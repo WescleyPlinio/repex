@@ -37,6 +37,7 @@ produção científica, incentivando o engajamento de diferentes públicos e for
 Com um ambiente digital estruturado e de fácil navegação, o portal poderá auxiliar na difusão de boas práticas acadêmicas e na valorização do impacto social dos projetos, promovendo um contato mais direto entre pesquisa, inovação e demandas reais.
 
 # Análise e projeto
+Aqui será descrito a estrutura e o funcionamento do sistema com base na análise realizada. Serão apresentados os principais componentes, funcionalidades e modelos utilizados no desenvolvimento do software.
 
 ## Requisitos funcionais:
 Os requisitos funcionais representam as principais funcionalidades que o sistema deve efetuar.
