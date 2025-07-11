@@ -1,4 +1,4 @@
-# Repositório de Propostas e projetos de Pesquisa, Ensino e Extensão - REPEX
+# Repositório de Propostas e projetos de Ensino, Pesquisa e Extensão - REPEX
 
 ## Resumo:
 Os projetos de ensino, pesquisa e extensão do IFRN carecem de uma plataforma web centralizada e acessível para divulgação. Este projeto propõe o desenvolvimento de um sistema web de código aberto, utilizando o framework Django, que permita a divulgação de projetos em andamento, concluídos e de propostas para prospectar alunos e parceiros interessados. A metodologia adotada consiste nas etapas de estudo teórico sobre divulgação científica e ferramentas similares, levantamento de requisitos, modelagem, implementação, implantação e avaliação com usuários do campus. Espera-se obter um sistema replicável para diversos campi, que contribua para a visibilidade e a produção acadêmica da instituição.
@@ -35,6 +35,34 @@ Além disso, a plataforma possibilitará uma comunicação mais dinâmica e aces
 produção científica, incentivando o engajamento de diferentes públicos e fortalecendo a troca de conhecimentos. Um dos impactos esperados é o aumento das oportunidades de networking para os alunos, permitindo conexões com pesquisadores, instituições e empresas interessadas nos projetos desenvolvidos.
 
 Com um ambiente digital estruturado e de fácil navegação, o portal poderá auxiliar na difusão de boas práticas acadêmicas e na valorização do impacto social dos projetos, promovendo um contato mais direto entre pesquisa, inovação e demandas reais.
+
+# Análise e projeto
+
+## Requisitos funcionais:
+Os requisitos funcionais representam as principais funcionalidades que o sistema deve efetuar.
+| Código | Título                          | Descrição                                                                                                                                                                          | Prioridade |
+|--------|----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|
+| RF 01 | Visualizar projetos             | O sistema deve garantir que os usuários vejam todas as informações relevantes dos projetos concluídos ou em andamento, incluindo os seus objetivos, links/arquivos úteis e resultados esperados/obtidos. | Alta       |
+| RF 02 | Gerenciar projetos              | O sistema deve permitir a certos usuários gerenciar os seus projetos. Ou seja: ler, adicionar, atualizar e deletá-los.                                                             | Alta       |
+| RF 03 | Cadastro e login de usuários    | O sistema possibilitará o cadastro e o eventual login de usuários para a utilização das funcionalidades.                                                                            | Alta       |
+| RF 04 | Gerenciamento de perfil         | O usuário poderá ver e editar as informações do seu perfil, como avatar e biografia.                                                                                                | Baixa      |
+| RF 05 | Pesquisar e filtrar projetos    | O usuário poderá pesquisar projetos de forma que possa filtrá-los por título, conteúdo, campus e categorias. Tudo deverá ser simples e intuitivo.                                   | Alta       |
+| RF 06 | Comunicação com orientadores    | O sistema deverá mostrar aos usuários quem são os orientadores e todos os meios fornecidos de entrar em contato com os mesmos.                                                      | Média      |
+| RF 07 | Colaboração entre projetos      | O sistema deverá não só exibir as informações do projeto em si, como também os outros projetos que estiverem colaborando com ele.                                                   | Média      |
+| RF 08 | Replicagem e usabilidade        | O sistema deverá ser totalmente replicável e personalizável por qualquer cliente.                                                                                                   | Produto    |
+
+
+## Requisitos não-funcionais:
+Os requisitos não funcionais estão relacionados às restrições do sistema quanto a sua disponibilidade, desempenho e segurança.
+| Código  | Título               | Descrição                                                                                                                                                  | Categoria      |
+|---------|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|
+| RNF 01 | Ambiente             | O sistema deve funcionar em ambiente web, sendo compatível com os principais navegadores contemporâneos como: Explorer, Firefox, Opera, e Chrome.         | Organizacional |
+| RNF 02 | Tecnologias          | O sistema deve ser desenvolvido usando as linguagens de marcação HTML e CSS, as linguagens de programação Python e JavaScript e os frameworks Django, Bootstrap e React. | Organizacional |
+| RNF 03 | Banco de dados       | A implementação do sistema deve empregar o MySQL como servidor de banco de dados.                                                                         | Organizacional |
+| RNF 04 | Acesso restrito      | O sistema não deverá permitir o acesso de usuários não cadastrados ou não autorizados a áreas restritas do sistema, por meio de login com senha.         | Produto        |
+| RNF 05 | Criptografia de senha| O sistema deverá criptografar as senhas dos usuários através do padrão de criptografia do Django.                                                         | Produto        |
+| RNF 06 | Filtragem no login   | O sistema deverá detectar os usuários com credenciais de docentes registrados no SUAP.                                                                    | Produto        |
+
 
 ## Referências bibliográficas:
 SANTOS, Erika Moreira; NASCIMENTO, Francinaide de Lima Silva. A prática pedagógica e o Projeto Integrador: uma análise de documentos oficiais do Instituto Federal do Rio Grande do Norte. 1-6. Natal: IFRN, 2020.
