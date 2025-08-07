@@ -1,5 +1,10 @@
 # Repositório de Propostas e projetos de Ensino, Pesquisa e Extensão - REPEX
 
+## Sumário
+- [Introdução](index.md)
+- [Resumo](#resumo)
+- [Diagrama de Classes](#diagrama-de-classes)
+
 ## Resumo:
 Os projetos de ensino, pesquisa e extensão do IFRN carecem de uma plataforma web centralizada e acessível para divulgação. Este projeto propõe o desenvolvimento de um sistema web de código aberto, utilizando o framework Django, que permita a divulgação de projetos em andamento, concluídos e de propostas para prospectar alunos e parceiros interessados. A metodologia adotada consiste nas etapas de estudo teórico sobre divulgação científica e ferramentas similares, levantamento de requisitos, modelagem, implementação, implantação e avaliação com usuários do campus. Espera-se obter um sistema replicável para diversos campi, que contribua para a visibilidade e a produção acadêmica da instituição.
 
