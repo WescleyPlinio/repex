@@ -1,0 +1,12 @@
+{% load static %}
+<div class="card">
+  {% if projeto.imagem %}
+    <img src="{{ projeto.imagem.url }}" class="card-img-top" alt="{{ projeto.titulo }}" />
+  {% else %}
+    <img src="{% static 'imgs/placeholder.webp' %}" class="card-img-top" alt="{{ projeto.titulo }}" />
+  {% endif %}
+  <div class="card-body">
+    <h5 class="card-title" style="color: orange;">{{ projeto.titulo }}</h5>
+    <p class="card-text">{{ projeto.objetivo }}</p>
+  </div>
+</div>

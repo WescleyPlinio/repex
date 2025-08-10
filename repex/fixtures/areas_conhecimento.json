@@ -1,0 +1,37 @@
+[
+  {
+    "model": "repex.areaconhecimento",
+    "pk": 1,
+    "fields": {
+      "area": "Ciências Exatas"
+    }
+  },
+  {
+    "model": "repex.areaconhecimento",
+    "pk": 2,
+    "fields": {
+      "area": "Ciências Humanas"
+    }
+  },
+  {
+    "model": "repex.areaconhecimento",
+    "pk": 3,
+    "fields": {
+      "area": "Biológicas"
+    }
+  },
+  {
+    "model": "repex.areaconhecimento",
+    "pk": 4,
+    "fields": {
+      "area": "Engenharia"
+    }
+  },
+  {
+    "model": "repex.areaconhecimento",
+    "pk": 5,
+    "fields": {
+      "area": "Tecnologia da Informação"
+    }
+  }
+]

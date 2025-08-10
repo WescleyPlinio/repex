@@ -7,3 +7,61 @@
     border-top-left-radius: 60% 80%;
     border-top-right-radius: 60% 80%;
 }
+
+.carousel-shell {
+    position: relative;
+}
+
+.carousel-viewport {
+    overflow: hidden;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 0;
+    transition: transform .5s ease;
+    will-change: transform;
+}
+
+.card-item {
+    flex: 0 0 40%;
+    max-width: 40%;
+    box-sizing: border-box;
+    padding: .3rem;
+    /* espaço interno entre cards */
+}
+
+.card-item .card {
+    height: 100%;
+}
+
+/* controles */
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    border: none;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .12);
+}
+
+.carousel-prev {
+    left: -10px;
+}
+
+.carousel-next {
+    right: -10px;
+}
+
+@media (max-width: 768px) {
+    .card-item {
+        flex: 0 0 80%;
+        max-width: 80%;
+    }
+}
