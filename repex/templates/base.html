@@ -1,26 +1,28 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blog com Curva em Parábola</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'main.css' %}">
-</head>
-<body class="d-flex flex-column min-vh-100">
-
-    {% include "partials/_navbar.html" %}
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'main.css' %}" />
+  </head>
+  <body class="d-flex flex-column min-vh-100">
+    {% include 'partials/_navbar.html' %}
 
     <!-- Conteúdo -->
     <main class="flex-grow-1 container my-5">
-        {% block content %}{% endblock content %}
+      {% block content %}
+      {% endblock %}
     </main>
-    
-    {% include "partials/_footer.html" %}
+
+    {% include 'partials/_footer.html' %}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{% static 'main.js' %}"></script>
-</body>
+  </body>
 </html>
