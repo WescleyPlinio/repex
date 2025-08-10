@@ -1,0 +1,9 @@
+.nav {
+    border-bottom-left-radius: 60% 80%;
+    border-bottom-right-radius: 60% 80%;
+}
+
+.footer {
+    border-top-left-radius: 60% 80%;
+    border-top-right-radius: 60% 80%;
+}
