@@ -1,9 +1,22 @@
 # Repositório de Propostas e projetos de Ensino, Pesquisa e Extensão - REPEX
 
 ## Sumário
-- [Introdução](index.md)
 - [Resumo](#resumo)
+- [Palavras chave](#palavras-chave)
+- [Introdução](#introdução)
+- [Justificativa](#justificativa)
+- [Fundamentação teórica](#fundamentção-teórica)
+- [Objetivo geral](#objetivo-geral)
+- [Resultados esperados](#resultados-esperados)
 - [Diagrama de Classes](#diagrama-de-classes)
+- [Análise e projeto do sistema](#análise-e-projeto-do-sistema)
+- [Requisitos funcionais](#requisitos-funcionais)
+- [Requisitos não-funcionais](#requisitos-não-funcionais)
+- [Diagrama de casos de uso](#diagrama-de-casos-de-uso)
+- [Diagrama de classes](#diagrama-de-classes)
+- [Protótipos de tela](#protótipos-de-tela-alta-fidelidade)
+- [Referências bibliográficas](#referências-bibliográficas)
+
 
 ## Resumo:
 Os projetos de ensino, pesquisa e extensão do IFRN carecem de uma plataforma web centralizada e acessível para divulgação. Este projeto propõe o desenvolvimento de um sistema web de código aberto, utilizando o framework Django, que permita a divulgação de projetos em andamento, concluídos e de propostas para prospectar alunos e parceiros interessados. A metodologia adotada consiste nas etapas de estudo teórico sobre divulgação científica e ferramentas similares, levantamento de requisitos, modelagem, implementação, implantação e avaliação com usuários do campus. Espera-se obter um sistema replicável para diversos campi, que contribua para a visibilidade e a produção acadêmica da instituição.
@@ -41,7 +54,7 @@ produção científica, incentivando o engajamento de diferentes públicos e for
 
 Com um ambiente digital estruturado e de fácil navegação, o portal poderá auxiliar na difusão de boas práticas acadêmicas e na valorização do impacto social dos projetos, promovendo um contato mais direto entre pesquisa, inovação e demandas reais.
 
-# Análise e projeto
+# Análise e projeto do sistema
 Aqui será descrito a estrutura e o funcionamento do sistema com base na análise realizada. Serão apresentados os principais componentes, funcionalidades e modelos utilizados no desenvolvimento do software.
 
 ## Requisitos funcionais:
@@ -78,6 +91,51 @@ O diagrama de casos de uso representa as principais interações entre os usuár
 O diagrama de classes representa a estrutura do sistema, destacando as principais entidades, seus atributos e os relacionamentos entre elas.
 
 ![Diagrama de classes](imgs/classes.png)
+
+## Protótipos de tela (alta fidelidade):
+Um protótipo de alta fidelidade é uma representação visual de como o sistema vai
+funcionar e se parecer depois de pronto. Ele mostra as cores reais, os botões, os textos, os
+ícones e até simula como será a navegação entre as páginas. Esse tipo de protótipo é
+importante porque permite testar a aparência e a usabilidade do sistema antes de começar
+a programação. Assim, é possível fazer ajustes com base no que os usuários acham ou no
+que os desenvolvedores precisam.
+
+Para criar os protótipos de tela do sistema, foi utilizada a ferramenta Figma. O Figma
+é uma plataforma online que permite criar o design de sites e aplicativos de forma prática e
+colaborativa. Com ele, é possível desenhar telas, posicionar elementos gráficos, adicionar
+interações e compartilhar o protótipo com outras pessoas. É uma das ferramentas mais
+utilizadas atualmente por designers e desenvolvedores, por ser simples de usar e funcionar
+diretamente no navegador
+
+#### Página inicial:
+A tela inicial, ou página index, será a porta de entrada principal do sistema. Todos os usuários, logados ou não, verão essa página da mesma forma. Após o menu, haverá umasessão de notícias relevantes. Além disso, haverão carrosséis para os projetos adicionados recentemente e os mais vistos.
+
+![Pagina inicial](imgs/1.png)
+
+#### Página de busca:
+No menu do sistema haverá uma barra de pesquisa. Quando o usuário efetuar a busca por um projeto ou notícia, os resultados aparecerão nessa página, da seguinte forma:
+
+![Pagina pesquisa](imgs/2.png)
+
+#### Página de ver projeto:
+Quando o usuário clicar em um dos projetos do sistema, ele será redirecionado para a página que mostra todos os detalhes do projeto em si.
+
+![Pagina projeto](imgs/3.png)
+
+#### Página de ver perfil:
+A tela de ver perfil consiste em uma tela com informações públicas de um usuário e os projetos que ele está associado.
+
+![Pagina perfil](imgs/4.png)
+
+#### Página de ver notícia:
+A tela de ver notícia aparece quando o usuário clica em uma das notícias. Nessa tela, as informações da notícia em questão são exibidas.
+
+![Pagina perfil](imgs/5.png)
+
+#### Página descubra:
+A tela descubra exibe de forma aleatória diversas notícias e projetos, com o intuito de fazer com que o usuário descubra novidades fora de seus principais interesses.
+
+![Pagina descubra](imgs/6.png)
 
 ## Referências bibliográficas:
 SANTOS, Erika Moreira; NASCIMENTO, Francinaide de Lima Silva. A prática pedagógica e o Projeto Integrador: uma análise de documentos oficiais do Instituto Federal do Rio Grande do Norte. 1-6. Natal: IFRN, 2020.
