@@ -5,12 +5,13 @@ Para usar o sistema, siga esses passos:
 
     pip install -r requirements.txt
 
-### Após isso faça:
+### Após isso faça as migrações:
+    py manage.py migrate
+
+### Instale objetos prontos (opcional):
 
     py manage.py loaddata repex/fixtures/areas_conhecimento.json
-
     py manage.py loaddata repex/fixtures/projetos.json
-
     py manage.py loaddata repex/fixtures/noticias.json
 
 ### Por fim, rode:
