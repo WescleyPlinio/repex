@@ -1,0 +1,9 @@
+<h2>Meu perfil</h2>
+{% if userobj.profile.avatar %}
+  <img src="{{ userobj.profile.avatar.url }}" alt="avatar" width="120" height="120">
+{% endif %}
+<p>Usuário: {{ userobj.username }}</p>
+<p>Nome: {{ userobj.profile.primeiro_nome }} {{ userobj.profile.ultimo_sobrenome }}</p>
+<p>Curso: {{ userobj.curso }}</p>
+<p>Vínculo: {{ userobj.vinculo }}</p>
+<a href="{% url 'editarperfil' %}">Editar perfil</a>
