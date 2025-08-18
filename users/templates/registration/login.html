@@ -1,7 +1,14 @@
-<h2>Login</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Entrar</button>
-</form>
-<p>Ainda não tem conta? <a href="{% url 'cadastro' %}">Cadastre-se</a></p>
+{% extends "registration/login_base.html" %}
+{% load static crispy_forms_tags %}
+
+{% block content %}
+<div class="login-container bg-white p-5 rounded shadow shadow-lg">
+  <h2 class="text-center text-primary">Login</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form| crispy }}
+    <button class="btn btn-primary mb-2" type="submit">Entrar</button>
+  </form>
+  <p>Ainda não tem conta? <a href="{% url 'cadastro' %}">Cadastre-se</a></p>
+</div>
+{% endblock content %}

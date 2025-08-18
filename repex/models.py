@@ -1,4 +1,5 @@
 from django.db import models
+from users.models import Profile, User
 
 class AreaConhecimento(models.Model):
     area = models.CharField(max_length=150)
@@ -29,6 +30,7 @@ class Projeto(models.Model):
     palavras_chave = models.CharField(max_length=200, blank=True, null=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
     modalidade = models.CharField(max_length=20, choices=MODALIDADE_CHOICES)
+    componentes = models.ManyToManyField(Profile, related_name='componentes', blank=True)
     
     def __str__(self):
         return self.titulo
@@ -58,3 +60,29 @@ class Noticia(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
+
+# class SocialNetwork(models.Model):
+#     """
+#     Cadastrado pelo admin: lista de redes possíveis.
+#     """
+#     nome = models.CharField(max_length=100, unique=True)
+#     icone = models.CharField(max_length=50, blank=True, null=True)  # Ex: fa-brands fa-instagram
+#     url_base = models.URLField(blank=True, null=True)  # Ex: "https://instagram.com/"
+
+#     def __str__(self):
+#         return self.nome
+
+
+# class UserSocialLink(models.Model):
+#     """
+#     O usuário escolhe a rede e cadastra o próprio link/perfil.
+#     """
+#     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="social_links")
+#     rede = models.ForeignKey(SocialNetwork, on_delete=models.CASCADE)
+#     url = models.URLField("URL do perfil")
+
+#     class Meta:
+#         unique_together = ("user", "rede")  # Garante que cada user só tenha 1 link por rede
+
+#     def __str__(self):
+#         return f"{self.user.username} - {self.rede.nome}"

@@ -80,36 +80,36 @@ body {
 }
 
 .notice-card {
-        position: relative;
-        background-size: cover;
-        background-position: center;
-        overflow: hidden;
-    }
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
 
-    /* Escurecimento/borrão da imagem */
-    .notice-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5); /* Escurecer */
-        backdrop-filter: blur(3px); /* Borrar levemente */
-        z-index: 1;
-    }
+/* Escurecimento/borrão da imagem */
+.notice-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Escurecer */
+    backdrop-filter: blur(3px); /* Borrar levemente */
+    z-index: 1;
+}
 
-    .notice-label {
-        position: absolute;
-        top: 8px;
-        left: 8px;
-        color: white;
-        font-size: 0.9rem;
-        z-index: 2;
-    }
+.notice-label {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    color: white;
+    font-size: 0.9rem;
+    z-index: 2;
+}
 
-    .notice-card h4 {
-        position: relative;
-        z-index: 2;
-        text-align: center;
-    }
+.notice-card h4 {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}

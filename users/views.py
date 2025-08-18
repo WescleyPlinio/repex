@@ -19,11 +19,17 @@ def cadastro(request):
 
 @login_required
 def verperfil(request):
-    return render(request, 'verperfil.html', {'userobj': request.user})
+    context = {
+        'user': request.user,
+        'projetos': Projeto.objects.all()
+    }
+    return render(request, 'verperfil.html', context)
 
 @login_required
 @permission_required('users.view_projetos', raise_exception=True)
 def paineladmin(request):
     projetos = Projeto.objects.all()
-    context = {'projetos': projetos}
+    context = {
+        'projetos': projetos,
+        }
     return render(request, 'paineladmin.html', context)
