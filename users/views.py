@@ -3,19 +3,20 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth import get_user_model
 from repex.models import Projeto
+from .forms import CadastroForm
 
 User = get_user_model()
 
 def cadastro(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = CadastroForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('verperfil')
+            return redirect("index")
     else:
         form = CadastroForm()
-    return render(request, 'registration/cadastro.html', {'form': form})
+    return render(request, "registration/cadastro.html", {"form": form})
 
 @login_required
 def verperfil(request):

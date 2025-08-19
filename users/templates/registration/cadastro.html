@@ -1,0 +1,26 @@
+{% extends 'registration/login.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <div class="container my-5">
+    <div class="card shadow p-4">
+      <h2 class="mb-4 text-primary">Cadastro de Usuário</h2>
+      <form method="post">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-md-6">{{ form.username|as_crispy_field }}
+            {{ form.email|as_crispy_field }}
+            {{ form.nome_completo|as_crispy_field }}</div>
+          <div class="col-md-6">{{ form.matricula|as_crispy_field }}
+            {{ form.data_nascimento|as_crispy_field }}
+            {{ form.telefone|as_crispy_field }}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">{{ form.password1|as_crispy_field }}</div>
+          <div class="col-md-6">{{ form.password2|as_crispy_field }}</div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Cadastrar</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

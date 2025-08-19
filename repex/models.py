@@ -30,7 +30,7 @@ class Projeto(models.Model):
     palavras_chave = models.CharField(max_length=200, blank=True, null=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
     modalidade = models.CharField(max_length=20, choices=MODALIDADE_CHOICES)
-    componentes = models.ManyToManyField(Profile, related_name='componentes', blank=True)
+    componentes = models.ManyToManyField(User, related_name='componentes', blank=True)
     
     def __str__(self):
         return self.titulo

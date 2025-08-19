@@ -10,11 +10,17 @@ class User(AbstractUser):
     data_nascimento = models.DateField(null=True, blank=True)
     telefone = models.CharField(max_length=15, null=True, blank=True)
 
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ["username"]
+
+    email = models.EmailField(unique=True)
+
     def __str__(self):
         return self.username
     
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio = models.TextField(null=True, blank=True, max_length=500)
     avatar = models.ImageField(upload_to='media')
 
     def __str__(self):

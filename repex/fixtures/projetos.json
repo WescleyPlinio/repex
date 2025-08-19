@@ -1,12 +1,11 @@
 [
   {
-    "model": "repex.Projeto",
+    "model": "repex.projeto",
     "pk": 1,
     "fields": {
       "titulo": "Sistema de Monitoramento Ambiental",
       "resumo": "Projeto para desenvolver um sistema de sensores que monitore temperatura, umidade e qualidade do ar em tempo real.",
       "justificativa": "A poluição e mudanças climáticas exigem ferramentas de monitoramento rápido e eficiente.",
-      "area_conhecimento": 5,      
       "objetivo": "Criar um sistema de baixo custo para coleta e análise de dados ambientais.",
       "criado_em": "2025-08-10T10:00:00Z",
       "resultados": "Protótipo funcional desenvolvido e testado em campo.",
@@ -14,17 +13,18 @@
       "doc": null,
       "palavras_chave": "monitoramento, sensores, meio ambiente",
       "status": "Concluído",
-      "modalidade": "Pesquisa"
+      "modalidade": "Pesquisa",
+      "area_conhecimento": 1,
+      "componentes": [1, 2]
     }
   },
   {
-    "model": "repex.Projeto",
+    "model": "repex.projeto",
     "pk": 2,
     "fields": {
       "titulo": "Aplicativo Educacional para Matemática",
       "resumo": "Desenvolvimento de um app gamificado para auxiliar estudantes no aprendizado de matemática básica.",
       "justificativa": "A dificuldade de alunos no aprendizado da matemática exige novas abordagens lúdicas.",
-      "area_conhecimento": 5,
       "objetivo": "Criar um aplicativo interativo com desafios e pontuação.",
       "criado_em": "2025-08-10T10:05:00Z",
       "resultados": "Aplicativo testado em escolas parceiras com boa aceitação.",
@@ -32,17 +32,18 @@
       "doc": null,
       "palavras_chave": "educação, matemática, aplicativo",
       "status": "Em andamento",
-      "modalidade": "Extensão"
+      "modalidade": "Extensão",
+      "area_conhecimento": 2,
+      "componentes": [3, 4]
     }
   },
   {
-    "model": "repex.Projeto",
+    "model": "repex.projeto",
     "pk": 3,
     "fields": {
       "titulo": "Plataforma de Divulgação Científica",
       "resumo": "Portal web para publicação e acesso a artigos, notícias e eventos científicos.",
       "justificativa": "Faltam plataformas acessíveis para divulgação de ciência em língua portuguesa.",
-      "area_conhecimento": 5,
       "objetivo": "Desenvolver um site responsivo e intuitivo para divulgação científica.",
       "criado_em": "2025-08-10T10:10:00Z",
       "resultados": "Plataforma online com mais de 200 acessos diários.",
@@ -50,17 +51,18 @@
       "doc": null,
       "palavras_chave": "ciência, tecnologia, divulgação",
       "status": "Concluído",
-      "modalidade": "Pesquisa"
+      "modalidade": "Pesquisa",
+      "area_conhecimento": 1,
+      "componentes": [5, 6]
     }
   },
   {
-    "model": "repex.Projeto",
+    "model": "repex.projeto",
     "pk": 4,
     "fields": {
       "titulo": "Robô Seguidor de Linha",
       "resumo": "Construção de um robô capaz de seguir trajetos pré-definidos utilizando sensores ópticos.",
       "justificativa": "Projetos de robótica estimulam o aprendizado prático de eletrônica e programação.",
-      "area_conhecimento": 5,
       "objetivo": "Desenvolver um robô seguidor de linha para competições escolares.",
       "criado_em": "2025-08-10T10:15:00Z",
       "resultados": "Robô completou circuito de testes com 95% de precisão.",
@@ -68,17 +70,18 @@
       "doc": null,
       "palavras_chave": "robótica, sensores, automação",
       "status": "Em andamento",
-      "modalidade": "Ensino"
+      "modalidade": "Ensino",
+      "area_conhecimento": 4,
+      "componentes": [7, 8]
     }
   },
   {
-    "model": "repex.Projeto",
+    "model": "repex.projeto",
     "pk": 5,
     "fields": {
       "titulo": "Sistema de Gestão de Biblioteca",
       "resumo": "Software para controle de empréstimos, devoluções e catálogo de livros.",
       "justificativa": "Bibliotecas escolares precisam de sistemas simples e eficientes para gestão de acervo.",
-      "area_conhecimento": 5,
       "objetivo": "Criar um sistema web para bibliotecas de pequeno porte.",
       "criado_em": "2025-08-10T10:20:00Z",
       "resultados": "Sistema implementado em duas bibliotecas piloto.",
@@ -86,17 +89,18 @@
       "doc": null,
       "palavras_chave": "biblioteca, gestão, software",
       "status": "Concluído",
-      "modalidade": "Extensão"
+      "modalidade": "Extensão",
+      "area_conhecimento": 2,
+      "componentes": [9, 10]
     }
   },
   {
-    "model": "repex.Projeto",
+    "model": "repex.projeto",
     "pk": 6,
     "fields": {
       "titulo": "Estudo sobre Energia Solar Residencial",
       "resumo": "Análise da viabilidade e impacto do uso de painéis solares em residências urbanas.",
       "justificativa": "A busca por energias renováveis cresce com a crise energética e mudanças climáticas.",
-      "area_conhecimento": 5,
       "objetivo": "Avaliar o retorno financeiro e ambiental da energia solar.",
       "criado_em": "2025-08-10T10:25:00Z",
       "resultados": "Redução média de 40% na conta de energia das residências estudadas.",
@@ -104,17 +108,18 @@
       "doc": null,
       "palavras_chave": "energia solar, sustentabilidade, economia",
       "status": "Concluído",
-      "modalidade": "Pesquisa"
+      "modalidade": "Pesquisa",
+      "area_conhecimento": 1,
+      "componentes": [1, 3]
     }
   },
   {
-    "model": "repex.Projeto",
+    "model": "repex.projeto",
     "pk": 7,
     "fields": {
       "titulo": "Aplicativo de Rotas para Ciclistas",
       "resumo": "App mobile que sugere rotas seguras e eficientes para ciclistas urbanos.",
       "justificativa": "O aumento do uso de bicicletas requer soluções para segurança no trânsito.",
-      "area_conhecimento": 5,
       "objetivo": "Criar um aplicativo com mapas e pontos de interesse para ciclistas.",
       "criado_em": "2025-08-10T10:30:00Z",
       "resultados": "App com mais de 500 downloads e avaliações positivas.",
@@ -122,17 +127,18 @@
       "doc": null,
       "palavras_chave": "ciclismo, transporte, mobilidade urbana",
       "status": "Em andamento",
-      "modalidade": "Extensão"
+      "modalidade": "Extensão",
+      "area_conhecimento": 5,
+      "componentes": [2, 4]
     }
   },
   {
-    "model": "repex.Projeto",
+    "model": "repex.projeto",
     "pk": 8,
     "fields": {
       "titulo": "Reciclagem de Resíduos Eletrônicos",
       "resumo": "Projeto para coleta e reciclagem de lixo eletrônico na comunidade.",
       "justificativa": "O descarte incorreto de resíduos eletrônicos causa sérios impactos ambientais.",
-      "area_conhecimento": 5,
       "objetivo": "Implantar pontos de coleta e oficinas de reaproveitamento.",
       "criado_em": "2025-08-10T10:35:00Z",
       "resultados": "Coletados mais de 300kg de resíduos eletrônicos.",
@@ -140,17 +146,18 @@
       "doc": null,
       "palavras_chave": "reciclagem, lixo eletrônico, meio ambiente",
       "status": "Concluído",
-      "modalidade": "Extensão"
+      "modalidade": "Extensão",
+      "area_conhecimento": 5,
+      "componentes": [5, 6]
     }
   },
   {
-    "model": "repex.Projeto",
+    "model": "repex.projeto",
     "pk": 9,
     "fields": {
       "titulo": "Horta Comunitária Escolar",
       "resumo": "Criação de uma horta orgânica para consumo na merenda escolar.",
       "justificativa": "Hortas incentivam hábitos alimentares saudáveis e consciência ambiental.",
-      "area_conhecimento": 5,
       "objetivo": "Implantar e manter uma horta comunitária na escola.",
       "criado_em": "2025-08-10T10:40:00Z",
       "resultados": "Horta produzindo hortaliças frescas para uso escolar.",
@@ -158,17 +165,18 @@
       "doc": null,
       "palavras_chave": "horta, alimentação saudável, escola",
       "status": "Em andamento",
-      "modalidade": "Ensino"
+      "modalidade": "Ensino",
+      "area_conhecimento": 3,
+      "componentes": [7, 8]
     }
   },
   {
-    "model": "repex.Projeto",
+    "model": "repex.projeto",
     "pk": 10,
     "fields": {
       "titulo": "Oficina de Programação para Jovens",
       "resumo": "Curso prático de programação web para estudantes do ensino médio.",
       "justificativa": "Falta de oportunidades de aprendizado de tecnologia em escolas públicas.",
-      "area_conhecimento": 5,
       "objetivo": "Capacitar jovens para desenvolver sites e aplicativos básicos.",
       "criado_em": "2025-08-10T10:45:00Z",
       "resultados": "50 alunos concluíram o curso com projetos práticos.",
@@ -176,7 +184,9 @@
       "doc": null,
       "palavras_chave": "programação, educação, tecnologia",
       "status": "Concluído",
-      "modalidade": "Ensino"
+      "modalidade": "Ensino",
+      "area_conhecimento": 5,
+      "componentes": [9, 10]
     }
   }
 ]
