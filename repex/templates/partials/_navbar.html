@@ -7,7 +7,7 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-      <form method="GET" action="{% url 'pesquisar' %}" class="d-flex mx-auto w-50">
+      <form method="GET" action="{% url 'explorar' %}" class="d-flex mx-auto w-50">
         {% csrf_token %}
         <div class="position-relative" style="width: 500px;">
           <input type="text" name="q" class="form-control pe-5" placeholder="Busque projetos:" value="{{ query }}" />

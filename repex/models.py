@@ -30,7 +30,7 @@ class Projeto(models.Model):
     palavras_chave = models.CharField(max_length=200, blank=True, null=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
     modalidade = models.CharField(max_length=20, choices=MODALIDADE_CHOICES)
-    componentes = models.ManyToManyField(User, related_name='componentes', blank=True)
+    componentes = models.ManyToManyField(User, related_name='projetos', blank=True)
     
     def __str__(self):
         return self.titulo
@@ -53,7 +53,8 @@ class Noticia(models.Model):
     data_publicacao = models.DateTimeField(auto_now_add=True, null=True)
     imagem = models.ImageField(upload_to='media/', null=True, blank=True)
     area_conhecimento = models.ForeignKey(AreaConhecimento, on_delete=models.CASCADE, related_name='area_conhecimento_noticia', null=True, blank=True)
-
+    autor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='noticias', null=True, blank=True)
+    criado_em = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
         return self.titulo
