@@ -1,12 +1,14 @@
 {% load static %}
-<div class="card border border-0 shadow shadow-sm">
-  {% if projeto.imagem %}
-    <img src="{{ projeto.imagem.url }}" class="card-img-top" alt="{{ projeto.titulo }}" />
-  {% else %}
-    <img src="{% static 'imgs/placeholder.webp' %}" class="card-img-top" alt="{{ projeto.titulo }}" />
-  {% endif %}
-  <div class="card-body">
-    <h5 class="card-title" style="color: orange;">{{ projeto.titulo }}</h5>
-    <p class="card-text">{{ projeto.objetivo }}</p>
+<a href="{% url "projeto_detail" projeto.id %}" class="text-decoration-none">
+  <div class="card border border-0 shadow shadow-sm">
+    {% if projeto.imagem %}
+      <img src="{{ projeto.imagem.url }}" class="card-img-top" alt="{{ projeto.titulo }}" />
+    {% else %}
+      <img src="{% static 'imgs/placeholder.webp' %}" class="card-img-top" alt="{{ projeto.titulo }}" />
+    {% endif %}
+    <div class="card-body">
+      <h5 class="card-title" style="color: orange;">{{ projeto.titulo }}</h5>
+      <p class="card-text">{{ projeto.objetivo }}</p>
+    </div>
   </div>
-</div>
+</a>

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from repex.models import Projeto, Noticia
+from django.views.generic import DetailView
 
 def index(request):
     projetos = Projeto.objects.all().order_by("criado_em")[:9]
@@ -39,3 +40,13 @@ def explorar(request):
         'query': query,
     }
     return render(request, 'explorar.html', context)
+
+class ProjetoDetailView(DetailView):
+    model = Projeto
+    template_name = 'projeto_detail.html'
+    context_object_name = 'projeto'
+
+class NoticiaDetailView(DetailView):
+    model = Noticia
+    template_name = 'noticia_detail.html'
+    context_object_name = 'noticia'

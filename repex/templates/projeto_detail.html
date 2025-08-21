@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static news_extras %}
+{% block title %}
+  {{ projeto.titulo }}
+{% endblock %}
+
+{% block content %}
+  <h1 style="color: orange;" class="text-center fw-bold mb-3">{{ projeto.titulo }}</h1>
+  <div class="row g-4">
+    <div class="col-md-4">
+      <img src="{% static 'imgs/placeholder.webp' %}" alt="{{ projeto.titulo }}" class="img-fluid w-100 mb-3" />
+      <div class="w-100">
+        <h4 style="color:blue">Modalidade:</h4>
+        <p>{{ projeto.modalidade }}</p>
+      </div>
+      {% if projeto.documentacao %}
+        <div class="w-100">
+          <h4 style="color:blue">Documentação:</h4>
+          <a href="{{ projeto.documentacao.url }}">{{ projeto.documentacao.url }}</a>
+        </div>
+      {% endif %}
+      <div class="w-100">
+        <h4 style="color:blue">Área de conhecimento:</h4>
+        <p>{{ projeto.area_conhecimento }}</p>
+      </div>
+      <div class="w-100">
+        <h4 style="color:blue">Status:</h4>
+        <p>{{ projeto.status }}</p>
+      </div>
+      <div class="w-100">
+        <h4 style="color:blue">Criado em:</h4>
+        <p>{{ projeto.criado_em }}</p>
+      </div>
+      <div class="w-100">
+        <h4 style="color:blue">Palavras-chave:</h4>
+        <p>{{ projeto.palavras_chave }}</p>
+      </div>
+      <div class="w-100">
+        <h4 style="color:blue">Componentes:</h4>
+        {% for componente in projeto.componentes.all %}
+          <p>{{ componente.username }}</p>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="w-100">
+        <h4 style="color:blue">Resumo:</h4>
+        <p>{{ projeto.resumo }}</p>
+      </div>
+      <div class="w-100">
+        <h4 style="color:blue">Justificativa:</h4>
+        <p>{{ projeto.justificativa }}</p>
+      </div>
+      <div class="w-100">
+        <h4 style="color:blue">Objetivo:</h4>
+        <p>{{ projeto.objetivo }}</p>
+      </div>
+      <div class="w-100">
+        <h4 style="color:blue">Resultados esperados:</h4>
+        <p>{{ projeto.eesultados }}</p>
+      </div>
+    </div>
+  </div>
+{% endblock %}
