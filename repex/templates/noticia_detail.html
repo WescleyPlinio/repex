@@ -6,16 +6,17 @@
 
 {% block content %}
   <h1 style="color: orange;" class="text-center fw-bold mb-3">{{ noticia.titulo }}</h1>
-  <p class="text-center">
-    Publicado em: {{ noticia.criado_em }}
-  </p>
-  <h6 class="text-center">
-    {{ noticia.descricao }}
-  </h6>
-  {% if noticia.imagem %}
-  <img src="{{ noticia.imagem.url }}" alt="{{ noticia.titulo }}" class="img-fluid w-100 mb-3" />
-  {% else %}
-  <img src="{% static 'imgs/placeholder.webp' %}" alt="{{ noticia.titulo }}" class="img-fluid w-100 mb-3" />
-  {% endif %}
-  <p>{{ noticia.conteudo }}</p>
+  <p class="text-center fw-light">Publicado em: {{ noticia.criado_em }}</p>
+  <div class="row g-4">
+    <div class="col-md-6">
+      {% if noticia.imagem %}
+        <img src="{{ noticia.imagem.url }}" alt="{{ noticia.titulo }}" class="img-fluid w-100 mb-3" />
+      {% else %}
+        <img src="{% static 'imgs/placeholder.webp' %}" alt="{{ noticia.titulo }}" class="img-fluid w-100 mb-3" />
+      {% endif %}
+    </div>
+    <div class="col-md-6">
+      <p>{{ noticia.conteudo }}</p>
+    </div>
+  </div>
 {% endblock %}
