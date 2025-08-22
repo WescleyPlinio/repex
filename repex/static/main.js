@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.carousel-shell').forEach(shell => {
     const track = shell.querySelector('.carousel-track');
+    if (!track) return;
+    
     const items = Array.from(track.children);
     const prevBtn = shell.querySelector('.carousel-prev');
     const nextBtn = shell.querySelector('.carousel-next');

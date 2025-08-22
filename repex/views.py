@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from repex.models import Projeto, Noticia
 from django.views.generic import DetailView
+from django.core.paginator import Paginator
 
 def index(request):
     projetos = Projeto.objects.all().order_by("criado_em")[:9]
-    noticias = Noticia.objects.all()
+    noticias = Noticia.objects.all().order_by("criado_em")[:9]
     context = {
         "projetos": projetos,
         "noticias": noticias
@@ -17,17 +18,20 @@ def explorar(request):
     resultado_projeto_titulo = Projeto.objects.filter(titulo__icontains=query)
     resultado_projeto_objetivo = Projeto.objects.filter(objetivo__icontains=query)
     resultado_projeto_resumo = Projeto.objects.filter(resumo__icontains=query)
+    resultados_projetos = (resultado_projeto_titulo | resultado_projeto_objetivo | resultado_projeto_resumo).distinct()
 
     resultado_noticia_titulo = Noticia.objects.filter(titulo__icontains=query)
     resultado_noticia_descricao = Noticia.objects.filter(descricao__icontains=query)
     resultado_noticia_conteudo = Noticia.objects.filter(conteudo__icontains=query)
-
-    resultados_projetos = (resultado_projeto_titulo | resultado_projeto_objetivo | resultado_projeto_resumo).distinct()
     resultados_noticias = (resultado_noticia_titulo | resultado_noticia_descricao | resultado_noticia_conteudo).distinct()
 
-    # paginator = Paginator(resultados, 3)
-    # numero_da_pagina = request.GET.get('pagina')
-    # resultados_paginados = paginator.get_page(numero_da_pagina)
+    paginator_projetos = Paginator(resultados_projetos, 3)
+    page_number_projetos = request.GET.get('page_projetos')
+    resultados_projetos = paginator_projetos.get_page(page_number_projetos)
+
+    paginator_noticias = Paginator(resultados_noticias, 3)
+    page_number_noticias = request.GET.get('page_noticias')
+    resultados_noticias = paginator_noticias.get_page(page_number_noticias)
 
     projetos_random = Projeto.objects.all().order_by("?")[:9]
     noticias_random = Noticia.objects.all().order_by("?")[:9]

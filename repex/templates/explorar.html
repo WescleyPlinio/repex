@@ -4,116 +4,34 @@
   Explorar projetos
 {% endblock %}
 
-{% block nav_bottom %}
-  <h2 class="text-white text-center m-auto my-5 fw-bold">Repositório IFSPP, aqui é o lar de todos os nossos projetos!</h2>
-{% endblock %}
-
 {% block content %}
   {% if query %}
     <div class="carousel-shell mb-5">
       <h4 style="color: blue;">Projetos correspondentes:</h4>
-      <div class="carousel-viewport">
-        <div class="carousel-track w-100" id="cardTrack">
-          {% for projeto in resultados_projetos %}
-            <div class="card-item">
-              {% include 'partials/_card.html' %}
-            </div>
-          {% endfor %}
-        </div>
-      </div>
-
-      <button class="btn btn-light carousel-control carousel-prev" id="prevBtn" style="color: blue;" aria-label="Anterior">‹</button>
-      <button class="btn btn-light carousel-control carousel-next" id="nextBtn" style="color: blue;" aria-label="Próximo">›</button>
-    </div>
-
-    <div id="newsCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
-      <h4 style="color: blue;">Notícias correspondentes:</h4>
-      <div class="carousel-inner">
-        {% for group in resultados_noticias|chunks:3 %}
-          <div class="carousel-item {% if forloop.first %}active{% endif %}">
-            <div class="notice-shell row g-1 d-flex">
-              <div class="col-md-6 col-lg-6 col-sm-12">
-                <div class="notice-card h-100 d-flex"
-                  style="background-image: url('{% if group.0.imagem %}
-                    {{ group.0.imagem.url }}
-                  {% else %}
-                    {% static 'imgs/placeholder.webp' %}
-                  {% endif %}');">
-                  <span class="notice-label">
-                    {% if group.0 %}
-                      {{ group.0.area_conhecimento }}
-                    {% else %}
-                      Área de conhecimento
-                    {% endif %}
-                  </span>
-                  <h4 class="m-auto p-5" style="color: orange;">
-                    {% if group.0 %}
-                      {{ group.0.titulo }}
-                    {% else %}
-                      Últimas notícias:
-                    {% endif %}
-                  </h4>
-                </div>
-              </div>
-
-              <div class="col-md-6 col-lg-6 col-sm-12">
-                <div class="row d-flex flex-column" style="height: 100%;">
-                  <div class="col-lg-12 col-md-12 col-sm-12 flex-grow-1 mb-1">
-                    <div class="notice-card h-100 d-flex"
-                      style="background-image: url('{% if group.1.imagem %}
-                        {{ group.1.imagem.url }}
-                      {% else %}
-                        {% static 'imgs/placeholder.webp' %}
-                      {% endif %}');">
-                      <span class="notice-label">
-                        {% if group.1 %}
-                          {{ group.1.area_conhecimento }}
-                        {% else %}
-                          Área de conhecimento
-                        {% endif %}
-                      </span>
-                      <h4 class="m-auto p-5" style="color: orange;">
-                        {% if group.1 %}
-                          {{ group.1.titulo }}
-                        {% else %}
-                          Últimas notícias:
-                        {% endif %}
-                      </h4>
-                    </div>
-                  </div>
-
-                  <div class="col-lg-12 col-md-12 col-sm-12 flex-grow-1">
-                    <div class="notice-card h-100 d-flex"
-                      style="background-image: url('{% if group.2.imagem %}
-                        {{ group.2.imagem.url }}
-                      {% else %}
-                        {% static 'imgs/placeholder.webp' %}
-                      {% endif %}');">
-                      <span class="notice-label">
-                        {% if group.2 %}
-                          {{ group.2.area_conhecimento }}
-                        {% else %}
-                          Área de conhecimento
-                        {% endif %}
-                      </span>
-                      <h4 class="m-auto p-5" style="color: orange;">
-                        {% if group.2 %}
-                          {{ group.2.titulo }}
-                        {% else %}
-                          Últimas notícias:
-                        {% endif %}
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+      <div class="row g-2">
+        {% for projeto in resultados_projetos %}
+          <div class="col-md-4">
+            {% include 'partials/_card.html' %}
           </div>
+            {% empty %}
+            <p class="text-center">Nenhum projeto encontrado.</p>
         {% endfor %}
       </div>
+      {% include 'partials/_paginacao_projeto.html' %}
+    </div>
 
-      <button class="btn btn-light carousel-control carousel-prev" data-bs-target="#newsCarousel" data-bs-slide="prev" style="color: blue;" aria-label="Anterior">‹</button>
-      <button class="btn btn-light carousel-control carousel-next" data-bs-target="#newsCarousel" data-bs-slide="next" style="color: blue;" aria-label="Próximo">›</button>
+    <div class="carousel-shell mb-5">
+      <h4 style="color: blue;">Notícias correspondentes:</h4>
+      <div class="row g-2">
+        {% for noticia in resultados_noticias %}
+          <div class="col-md-4">
+            {% include 'partials/_card_noticia.html' %}
+          </div>
+            {% empty %}
+            <p class="text-center">Nenhuma notícia encontrado.</p>
+        {% endfor %}
+      </div>
+      {% include 'partials/_paginacao_noticia.html' %}
     </div>
   {% endif %}
 
@@ -134,83 +52,95 @@
   </div>
 
   <div id="newsCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
-    <h4 style="color: blue;">Descubra notícias:</h4>
+    <h4 style="color: blue;">Notícias relevantes:</h4>
     <div class="carousel-inner">
       {% for group in noticias_random|chunks:3 %}
         <div class="carousel-item {% if forloop.first %}active{% endif %}">
           <div class="notice-shell row g-1 d-flex">
             <div class="col-md-6 col-lg-6 col-sm-12">
-              <div class="notice-card h-100 d-flex"
-                style="background-image: url('{% if group.0.imagem %}
-                  {{ group.0.imagem.url }}
-                {% else %}
-                  {% static 'imgs/placeholder.webp' %}
-                {% endif %}');">
-                <span class="notice-label">
-                  {% if group.0 %}
-                    {{ group.0.area_conhecimento }}
-                  {% else %}
-                    Área de conhecimento
-                  {% endif %}
-                </span>
-                <h4 class="m-auto p-5" style="color: orange;">
-                  {% if group.0 %}
-                    {{ group.0.titulo }}
-                  {% else %}
-                    Últimas notícias:
-                  {% endif %}
-                </h4>
-              </div>
+              {% if group.0.id %}
+                <a href="{% url 'noticia_detail' group.0.id %}" class="text-decoration-none">
+                  <div class="notice-card h-100 d-flex"
+                    style="background-image: url('{% if group.0.imagem %}
+                      {{ group.0.imagem.url }}
+                    {% else %}
+                      {% static 'imgs/placeholder.webp' %}
+                    {% endif %}');">
+                    <span class="notice-label">
+                      {% if group.0 %}
+                        {{ group.0.area_conhecimento }}
+                      {% else %}
+                        Área de conhecimento
+                      {% endif %}
+                    </span>
+                    <h4 class="m-auto p-5" style="color: orange;">
+                      {% if group.0 %}
+                        {{ group.0.titulo }}
+                      {% else %}
+                        Últimas notícias:
+                      {% endif %}
+                    </h4>
+                  </div>
+                </a>
+              {% endif %}
             </div>
 
             <div class="col-md-6 col-lg-6 col-sm-12">
               <div class="row d-flex flex-column" style="height: 100%;">
                 <div class="col-lg-12 col-md-12 col-sm-12 flex-grow-1 mb-1">
-                  <div class="notice-card h-100 d-flex"
-                    style="background-image: url('{% if group.1.imagem %}
-                      {{ group.1.imagem.url }}
-                    {% else %}
-                      {% static 'imgs/placeholder.webp' %}
-                    {% endif %}');">
-                    <span class="notice-label">
-                      {% if group.1 %}
-                        {{ group.1.area_conhecimento }}
-                      {% else %}
-                        Área de conhecimento
-                      {% endif %}
-                    </span>
-                    <h4 class="m-auto p-5" style="color: orange;">
-                      {% if group.1 %}
-                        {{ group.1.titulo }}
-                      {% else %}
-                        Últimas notícias:
-                      {% endif %}
-                    </h4>
-                  </div>
+                  {% if group.1.id %}
+                    <a href="{% url 'noticia_detail' group.1.id %}" class="text-decoration-none">
+                      <div class="notice-card h-100 d-flex"
+                        style="background-image: url('{% if group.1.imagem %}
+                          {{ group.1.imagem.url }}
+                        {% else %}
+                          {% static 'imgs/placeholder.webp' %}
+                        {% endif %}');">
+                        <span class="notice-label">
+                          {% if group.1 %}
+                            {{ group.1.area_conhecimento }}
+                          {% else %}
+                            Área de conhecimento
+                          {% endif %}
+                        </span>
+                        <h4 class="m-auto p-5" style="color: orange;">
+                          {% if group.1 %}
+                            {{ group.1.titulo }}
+                          {% else %}
+                            Últimas notícias:
+                          {% endif %}
+                        </h4>
+                      </div>
+                    </a>
+                  {% endif %}
                 </div>
 
                 <div class="col-lg-12 col-md-12 col-sm-12 flex-grow-1">
-                  <div class="notice-card h-100 d-flex"
-                    style="background-image: url('{% if group.2.imagem %}
-                      {{ group.2.imagem.url }}
-                    {% else %}
-                      {% static 'imgs/placeholder.webp' %}
-                    {% endif %}');">
-                    <span class="notice-label">
-                      {% if group.2 %}
-                        {{ group.2.area_conhecimento }}
-                      {% else %}
-                        Área de conhecimento
-                      {% endif %}
-                    </span>
-                    <h4 class="m-auto p-5" style="color: orange;">
-                      {% if group.2 %}
-                        {{ group.2.titulo }}
-                      {% else %}
-                        Últimas notícias:
-                      {% endif %}
-                    </h4>
-                  </div>
+                  {% if group.2.id %}
+                    <a href="{% url 'noticia_detail' group.2.id %}" class="text-decoration-none">
+                      <div class="notice-card h-100 d-flex"
+                        style="background-image: url('{% if group.2.imagem %}
+                          {{ group.2.imagem.url }}
+                        {% else %}
+                          {% static 'imgs/placeholder.webp' %}
+                        {% endif %}');">
+                        <span class="notice-label">
+                          {% if group.2 %}
+                            {{ group.2.area_conhecimento }}
+                          {% else %}
+                            Área de conhecimento
+                          {% endif %}
+                        </span>
+                        <h4 class="m-auto p-5" style="color: orange;">
+                          {% if group.2 %}
+                            {{ group.2.titulo }}
+                          {% else %}
+                            Últimas notícias:
+                          {% endif %}
+                        </h4>
+                      </div>
+                    </a>
+                  {% endif %}
                 </div>
               </div>
             </div>
