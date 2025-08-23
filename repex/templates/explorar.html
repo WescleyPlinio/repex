@@ -8,30 +8,16 @@
   {% if query %}
     <div class="carousel-shell mb-5">
       <h4 style="color: blue;">Projetos correspondentes:</h4>
-      <div class="row g-2">
-        {% for projeto in resultados_projetos %}
-          <div class="col-md-4">
-            {% include 'partials/_card.html' %}
-          </div>
-            {% empty %}
-            <p class="text-center">Nenhum projeto encontrado.</p>
-        {% endfor %}
+      <div id="ajax_projetos">
+        {% include 'partials/_ajax_projetos.html' %}
       </div>
-      {% include 'partials/_paginacao_projeto.html' %}
     </div>
 
     <div class="carousel-shell mb-5">
       <h4 style="color: blue;">Notícias correspondentes:</h4>
-      <div class="row g-2">
-        {% for noticia in resultados_noticias %}
-          <div class="col-md-4">
-            {% include 'partials/_card_noticia.html' %}
-          </div>
-            {% empty %}
-            <p class="text-center">Nenhuma notícia encontrado.</p>
-        {% endfor %}
+      <div id="ajax_noticias">
+        {% include 'partials/_ajax_noticias.html' %}
       </div>
-      {% include 'partials/_paginacao_noticia.html' %}
     </div>
   {% endif %}
 

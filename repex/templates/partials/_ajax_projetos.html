@@ -1,0 +1,11 @@
+{% load static %}
+<div class="row g-2">
+  {% for projeto in resultados_projetos %}
+    <div class="col-md-4">
+      {% include 'partials/_card.html' %}
+    </div>
+  {% empty %}
+    <p class="text-center">Nenhum projeto encontrado.</p>
+  {% endfor %}
+</div>
+{% include 'partials/_paginacao_projeto.html' %}

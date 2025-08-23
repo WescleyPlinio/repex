@@ -1,16 +1,19 @@
 <nav class="mt-3">
   <ul class="pagination justify-content-end">
-
     {% if resultados_noticias.has_previous %}
       <li class="page-item">
-        <a class="page-link" href="?q={{ query }}&page_noticias=1">«</a>
+        <a class="page-link" href="{% url 'ajax_noticias' %}?q={{ query }}&page_noticias=1">«</a>
       </li>
       <li class="page-item">
-        <a class="page-link" href="?q={{ query }}&page_noticias={{ resultados_noticias.previous_page_number }}">‹</a>
+        <a class="page-link" href="{% url 'ajax_noticias' %}?q={{ query }}&page_noticias={{ resultados_noticias.previous_page_number }}">‹</a>
       </li>
     {% else %}
-      <li class="page-item disabled"><span class="page-link">«</span></li>
-      <li class="page-item disabled"><span class="page-link">‹</span></li>
+      <li class="page-item disabled">
+        <span class="page-link">«</span>
+      </li>
+      <li class="page-item disabled">
+        <span class="page-link">‹</span>
+      </li>
     {% endif %}
 
     {% for num in resultados_noticias.paginator.page_range %}
@@ -20,22 +23,25 @@
         </li>
       {% elif num > resultados_noticias.number|add:'-3' and num < resultados_noticias.number|add:'3' %}
         <li class="page-item">
-          <a class="page-link" href="?q={{ query }}&page_noticias={{ num }}">{{ num }}</a>
+          <a class="page-link" href="{% url 'ajax_noticias' %}?q={{ query }}&page_noticias={{ num }}">{{ num }}</a>
         </li>
       {% endif %}
     {% endfor %}
 
     {% if resultados_noticias.has_next %}
       <li class="page-item">
-        <a class="page-link" href="?q={{ query }}&page_noticias={{ resultados_noticias.next_page_number }}">›</a>
+        <a class="page-link" href="{% url 'ajax_noticias' %}?q={{ query }}&page_noticias={{ resultados_noticias.next_page_number }}">›</a>
       </li>
       <li class="page-item">
-        <a class="page-link" href="?q={{ query }}&page_noticias={{ resultados_noticias.paginator.num_pages }}">»</a>
+        <a class="page-link" href="{% url 'ajax_noticias' %}?q={{ query }}&page_noticias={{ resultados_noticias.paginator.num_pages }}">»</a>
       </li>
     {% else %}
-      <li class="page-item disabled"><span class="page-link">›</span></li>
-      <li class="page-item disabled"><span class="page-link">»</span></li>
+      <li class="page-item disabled">
+        <span class="page-link">›</span>
+      </li>
+      <li class="page-item disabled">
+        <span class="page-link">»</span>
+      </li>
     {% endif %}
-
   </ul>
 </nav>

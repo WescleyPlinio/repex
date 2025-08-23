@@ -1,0 +1,11 @@
+{% load static %}
+<div class="row g-2">
+  {% for noticia in resultados_noticias %}
+    <div class="col-md-4">
+      {% include 'partials/_card_noticia.html' %}
+    </div>
+  {% empty %}
+    <p class="text-center">Nenhuma notícia encontrado.</p>
+  {% endfor %}
+</div>
+{% include 'partials/_paginacao_noticia.html' %}
