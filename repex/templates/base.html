@@ -47,8 +47,14 @@
         $.ajax({
           url: url,
           type: 'GET',
+          beforeSend: function () {
+            $('#spinner').show()
+          },
           success: function (data) {
             $('#ajax_projetos').html(data.html)
+          },
+          complete: function () {
+            $('#spinner').hide()
           }
         })
       })
@@ -59,8 +65,14 @@
         $.ajax({
           url: url,
           type: 'GET',
+          beforeSend: function () {
+            $('#spinner2').show()
+          },
           success: function (data) {
             $('#ajax_noticias').html(data.html)
+          },
+          complete: function () {
+            $('#spinner2').hide()
           }
         })
       })

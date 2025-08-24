@@ -8,6 +8,11 @@
   {% if query %}
     <div class="carousel-shell mb-5">
       <h4 style="color: blue;">Projetos correspondentes:</h4>
+      <div id="spinner" class="text-center m-auto" style="display: none;">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Carregando...</span>
+        </div>
+      </div>
       <div id="ajax_projetos">
         {% include 'partials/_ajax_projetos.html' %}
       </div>
@@ -15,6 +20,11 @@
 
     <div class="carousel-shell mb-5">
       <h4 style="color: blue;">Notícias correspondentes:</h4>
+      <div id="spinner2" class="text-center m-auto" style="display: none;">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Carregando...</span>
+        </div>
+      </div>
       <div id="ajax_noticias">
         {% include 'partials/_ajax_noticias.html' %}
       </div>
