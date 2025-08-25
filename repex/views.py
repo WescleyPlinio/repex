@@ -1,9 +1,19 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from repex.models import Projeto, Noticia
 from django.views.generic import DetailView
 from django.core.paginator import Paginator
 from django.template.loader import render_to_string
 from django.http import JsonResponse
+from .forms import ProjetoForm
+
+from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.messages.views import SuccessMessageMixin
+
+
+
+
 
 def index(request):
     projetos = Projeto.objects.all().order_by("criado_em")[:9]
@@ -96,3 +106,28 @@ class NoticiaDetailView(DetailView):
     model = Noticia
     template_name = 'noticia_detail.html'
     context_object_name = 'noticia'
+
+class ProjetoCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = Projeto
+    form_class = ProjetoForm
+    template_name = 'projeto_form.html'
+    success_message = 'Projeto criado com sucesso!'
+    success_url = reverse_lazy('explorar')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        self.object.componentes.add(self.request.user)
+        return response
+
+
+class ProjetoUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Projeto
+    form_class = ProjetoForm
+    template_name = 'projeto_form.html'
+    success_message = 'Projeto atualizado com sucesso!'
+    success_url = reverse_lazy('explorar')
+
+class ProjetoDeleteView(LoginRequiredMixin, DeleteView):
+    model = Projeto
+    template_name = 'confirm_delete.html'
+    success_url = reverse_lazy('explorar')

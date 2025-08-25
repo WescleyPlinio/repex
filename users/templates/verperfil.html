@@ -13,10 +13,15 @@
       {% endif %}
       <h4 class="fw-bold" style="color: orange;">{{ user.username }}</h4>
       <p>Entrou em 2025</p>
-      <form action="{% url "logout" %}" method="post">
-        {% csrf_token %}
-        <button class="btn btn-primary" type="submit">Sair</button>
-      </form>
+
+      <div class="d-flex gap-2">
+      <a class="btn btn-danger" href="{% url 'projeto_create' %}">Criar novo</a>
+  
+        <form action="{% url 'logout' %}" method="post">
+          {% csrf_token %}
+          <button class="btn btn-primary" type="submit">Sair</button>
+        </form>
+      </div>
 
     </div>
     <div class="col-md-7">

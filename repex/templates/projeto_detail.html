@@ -61,4 +61,35 @@
       </div>
     </div>
   </div>
+
+  <a class="btn btn-primary" href="{% url 'projeto_update' projeto.pk %}">Editar</a>
+
+<button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarExclusaoModal">
+  Excluir
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="confirmarExclusaoModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalLabel">Confirmar exclusão</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">
+        Tem certeza que deseja excluir o projeto <strong>"{{ projeto.titulo }}"</strong>?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+
+        <!-- Form que realmente deleta -->
+        <form method="post" action="{% url 'projeto_delete' projeto.pk %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">Excluir</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% endblock %}

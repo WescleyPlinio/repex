@@ -6,19 +6,19 @@ Para usar o sistema, siga esses passos:
     pip install -r requirements.txt
 
 ### Após isso faça as migrações:
-    py manage.py migrate
+    python manage.py migrate
 
 ### Instale objetos prontos (opcional, mas se instalar precisa ser nessa ordem):
 
-    py manage.py loaddata repex/fixtures/areas_conhecimento.json
-    py manage.py loaddata users/fixtures/users.json
-    py manage.py loaddata repex/fixtures/projetos.json
-    py manage.py loaddata repex/fixtures/noticias.json
+    python manage.py loaddata repex/fixtures/areas_conhecimento.json
+    python manage.py loaddata users/fixtures/users.json
+    python manage.py loaddata repex/fixtures/projetos.json
+    python manage.py loaddata repex/fixtures/noticias.json
 
 ### Crie um super usuário:
 
-    py manage.py createsuperuser
+    python manage.py createsuperuser
 
 ### Por fim, rode:
 
-    py manage.py runserver
+    python manage.py runserver
