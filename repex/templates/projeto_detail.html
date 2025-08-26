@@ -38,7 +38,11 @@
       <div class="w-100">
         <h5 style="color:blue">Componentes:</h5>
         {% for componente in projeto.componentes.all %}
-          <p>{{ componente.username }}</p>
+          <p>
+            <a href="{% url "profile_detail" componente.id %}">
+              {{ componente.username }}
+            </a>
+          </p>
         {% endfor %}
       </div>
     </div>

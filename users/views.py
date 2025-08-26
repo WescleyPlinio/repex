@@ -19,12 +19,11 @@ def cadastro(request):
     return render(request, "registration/cadastro.html", {"form": form})
 
 @login_required
-def verperfil(request):
+def ver_perfil(request):
     context = {
         'user': request.user,
-        'projetos': Projeto.objects.all()
     }
-    return render(request, 'verperfil.html', context)
+    return render(request, 'ver_perfil.html', context)
 
 @login_required
 @permission_required('users.view_projetos', raise_exception=True)

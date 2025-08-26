@@ -1,0 +1,22 @@
+{% load static %}
+<aside class="main-sidebar sidebar-dark-primary elevation-1 fundo-bd">
+  <a href="{% url 'index' %}" class="brand-link d-flex"><img src="{% static 'imgs/logotopo.svg' %}" class="w-100" alt="" /></a>
+  <div class="sidebar">
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
+        <li class="nav-item">
+          <a href="{% url 'index' %}" class="nav-link">
+            <i class="fa-solid fa-home fa-lg nav-icon"></i>
+            <p class="text">Início</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'logout' %}" class="nav-link">
+            <i class="fa-solid fa-user fa-lg nav-icon"></i>
+            <p class="text">Ver perfil</p>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</aside>

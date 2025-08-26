@@ -1,19 +1,14 @@
 from django.shortcuts import render, redirect
 from repex.models import Projeto, Noticia
-from django.views.generic import DetailView
 from django.core.paginator import Paginator
 from django.template.loader import render_to_string
 from django.http import JsonResponse
 from .forms import ProjetoForm
-
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
-
-
-
-
+from users.models import User
 
 def index(request):
     projetos = Projeto.objects.all().order_by("criado_em")[:9]
@@ -119,7 +114,6 @@ class ProjetoCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         self.object.componentes.add(self.request.user)
         return response
 
-
 class ProjetoUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Projeto
     form_class = ProjetoForm
@@ -131,3 +125,9 @@ class ProjetoDeleteView(LoginRequiredMixin, DeleteView):
     model = Projeto
     template_name = 'confirm_delete.html'
     success_url = reverse_lazy('explorar')
+
+
+class ProfileDetailView(DetailView):
+    model = User
+    template_name = 'profile_detail.html'
+    context_object_name = 'user'
