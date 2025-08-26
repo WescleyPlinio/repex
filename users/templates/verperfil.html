@@ -4,12 +4,12 @@
   Ver perfil
 {% endblock %}
 {% block content %}
-  <div class="row g-5">
-    <div class="col-md-5">
+  <div class="row g-4">
+    <div class="col-md-4">
       {% if user.profile.avatar %}
-        <img src="{{ user.profile.avatar.url }}" alt="avatar" class="mw-100 me-5 rounded-circle" />
+        <img src="{{ user.profile.avatar.url }}" alt="avatar" class="mw-100 rounded-circle" />
       {% else %}
-        <img src="{% static 'imgs/placeholder.webp' %}" alt="avatar" class="mw-100 me-5 rounded-circle" />
+        <img src="{% static 'imgs/user_placeholder.png' %}" alt="avatar" class="mw-100 rounded-circle" />
       {% endif %}
       <h4 class="fw-bold" style="color: orange;">{{ user.username }}</h4>
       <p>Entrou em 2025</p>
@@ -24,13 +24,15 @@
       </div>
 
     </div>
-    <div class="col-md-7">
+    <div class="col-md-8">
       <h4 class="fw-bold" style="color: blue;">Projetos que {{ user.username }} está envolvido:</h4>
       <div class="row g-3">
-        {% for projeto in projetos %}
+        {% for projeto in user.projetos.all %}
         <div class="col-md-6">
           {% include 'partials/_card.html' %}
         </div>
+        {% empty %}
+        <p>{{ user.username }} ainda não está envolvido em nenhum projeto.</p>
         {% endfor %}
       </div>
     </div>

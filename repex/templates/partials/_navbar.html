@@ -3,35 +3,70 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg bg-primary navbar-dark">
   <div class="container">
-    <a class="navbar-brand" href="{% url "index" %}">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"><span class="navbar-toggler-icon"></span></button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <a class="navbar-brand" href="{% url 'index' %}">Navbar</a>
+    <form method="GET" action="{% url 'explorar' %}" class="flex-grow-1 mx-3 d-none d-md-block">
+      {% csrf_token %}
+      <div class="position-relative">
+        <input type="text" name="q" class="form-control" placeholder="Busque projetos:" value="{{ query }}" />
+        <button type="submit" class="btn btn-link p-0 position-absolute top-50 end-0 translate-middle-y me-3"><i class="fas fa-search text-dark"></i></button>
+      </div>
+    </form>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"><span class="navbar-toggler-icon"></span></button>
 
-      <form method="GET" action="{% url 'explorar' %}" class="d-flex mx-auto w-100">
-        {% csrf_token %}
-        <div class="position-relative w-100 mx-5">
-          <input type="text" name="q" class="form-control pe-5" placeholder="Busque projetos:" value="{{ query }}" />
-          <button type="submit" class="btn btn-link p-0 position-absolute top-50 end-0 translate-middle-y me-3"><i class="fas fa-search text-dark"></i></button>
-        </div>
-      </form>
-      
+    <div class="collapse navbar-collapse " id="navbarSupportedContent">
+
       <ul class="navbar-nav ms-auto">
         <li class="nav-item ms-2">
-          <a class="nav-link active" href="{% url "index" %}">Início</a>
+          <a class="nav-link active" href="{% url 'index' %}">Início</a>
         </li>
         <li class="nav-item ms-2">
-          <a class="nav-link active" href="{% url "explorar" %}">Explorar</a>
+          <a class="nav-link active" href="{% url 'explorar' %}">Explorar</a>
         </li>
         {% if user.is_authenticated %}
-        <li class="nav-item ms-2">
-          <a class="nav-link active" href="{% url "ver_perfil" %}">Área do usuário</a>
-        </li>
+          <li class="nav-item ms-2">
+            <a class="nav-link active" href="{% url 'ver_perfil' %}">Área do usuário</a>
+          </li>
         {% else %}
-        <li class="nav-item ms-2">
-          <a class="nav-link active" href="{% url "login" %}">Login</a>
-        </li>
+          <li class="nav-item ms-2">
+            <a class="nav-link active" href="{% url 'login' %}">Login</a>
+          </li>
         {% endif %}
       </ul>
     </div>
   </div>
 </nav>
+
+<!-- offcanvas -->
+<div class="offcanvas offcanvas-end text-bg-primary" tabindex="-1" id="offcanvasNavbar">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Menu</h5>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body">
+    <form method="GET" action="{% url 'explorar' %}" class="w-100 mb-1">
+      {% csrf_token %}
+      <div class="position-relative">
+        <input type="text" name="q" class="form-control" placeholder="Busque projetos:" value="{{ query }}" />
+        <button type="submit" class="btn btn-link p-0 position-absolute top-50 end-0 translate-middle-y me-3"><i class="fas fa-search text-dark"></i></button>
+      </div>
+    </form>
+
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item mb-1">
+        <a class="nav-link active" href="{% url 'index' %}">Início</a>
+      </li>
+      <li class="nav-item mb-1">
+        <a class="nav-link active" href="{% url 'explorar' %}">Explorar</a>
+      </li>
+      {% if user.is_authenticated %}
+        <li class="nav-item mb-1">
+          <a class="nav-link active" href="{% url 'ver_perfil' %}">Área do usuário</a>
+        </li>
+      {% else %}
+        <li class="nav-item mb-1">
+          <a class="nav-link active" href="{% url 'login' %}">Login</a>
+        </li>
+      {% endif %}
+    </ul>
+  </div>
+</div>
