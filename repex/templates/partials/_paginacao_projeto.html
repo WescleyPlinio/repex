@@ -21,7 +21,7 @@
         <li class="page-item active" aria-current="page">
           <span class="page-link">{{ num }}</span>
         </li>
-      {% elif num > resultados_projetos.number|add:'-3' and num < resultados_projetos.number|add:'3' %}
+      {% elif num > resultados_projetos.number|add:'-6' and num < resultados_projetos.number|add:'6' %}
         <li class="page-item">
           <a class="page-link" href="{% url 'ajax_projetos' %}?q={{ query }}&page_projetos={{ num }}">{{ num }}</a>
         </li>

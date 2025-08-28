@@ -9,6 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
 from users.models import User
+from django.db.models import Q
 
 def index(request):
     projetos = Projeto.objects.all().order_by("criado_em")[:9]
@@ -21,7 +22,9 @@ def index(request):
 
 def explorar(request):
     query = request.GET.get('q', '')
-    
+    status = request.GET.get('status')
+    modalidade = request.GET.get('modalidade')
+
     resultado_projeto_titulo = Projeto.objects.filter(titulo__icontains=query)
     resultado_projeto_objetivo = Projeto.objects.filter(objetivo__icontains=query)
     resultado_projeto_resumo = Projeto.objects.filter(resumo__icontains=query)
@@ -31,8 +34,13 @@ def explorar(request):
     resultado_noticia_descricao = Noticia.objects.filter(descricao__icontains=query)
     resultado_noticia_conteudo = Noticia.objects.filter(conteudo__icontains=query)
     resultados_noticias = (resultado_noticia_titulo | resultado_noticia_descricao | resultado_noticia_conteudo).distinct()
+    
+    if status:
+        resultados_projetos = resultados_projetos.filter(status=status)
+    if modalidade:
+        resultados_projetos = resultados_projetos.filter(modalidade=modalidade)
 
-    paginator_projetos = Paginator(resultados_projetos, 3)
+    paginator_projetos = Paginator(resultados_projetos, 6)
     page_number_projetos = request.GET.get('page_projetos')
     resultados_projetos = paginator_projetos.get_page(page_number_projetos)
 
@@ -49,6 +57,8 @@ def explorar(request):
         'projetos_random': projetos_random,
         'noticias_random': noticias_random,
         'query': query,
+        'status_choices': Projeto.STATUS_CHOICES,
+        'modalidade_choices': Projeto.MODALIDADE_CHOICES,
     }
     return render(request, 'explorar.html', context)
 
@@ -60,7 +70,7 @@ def ajax_projetos(request):
     resultado_projeto_resumo = Projeto.objects.filter(resumo__icontains=query)
     resultados_projetos = (resultado_projeto_titulo | resultado_projeto_objetivo | resultado_projeto_resumo).distinct()
 
-    paginator = Paginator(resultados_projetos, 3)
+    paginator = Paginator(resultados_projetos, 6)
     page_number = request.GET.get('page_projetos')
     page_obj = paginator.get_page(page_number)
 

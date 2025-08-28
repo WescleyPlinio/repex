@@ -4,7 +4,7 @@
 <nav class="navbar navbar-expand-lg bg-primary navbar-dark">
   <div class="container">
     <a class="navbar-brand" href="{% url 'index' %}">Navbar</a>
-    <form method="GET" action="{% url 'explorar' %}" class="flex-grow-1 mx-3 d-none d-md-block">
+    <form method="GET" action="{% url 'explorar' %}" class="flex-grow-1 mw-100 mx-3 d-none d-md-block">
       {% csrf_token %}
       <div class="position-relative">
         <input type="text" name="q" class="form-control" placeholder="Busque projetos:" value="{{ query }}" />
@@ -13,21 +13,20 @@
     </form>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"><span class="navbar-toggler-icon"></span></button>
 
-    <div class="collapse navbar-collapse " id="navbarSupportedContent">
-
+    <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item ms-2">
+        <li class="nav-item">
           <a class="nav-link active" href="{% url 'index' %}">Início</a>
         </li>
-        <li class="nav-item ms-2">
+        <li class="nav-item">
           <a class="nav-link active" href="{% url 'explorar' %}">Explorar</a>
         </li>
         {% if user.is_authenticated %}
-          <li class="nav-item ms-2">
-            <a class="nav-link active" href="{% url 'ver_perfil' %}">Área do usuário</a>
+          <li class="nav-item">
+            <a class="nav-link active text-nowrap" href="{% url 'profile_detail' request.user.id %}">Área do usuário</a>
           </li>
         {% else %}
-          <li class="nav-item ms-2">
+          <li class="nav-item">
             <a class="nav-link active" href="{% url 'login' %}">Login</a>
           </li>
         {% endif %}
@@ -37,34 +36,34 @@
 </nav>
 
 <!-- offcanvas -->
-<div class="offcanvas offcanvas-end text-bg-primary" tabindex="-1" id="offcanvasNavbar">
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title">Menu</h5>
+    <h5 class="offcanvas-title" style="color: blue;">Menu</h5>
     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
   </div>
   <div class="offcanvas-body">
     <form method="GET" action="{% url 'explorar' %}" class="w-100 mb-1">
-      {% csrf_token %}
       <div class="position-relative">
         <input type="text" name="q" class="form-control" placeholder="Busque projetos:" value="{{ query }}" />
-        <button type="submit" class="btn btn-link p-0 position-absolute top-50 end-0 translate-middle-y me-3"><i class="fas fa-search text-dark"></i></button>
+        <button type="submit" class="p-0 position-absolute top-50 end-0 translate-middle-y me-3">
+        <i class="fas fa-search"></i></button>
       </div>
     </form>
 
     <ul class="navbar-nav ms-auto">
       <li class="nav-item mb-1">
-        <a class="nav-link active" href="{% url 'index' %}">Início</a>
+        <a class="nav-link active" href="{% url 'index' %}" style="color: blue;">Início</a>
       </li>
       <li class="nav-item mb-1">
-        <a class="nav-link active" href="{% url 'explorar' %}">Explorar</a>
+        <a class="nav-link active" href="{% url 'explorar' %}" style="color: blue;">Explorar</a>
       </li>
       {% if user.is_authenticated %}
         <li class="nav-item mb-1">
-          <a class="nav-link active" href="{% url 'ver_perfil' %}">Área do usuário</a>
+          <a class="nav-link active" href="{% url 'ver_perfil' %}" style="color: blue;">Área do usuário</a>
         </li>
       {% else %}
         <li class="nav-item mb-1">
-          <a class="nav-link active" href="{% url 'login' %}">Login</a>
+          <a class="nav-link active" href="{% url 'login' %}" style="color: blue;">Login</a>
         </li>
       {% endif %}
     </ul>
