@@ -8,7 +8,7 @@
   <h1 style="color: orange;" class="text-center fw-bold mb-3">{{ projeto.titulo }}</h1>
   <div class="row g-4">
     <div class="col-md-4">
-      <img src="{% static 'imgs/placeholder.webp' %}" alt="{{ projeto.titulo }}" class="img-fluid w-100 mb-3" />
+      <img src="{% if projeto.capa %}{{ projeto.capa.url }}{% else %}{% static 'imgs/placeholder.webp' %}{% endif %}" alt="{{ projeto.titulo }}" class="img-fluid w-100 mb-3" />
       <div class="w-100">
         <h5 style="color:blue">Modalidade:</h5>
         <p>{{ projeto.modalidade }}</p>
@@ -61,7 +61,7 @@
       </div>
       <div class="w-100">
         <h5 style="color:blue">Resultados esperados:</h5>
-        <p>{{ projeto.eesultados }}</p>
+        <p>{{ projeto.resultados }}</p>
       </div>
     </div>
   </div>
