@@ -2,8 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth import get_user_model
-from repex.models import Projeto, RedeSocial, UserSocialLink, RedeSocial
-from .forms import UserSocialLinkFormSet
+from repex.models import Projeto, RedeSocial
 from .models import Profile, User
 from .forms import CadastroForm
 from django.views.generic import UpdateView, CreateView, DeleteView, DetailView
