@@ -7,9 +7,9 @@
   <div class="row g-4">
     <div class="col-md-4">
       {% if user.profile.avatar %}
-        <img src="{{ user.profile.avatar.url }}" alt="avatar" class="mw-100 rounded-circle" />
+        <img src="{{ user.profile.avatar.url }}" alt="avatar" class="mw-100 rounded-circle shadow mb-2" />
       {% else %}
-        <img src="{% static 'imgs/user_placeholder.png' %}" alt="avatar" class="mw-100 rounded-circle" />
+        <img src="{% static 'imgs/user_placeholder.png' %}" alt="avatar" class="mw-100 rounded-circle shadow mb-2" />
       {% endif %}
       <h4 class="fw-bold" style="color: orange;">{{ user.username }}</h4>
       {% if user.profile.bio %}
@@ -17,9 +17,8 @@
       {% endif %}
 
       <div class="d-flex gap-2 justify-content-between">
-        <a class="btn btn-primary" href="{% url 'projeto_create' %}">Adicionar projeto</a>
         {% if user.id == request.user.id %}
-          <a class="btn btn-dark" href="{% url 'ver_perfil' %}">Área do usuário</a>
+          <a class="btn btn-dark" href="{% url 'ver_perfil' %}">Dashboard</a>
         {% endif %}
 
         <form action="{% url 'logout' %}" method="post" class="">

@@ -24,6 +24,7 @@ def cadastro(request):
 @login_required
 def ver_perfil(request):
     context = {
+        'projetos': Projeto.objects.all(),
         'user': request.user,
     }
     return render(request, 'ver_perfil.html', context)

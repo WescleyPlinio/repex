@@ -4,22 +4,34 @@
   Perfil de {{ user.username }}
 {% endblock %}
 {% block content %}
-  <h3 class="text-primary">Redes sociais:</h3>
-  <a class="btn btn-primary mb-2" href="{% url 'nova_rede_social' %}">Cadastrar rede social</a>
-  <div class="row g-3">
-    {% for r in redes_sociais %}
-      <div class="col-md-4">
-        <div class="card mb-3">
-          <div class="card-body">
-            <h4>{{ r.nome }}</h4>
-            <p>Ícone: {{ r.icone }}</p>
-            <p>URL base: {{ r.url_base }}</p>
-            <a class="card-link" href="{% url 'editar_rede_social' r.id %}">Editar</a>
-          </div>
-        </div>
-      </div>
-    {% empty %}
-      <p>Sem redes sociais cadastradas</p>
-    {% endfor %}
+<div class="card">
+  <div class="card-header d-flex">
+    <h3 class="card-title fw-bold my-auto">Redes sociais</h3>
+    <a class="btn btn-primary ms-auto" href="{% url "nova_rede_social" %}">Cadastrar</a>
   </div>
+  <div class="card-body table-responsive p-0">
+    <table class="table table-hover text-nowrap">
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Ícone</th>
+          <th>URL</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in redes_sociais %}
+        <tr>
+          <td>{{ r.nome }}</td>
+          <td>{{ r.icone }}</td>
+          <td>{{ r.url_base }}</td>
+          <td>
+            <a href="{% url "editar_rede_social" r.id %}" class="btn btn-sm btn-primary">Editar</a>
+            <a class="btn btn-sm btn-danger">Excluir</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
 {% endblock %}
