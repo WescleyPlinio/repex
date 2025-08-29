@@ -3,7 +3,10 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth import get_user_model
 from repex.models import Projeto
+from .models import Profile, User
 from .forms import CadastroForm
+from django.views.generic import UpdateView
+from django.urls import reverse_lazy
 
 User = get_user_model()
 
@@ -33,3 +36,9 @@ def paineladmin(request):
         'projetos': projetos,
         }
     return render(request, 'paineladmin.html', context)
+
+class PerfilUpdate(UpdateView):
+    model = Profile
+    template_name = 'editar_perfil.html'
+    fields = ['bio', 'avatar']
+    success_url = reverse_lazy('ver_perfil')

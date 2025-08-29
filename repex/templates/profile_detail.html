@@ -12,27 +12,31 @@
         <img src="{% static 'imgs/user_placeholder.png' %}" alt="avatar" class="mw-100 rounded-circle" />
       {% endif %}
       <h4 class="fw-bold" style="color: orange;">{{ user.username }}</h4>
-      <p>Entrou em 2025</p>
+      {% if user.profile.bio %}
+        <p>{{ user.profile.bio }}</p>
+      {% endif %}
 
-      <div class="d-flex gap-2">
-      <a class="btn btn-danger" href="{% url 'projeto_create' %}">Criar novo</a>
-  
-        <form action="{% url 'logout' %}" method="post">
+      <div class="d-flex gap-2 justify-content-between">
+        <a class="btn btn-primary" href="{% url 'projeto_create' %}">Adicionar projeto</a>
+        {% if user.id == request.user.id %}
+          <a class="btn btn-dark" href="{% url 'ver_perfil' %}">Área do usuário</a>
+        {% endif %}
+
+        <form action="{% url 'logout' %}" method="post" class="">
           {% csrf_token %}
-          <button class="btn btn-primary" type="submit">Sair</button>
+          <button class="btn btn-dark" type="submit">Sair</button>
         </form>
       </div>
-
     </div>
     <div class="col-md-8">
       <h4 class="fw-bold" style="color: blue;">Projetos que {{ user.username }} está envolvido:</h4>
       <div class="row g-3">
         {% for projeto in user.projetos.all %}
-        <div class="col-md-6">
-          {% include 'partials/_card.html' %}
-        </div>
+          <div class="col-md-6">
+            {% include 'partials/_card.html' %}
+          </div>
         {% empty %}
-        <p>{{ user.username }} ainda não está envolvido em nenhum projeto.</p>
+          <p>{{ user.username }} ainda não está envolvido em nenhum projeto.</p>
         {% endfor %}
       </div>
     </div>
