@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %}{% endblock title %}</title>
+    <title>{% block title %}Área do usuário{% endblock title %}</title>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- AdminLTE -->
@@ -23,9 +23,10 @@
       {% include 'partials/nav.html' %}
 
       <main class="content-wrapper">
-        {% block content %}
-
-        {% endblock %}
+        <div class="container py-3">
+          {% block content %}
+          {% endblock %}
+        </div>
       </main>
 
       <footer class="navbar navbar-dark py-4 ">

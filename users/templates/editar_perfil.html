@@ -1,14 +1,25 @@
-{% extends "base_user.html" %}
+{% extends 'base_user.html' %}
 {% load static crispy_forms_tags %}
 {% block title %}
   Perfil de {{ user.username }}
-{% endblock title %}
+{% endblock %}
 {% block content %}
-<div class="container py-3">
-    <form action="{% url "editar_perfil" request.user.profile.id %}" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form| crispy }}
-        <button type="submit" class="btn btn-primary">Salvar</button>
-    </form>
-</div>
+  <form action="{% url 'editar_perfil' request.user.profile.id %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form|crispy }}
+
+    <h3>Redes Sociais</h3>
+    {{ social_formset.management_form }}
+    {% for form in social_formset %}
+        <div class="social-form">
+            {{ form.rede.label_tag }} {{ form.rede }}
+            {{ form.url.label_tag }} {{ form.url }}
+            {% if form.instance.pk %}
+                {{ form.DELETE.label_tag }} {{ form.DELETE }}
+            {% endif %}
+        </div>
+    {% endfor %}
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+  </form>
 {% endblock %}

@@ -2,10 +2,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth import get_user_model
-from repex.models import Projeto
+from repex.models import Projeto, RedeSocial, UserSocialLink, RedeSocial
+from .forms import UserSocialLinkFormSet
 from .models import Profile, User
 from .forms import CadastroForm
-from django.views.generic import UpdateView
+from django.views.generic import UpdateView, CreateView, DeleteView, DetailView
 from django.urls import reverse_lazy
 
 User = get_user_model()
@@ -29,13 +30,24 @@ def ver_perfil(request):
     return render(request, 'ver_perfil.html', context)
 
 @login_required
-@permission_required('users.view_projetos', raise_exception=True)
 def paineladmin(request):
-    projetos = Projeto.objects.all()
+    redes_sociais = RedeSocial.objects.all()
     context = {
-        'projetos': projetos,
+        'redes_sociais': redes_sociais, 
         }
     return render(request, 'paineladmin.html', context)
+
+class RedeSocialCreate(CreateView):
+    model = RedeSocial
+    template_name = 'form_rede_social.html'
+    fields = ['nome', 'icone', 'url_base']
+    success_url = reverse_lazy('painel')
+
+class RedeSocialUpdate(UpdateView):
+    model = RedeSocial
+    template_name = 'form_rede_social.html'
+    fields = ['nome', 'icone', 'url_base']
+    success_url = reverse_lazy('painel')
 
 class PerfilUpdate(UpdateView):
     model = Profile

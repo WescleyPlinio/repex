@@ -7,4 +7,6 @@ urlpatterns = [
     path('perfil/', views.ver_perfil, name='ver_perfil'),
     path("editar_perfil/<int:pk>", views.PerfilUpdate.as_view(), name="editar_perfil"),
     path('painel/', views.paineladmin, name='painel'),
+    path('nova_rede_social/', views.RedeSocialCreate.as_view(), name='nova_rede_social'),
+    path('editar_rede_social/<int:pk>/', views.RedeSocialUpdate.as_view(), name='editar_rede_social'),
 ]

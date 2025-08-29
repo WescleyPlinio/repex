@@ -1,0 +1,25 @@
+{% extends 'base_user.html' %}
+{% load static crispy_forms_tags %}
+{% block title %}
+  Perfil de {{ user.username }}
+{% endblock %}
+{% block content %}
+  <h3 class="text-primary">Redes sociais:</h3>
+  <a class="btn btn-primary mb-2" href="{% url 'nova_rede_social' %}">Cadastrar rede social</a>
+  <div class="row g-3">
+    {% for r in redes_sociais %}
+      <div class="col-md-4">
+        <div class="card mb-3">
+          <div class="card-body">
+            <h4>{{ r.nome }}</h4>
+            <p>Ícone: {{ r.icone }}</p>
+            <p>URL base: {{ r.url_base }}</p>
+            <a class="card-link" href="{% url 'editar_rede_social' r.id %}">Editar</a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p>Sem redes sociais cadastradas</p>
+    {% endfor %}
+  </div>
+{% endblock %}
