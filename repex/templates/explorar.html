@@ -26,7 +26,7 @@
 {% block content %}
   {% if query %}
     <div class="carousel-shell mb-5">
-      <h4 style="color: blue;">Projetos correspondentes:</h4>
+      <h4 style="color: {{ identidade_visual.cor_sistema }};">Projetos correspondentes:</h4>
       <div id="spinner" class="text-center m-auto" style="display: none;">
         <div class="spinner-border text-primary" role="status">
           <span class="visually-hidden">Carregando...</span>
@@ -38,7 +38,7 @@
     </div>
 
     <div class="carousel-shell mb-5">
-      <h4 style="color: blue;">Notícias correspondentes:</h4>
+      <h4 style="color: {{ identidade_visual.cor_sistema }};">Notícias correspondentes:</h4>
       <div id="spinner2" class="text-center m-auto" style="display: none;">
         <div class="spinner-border text-primary" role="status">
           <span class="visually-hidden">Carregando...</span>
@@ -51,7 +51,7 @@
   {% endif %}
 
   <div class="carousel-shell mb-5">
-    <h4 style="color: blue;">Conheça projetos:</h4>
+    <h4 style="color: {{ identidade_visual.cor_sistema }};">Conheça projetos:</h4>
     <div class="carousel-viewport">
       <div class="carousel-track w-100" id="cardTrack">
         {% for projeto in projetos_random %}
@@ -67,7 +67,7 @@
   </div>
 
   <div id="newsCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
-    <h4 style="color: blue;">Notícias relevantes:</h4>
+    <h4 style="color: {{ identidade_visual.cor_sistema }};">Notícias relevantes:</h4>
     <div class="carousel-inner">
       {% for group in noticias_random|chunks:3 %}
         <div class="carousel-item {% if forloop.first %}active{% endif %}">
@@ -88,7 +88,7 @@
                         Área de conhecimento
                       {% endif %}
                     </span>
-                    <h4 class="m-auto p-5" style="color: orange;">
+                    <h4 class="m-auto p-5" style="color: {{ identidade_visual.cor_titulo }};">
                       {% if group.0 %}
                         {{ group.0.titulo }}
                       {% else %}
@@ -118,7 +118,7 @@
                             Área de conhecimento
                           {% endif %}
                         </span>
-                        <h4 class="m-auto p-5" style="color: orange;">
+                        <h4 class="m-auto p-5" style="color: {{ identidade_visual.cor_titulo }};">
                           {% if group.1 %}
                             {{ group.1.titulo }}
                           {% else %}
@@ -146,7 +146,7 @@
                             Área de conhecimento
                           {% endif %}
                         </span>
-                        <h4 class="m-auto p-5" style="color: orange;">
+                        <h4 class="m-auto p-5" style="color: {{ identidade_visual.cor_titulo }};">
                           {% if group.2 %}
                             {{ group.2.titulo }}
                           {% else %}

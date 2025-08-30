@@ -1,0 +1,15 @@
+{% extends 'base_user.html' %}
+{% load static crispy_forms_tags %}
+{% block title %}{% if form.instance.pk %}Editar Identidade visual{% else %}Nova Identidade visual{% endif %}{% endblock %}
+{% block content %}
+  <h3 class="mb-3 text-primary">{% if form.instance.pk %}Editar{% else %}Nova{% endif %} Identidade visual</h3>
+  <form method="post" enctype="multipart/form-data" class="card card-body">
+    {% csrf_token %}
+    {{ form| crispy}}
+    <div class="d-flex gap-2">
+      <button type="submit" class="btn btn-success">Salvar</button>
+      <a class="btn btn-primary" href="{% url "painel" %}">Cancelar</a>
+      <input type="color">
+    </div>
+  </form>
+{% endblock %}

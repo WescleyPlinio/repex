@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth import get_user_model
-from repex.models import Projeto, RedeSocial
+from repex.models import Projeto, RedeSocial, IdentidadeVisual
 from .models import Profile, User
 from .forms import CadastroForm
 from django.views.generic import UpdateView, CreateView, DeleteView, DetailView
@@ -32,8 +32,10 @@ def ver_perfil(request):
 @login_required
 def paineladmin(request):
     redes_sociais = RedeSocial.objects.all()
+    identidade_visual = IdentidadeVisual.objects.all()
     context = {
         'redes_sociais': redes_sociais, 
+        'identidades': identidade_visual
         }
     return render(request, 'paineladmin.html', context)
 
@@ -54,3 +56,17 @@ class PerfilUpdate(UpdateView):
     template_name = 'editar_perfil.html'
     fields = ['bio', 'avatar']
     success_url = reverse_lazy('ver_perfil')
+
+class IdentidadeVisualCreateView(CreateView):
+    model = IdentidadeVisual
+    fields = ['logo', 'cor_sistema', 'cor_suplente', 'cor_titulo']
+    template_name = 'identidade_visual_form.html'
+    success_message = 'Identidade visual criada com sucesso!'
+    success_url = reverse_lazy('painel')
+
+class IdentidadeVisualUpdateView(UpdateView):
+    model = IdentidadeVisual
+    fields = ['logo', 'cor_sistema', 'cor_suplente', 'cor_titulo']
+    template_name = 'identidade_visual_form.html'
+    success_message = 'Identidade visual atualizada com sucesso!'
+    success_url = reverse_lazy('painel')

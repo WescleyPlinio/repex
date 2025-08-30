@@ -1,14 +1,24 @@
-{% extends "registration/login_base.html" %}
+{% extends 'registration/login_base.html' %}
 {% load static crispy_forms_tags %}
 
 {% block content %}
-<div class="login-container bg-white p-5 rounded shadow shadow-lg">
-  <h2 class="text-center text-primary">Login</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form| crispy }}
-    <button class="btn btn-primary mb-2" type="submit">Entrar</button>
-  </form>
-  <p>Ainda não tem conta? <a href="{% url 'cadastro' %}">Cadastre-se</a></p>
-</div>
-{% endblock content %}
+  <div class="login-container bg-white p-5 rounded shadow shadow-lg">
+    <a class="text-decoratiom-none" href="{% url 'index' %}">
+      {% if identidade_visual.logo %}
+        <img class="w-100" src="{{ identidade_visual.logo.url }}" />
+      {% else %}
+        Repex
+      {% endif %}
+    </a>
+
+    <h2 class="text-center text-primary">Login</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <button class="btn btn-primary mb-2" type="submit">Entrar</button>
+    </form>
+    <p>
+      Ainda não tem conta? <a href="{% url 'cadastro' %}">Cadastre-se</a>
+    </p>
+  </div>
+{% endblock %}

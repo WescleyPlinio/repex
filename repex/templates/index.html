@@ -5,7 +5,7 @@
 {% endblock %}
 {% block content %}
   <div id="newsCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
-    <h4 style="color: blue;">Notícias relevantes:</h4>
+    <h4 style="color: {{ identidade_visual.cor_sistema }};">Notícias relevantes:</h4>
     <div class="carousel-inner">
       {% for group in noticias|chunks:3 %}
         <div class="carousel-item {% if forloop.first %}active{% endif %}">
@@ -26,7 +26,7 @@
                         Área de conhecimento
                       {% endif %}
                     </span>
-                    <h4 class="m-auto p-5" style="color: orange;">
+                    <h4 class="m-auto p-5" style="color: {{ identidade_visual.cor_titulo }};">
                       {% if group.0 %}
                         {{ group.0.titulo }}
                       {% else %}
@@ -56,7 +56,7 @@
                             Área de conhecimento
                           {% endif %}
                         </span>
-                        <h4 class="m-auto p-5" style="color: orange;">
+                        <h4 class="m-auto p-5" style="color: {{ identidade_visual.cor_titulo }};">
                           {% if group.1 %}
                             {{ group.1.titulo }}
                           {% else %}
@@ -84,7 +84,7 @@
                             Área de conhecimento
                           {% endif %}
                         </span>
-                        <h4 class="m-auto p-5" style="color: orange;">
+                        <h4 class="m-auto p-5" style="color: {{ identidade_visual.cor_titulo }};">
                           {% if group.2 %}
                             {{ group.2.titulo }}
                           {% else %}
@@ -107,7 +107,7 @@
   </div>
 
   <div class="carousel-shell mb-5">
-    <h4 style="color: blue;">Últimos projetos adicionados:</h4>
+    <h4 style="color: {{ identidade_visual.cor_sistema }};">Últimos projetos adicionados:</h4>
     <div class="carousel-viewport">
       <div class="carousel-track w-100" id="cardTrack">
         {% for projeto in projetos %}
@@ -123,7 +123,7 @@
   </div>
 
   <div class="carousel-shell mb-5">
-    <h4 style="color: blue;">Projetos mais vistos:</h4>
+    <h4 style="color: {{ identidade_visual.cor_sistema }};">Projetos mais vistos:</h4>
     <div class="carousel-viewport">
       <div class="carousel-track w-100" id="cardTrack">
         {% for projeto in projetos %}

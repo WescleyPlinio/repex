@@ -26,7 +26,7 @@ class Projeto(models.Model):
     criado_em = models.DateTimeField(auto_now_add=True, null=True)
     resultados = models.TextField(max_length=3000)
     capa = models.ImageField(upload_to='media/', null=True, blank=True)
-    doc = models.FileField(blank=True, null=True)
+    doc = models.FileField(upload_to='media/', blank=True, null=True)
     palavras_chave = models.CharField(max_length=200, blank=True, null=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
     modalidade = models.CharField(max_length=20, choices=MODALIDADE_CHOICES)
@@ -83,3 +83,12 @@ class UserSocialLink(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.rede.nome}"
+
+class IdentidadeVisual(models.Model):
+    logo = models.ImageField(upload_to='media/', null=True, blank=True)
+    cor_sistema = models.CharField(max_length=7, default="#005EFF")
+    cor_suplente = models.CharField(max_length=7, blank=True, null=True)
+    cor_titulo = models.CharField(max_length=7, default="#FF9823")
+
+    def __str__(self):
+        return f"Cores{self.cor_sistema, self.cor_suplente, self.cor_titulos}"

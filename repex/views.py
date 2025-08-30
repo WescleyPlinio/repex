@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from repex.models import Projeto, Noticia
+from .models import Projeto, Noticia, IdentidadeVisual
 from django.core.paginator import Paginator
 from django.template.loader import render_to_string
 from django.http import JsonResponse
@@ -117,7 +117,7 @@ class ProjetoCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = ProjetoForm
     template_name = 'projeto_form.html'
     success_message = 'Projeto criado com sucesso!'
-    success_url = reverse_lazy('explorar')
+    success_url = reverse_lazy('painel')
 
     def form_valid(self, form):
         response = super().form_valid(form)
@@ -129,13 +129,12 @@ class ProjetoUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     form_class = ProjetoForm
     template_name = 'projeto_form.html'
     success_message = 'Projeto atualizado com sucesso!'
-    success_url = reverse_lazy('explorar')
+    success_url = reverse_lazy('painel')
 
 class ProjetoDeleteView(LoginRequiredMixin, DeleteView):
     model = Projeto
     template_name = 'confirm_delete.html'
-    success_url = reverse_lazy('explorar')
-
+    success_url = reverse_lazy('painel')
 
 class ProfileDetailView(DetailView):
     model = User

@@ -4,7 +4,7 @@
   Perfil de {{ user.username }}
 {% endblock %}
 {% block content %}
-<div class="card">
+<div class="card mb-3">
   <div class="card-header d-flex">
     <h3 class="card-title fw-bold my-auto">Redes sociais</h3>
     <a class="btn btn-primary ms-auto" href="{% url "nova_rede_social" %}">Cadastrar</a>
@@ -26,6 +26,41 @@
           <td>{{ r.url_base }}</td>
           <td>
             <a href="{% url "editar_rede_social" r.id %}" class="btn btn-sm btn-primary">Editar</a>
+            <a class="btn btn-sm btn-danger">Excluir</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="card mb-3">
+  <div class="card-header d-flex">
+    <h3 class="card-title fw-bold my-auto">Identidades visuais</h3>
+    <a class="btn btn-primary ms-auto" href="{% url "identidade_visual_create" %}">Cadastrar</a>
+  </div>
+  <div class="card-body table-responsive p-0">
+    <table class="table table-hover text-nowrap">
+      <thead>
+        <tr>
+          <th>Logo</th>
+          <th>Cor do sistema</th>
+          <th>Cor suplente para o sistema</th>
+          <th>Cor dos títulos</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in identidades %}
+        <tr>
+          <td>
+            {% if i.logo %}<img src="{{ i.logo.url }}" alt="logo do sistema" class="img-fluid" style="max-width: 50px;" />{% else %}Vazio{% endif %}
+          </td>
+          <td>{{ i.cor_sistema }}</td>
+          <td>{% if i.cor_suplente %}{{ i.cor_suplente }}{% else %}Vazio{% endif %}</td>
+          <td>{{ i.cor_titulos }}</td>
+          <td>
+            <a href="{% url "identidade_visual_update" i.id %}" class="btn btn-sm btn-primary">Editar</a>
             <a class="btn btn-sm btn-danger">Excluir</a>
           </td>
         </tr>
