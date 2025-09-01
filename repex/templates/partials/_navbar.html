@@ -1,7 +1,7 @@
 {% load static %}
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: {{ identidade_visual.cor_sistema }};">
+<nav class="navbar navbar-expand-lg navbar-dark" style="{% if identidade_visual.cor_suplente %} background: linear-gradient(to right, {{ identidade_visual.cor_sistema }}, {{ identidade_visual.cor_suplente }}); {% else %}background-color: {{ identidade_visual.cor_sistema }};{% endif %}">
   <div class="container">
     <a class="navbar-brand" href="{% url 'index' %}">
       {% if identidade_visual.logo %}
