@@ -4,27 +4,25 @@
   Explorar projetos
 {% endblock %}
 {% block nav_bottom %}
-<form method="get" action="{% url 'explorar' %}" class="mb-4 d-flex justify-content-center gap-2 align-items-center">
-  <select name="status" class="form-select w-auto">
+<form method="get" name="q" value="{{ query }}" class="mb-4 d-flex justify-content-center gap-2 align-items-center">
+  <select name="status" class="form-select form-select-sm border border-0 w-auto">
     <option value="">Status</option>
     {% for valor, label in status_choices %}
-      <option value="{{ valor }}" {% if request.GET.status == valor %}selected{% endif %}>{{ label }}</option>
+      <option class="border border-0" value="{{ valor }}" {% if request.GET.status == valor %}selected{% endif %}>{{ label }}</option>
     {% endfor %}
   </select>
 
-  <select name="modalidade" class="form-select w-auto">
+  <select name="modalidade" class="form-select form-select-sm border border-0 w-auto">
     <option value="">Modalidade</option>
     {% for valor, label in modalidade_choices %}
-      <option value="{{ valor }}" {% if request.GET.modalidade == valor %}selected{% endif %}>{{ label }}</option>
+      <option class="border border-0" value="{{ valor }}" {% if request.GET.modalidade == valor %}selected{% endif %}>{{ label }}</option>
     {% endfor %}
   </select>
-
-  <button type="submit" class="btn btn-primary">Filtrar</button>
 </form>
 {% endblock %}
 
 {% block content %}
-  {% if query %}
+  {% if query or request.GET.status or request.GET.modalidade %}
     <div class="carousel-shell mb-5">
       <h4 style="color: {{ identidade_visual.cor_sistema }};">Projetos correspondentes:</h4>
       <div id="spinner" class="text-center m-auto" style="display: none;">

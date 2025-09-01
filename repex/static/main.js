@@ -2,13 +2,13 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.carousel-shell').forEach(shell => {
     const track = shell.querySelector('.carousel-track');
     if (!track) return;
-    
+
     const items = Array.from(track.children);
     const prevBtn = shell.querySelector('.carousel-prev');
     const nextBtn = shell.querySelector('.carousel-next');
 
     let index = 0;
-    let visible = 2.5; 
+    let visible = 2.5;
     let maxIndex = 0;
 
     function recalc() {
@@ -47,5 +47,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('resize', recalc);
     recalc();
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.querySelector("form[name='q']");
+  const selects = form.querySelectorAll("select");
+
+  selects.forEach(select => {
+    select.addEventListener("change", function () {
+      form.submit();
+    });
   });
 });

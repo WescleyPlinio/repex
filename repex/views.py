@@ -36,9 +36,9 @@ def explorar(request):
     resultados_noticias = (resultado_noticia_titulo | resultado_noticia_descricao | resultado_noticia_conteudo).distinct()
     
     if status:
-        resultados_projetos = resultados_projetos.filter(status=status)
+        resultados_projetos = resultados_projetos.filter(status=status).distinct()
     if modalidade:
-        resultados_projetos = resultados_projetos.filter(modalidade=modalidade)
+        resultados_projetos = resultados_projetos.filter(modalidade=modalidade).distinct()
 
     paginator_projetos = Paginator(resultados_projetos, 6)
     page_number_projetos = request.GET.get('page_projetos')
