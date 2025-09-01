@@ -49,14 +49,3 @@ document.addEventListener('DOMContentLoaded', () => {
     recalc();
   });
 });
-
-document.addEventListener("DOMContentLoaded", function () {
-  const form = document.querySelector("form[name='q']");
-  const selects = form.querySelectorAll("select");
-
-  selects.forEach(select => {
-    select.addEventListener("change", function () {
-      form.submit();
-    });
-  });
-});

@@ -166,3 +166,18 @@
     <button class="btn btn-light carousel-control carousel-next" data-bs-target="#newsCarousel" data-bs-slide="next" style="color: blue;" aria-label="Próximo">›</button>
   </div>
 {% endblock %}
+
+{% block extra_scripts %}
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const form = document.querySelector("form[name='q']")
+      const selects = form.querySelectorAll('select')
+    
+      selects.forEach((select) => {
+        select.addEventListener('change', function () {
+          form.submit()
+        })
+      })
+    })
+  </script>
+{% endblock %}

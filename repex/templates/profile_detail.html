@@ -11,7 +11,7 @@
       {% else %}
         <img src="{% static 'imgs/user_placeholder.png' %}" alt="avatar" class="mw-100 rounded-circle shadow mb-2" />
       {% endif %}
-      <h4 class="fw-bold" style="color: {{ identidade_visual.cor_titulo }};">{{ user.username }}</h4>
+      <h4 class="fw-bold" style="color: {{ identidade_visual.cor_titulo }};">{{ user.nome_completo }}</h4>
       {% if user.profile.bio %}
         <p>{{ user.profile.bio }}</p>
       {% endif %}
@@ -19,16 +19,16 @@
       <div class="d-flex gap-2 justify-content-between">
         {% if user.id == request.user.id %}
           <a style="background-color: {{ identidade_visual.cor_sistema }};" class="btn text-white flex-grow-1" href="{% url 'ver_perfil' %}">Dashboard</a>
-        {% endif %}
 
-        <form action="{% url 'logout' %}" method="post" class="">
-          {% csrf_token %}
-          <button style="background-color: {{ identidade_visual.cor_sistema }};" class="btn text-white flex-grow-1" type="submit">Sair</button>
-        </form>
+          <form action="{% url 'logout' %}" method="post" class="">
+            {% csrf_token %}
+            <button style="background-color: {{ identidade_visual.cor_sistema }};" class="btn text-white flex-grow-1" type="submit">Sair</button>
+          </form>
+        {% endif %}
       </div>
     </div>
     <div class="col-md-8">
-      <h4 class="fw-bold" style="color: {{ identidade_visual.cor_sistema }};">Projetos que {{ user.username }} está envolvido:</h4>
+      <h4 class="fw-bold" style="color: {{ identidade_visual.cor_sistema }};">Projetos que {{ user.nome_completo }} está envolvido:</h4>
       <div class="row g-3">
         {% for projeto in user.projetos.all %}
           <div class="col-md-6">

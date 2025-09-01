@@ -19,7 +19,12 @@
   <body class="d-flex flex-column min-vh-100">
     {% include 'partials/_navbar.html' %}
     <!-- Curva da navbar -->
-    <div class="nav shadow shadow-none pb-3 d-flex" style="{% if identidade_visual.cor_suplente %} background: linear-gradient(to right, {{ identidade_visual.cor_sistema }}, {{ identidade_visual.cor_suplente }}); {% else %}background-color: {{ identidade_visual.cor_sistema }};{% endif %}">
+    <div class="nav shadow shadow-none pb-3 d-flex"
+      style="{% if identidade_visual.cor_suplente %}
+         background: linear-gradient(to right, {{ identidade_visual.cor_sistema }}, {{ identidade_visual.cor_suplente }});
+      {% else %}
+        background-color: {{ identidade_visual.cor_sistema }};
+      {% endif %}">
       <div class="container">
         {% block nav_bottom %}
 
@@ -40,6 +45,8 @@
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <script src="{% static 'main.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {% block extra_scripts %}
+    {% endblock %}
     <script>
       $(document).on('click', '#ajax_projetos .pagination a', function (e) {
         e.preventDefault()

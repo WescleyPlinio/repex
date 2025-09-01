@@ -6,94 +6,110 @@
 
 {% block content %}
   <h1 style="color: orange;" class="text-center fw-bold mb-3">{{ projeto.titulo }}</h1>
-  <div class="row g-4">
+  <div class="row g-4 mb-3">
     <div class="col-md-4">
-      <img src="{% if projeto.capa %}{{ projeto.capa.url }}{% else %}{% static 'imgs/placeholder.webp' %}{% endif %}" alt="{{ projeto.titulo }}" class="img-fluid w-100 mb-3" />
+      <img src="{% if projeto.capa %}
+          {{ projeto.capa.url }}
+        {% else %}
+          {% static 'imgs/placeholder.webp' %}
+        {% endif %}"
+        alt="{{ projeto.titulo }}"
+        class="img-fluid w-100 mb-3" />
       <div class="w-100">
-        <h5 style="color:blue">Modalidade:</h5>
+        <h5 style="color:{{ identidade_visual.cor_sistema }}">Modalidade:</h5>
         <p>{{ projeto.modalidade }}</p>
       </div>
       {% if projeto.documentacao %}
         <div class="w-100">
-          <h5 style="color:blue">Documentação:</h5>
+          <h5 style="color:{{ identidade_visual.cor_sistema }}">Documentação:</h5>
           <a href="{{ projeto.documentacao.url }}">{{ projeto.documentacao.url }}</a>
         </div>
       {% endif %}
       <div class="w-100">
-        <h5 style="color:blue">Área de conhecimento:</h5>
+        <h5 style="color:{{ identidade_visual.cor_sistema }}">Área de conhecimento:</h5>
         <p>{{ projeto.area_conhecimento }}</p>
       </div>
       <div class="w-100">
-        <h5 style="color:blue">Status:</h5>
+        <h5 style="color:{{ identidade_visual.cor_sistema }}">Status:</h5>
         <p>{{ projeto.status }}</p>
       </div>
       <div class="w-100">
-        <h5 style="color:blue">Criado em:</h5>
+        <h5 style="color:{{ identidade_visual.cor_sistema }}">Criado em:</h5>
         <p>{{ projeto.criado_em }}</p>
       </div>
       <div class="w-100">
-        <h5 style="color:blue">Palavras-chave:</h5>
+        <h5 style="color:{{ identidade_visual.cor_sistema }}">Palavras-chave:</h5>
         <p>{{ projeto.palavras_chave }}</p>
       </div>
       <div class="w-100">
-        <h5 style="color:blue">Componentes:</h5>
-        {% for componente in projeto.componentes.all %}
-          <p>
-            <a href="{% url "profile_detail" componente.id %}">
-              {{ componente.username }}
+        <h5 style="color:{{ identidade_visual.cor_sistema }}">Componentes:</h5>
+        <div class="d-flex gap-3 flex-wrap">
+          {% for componente in projeto.componentes.all %}
+            <a href="{% url 'profile_detail' componente.id %}">
+              <div class="d-flex flex-column align-items-center">
+                <img src="{% if componente.profile.avatar %}
+                    {{ componente.profile.avatar.url }}
+                  {% else %}
+                    {% static 'imgs/user_placeholder.png' %}
+                  {% endif %}"
+                  alt="componente.nome_completo"
+                  class="img-fluid rounded-circle mb-1"
+                  style="max-width: 55px;" />
+                {{ componente.nome_completo }}
+              </div>
             </a>
-          </p>
-        {% endfor %}
+          {% endfor %}
+        </div>
       </div>
     </div>
     <div class="col-md-8">
       <div class="w-100">
-        <h5 style="color:blue">Resumo:</h5>
+        <h5 style="color:{{ identidade_visual.cor_sistema }}">Resumo:</h5>
         <p>{{ projeto.resumo }}</p>
       </div>
       <div class="w-100">
-        <h5 style="color:blue">Justificativa:</h5>
+        <h5 style="color:{{ identidade_visual.cor_sistema }}">Justificativa:</h5>
         <p>{{ projeto.justificativa }}</p>
       </div>
       <div class="w-100">
-        <h5 style="color:blue">Objetivo:</h5>
+        <h5 style="color:{{ identidade_visual.cor_sistema }}">Objetivo:</h5>
         <p>{{ projeto.objetivo }}</p>
       </div>
       <div class="w-100">
-        <h5 style="color:blue">Resultados esperados:</h5>
+        <h5 style="color:{{ identidade_visual.cor_sistema }}">Resultados esperados:</h5>
         <p>{{ projeto.resultados }}</p>
       </div>
     </div>
   </div>
 
-  <a class="btn btn-primary" href="{% url 'projeto_update' projeto.pk %}">Editar</a>
+  <nav class="d-flex justify-content-end gap-2 mb-5">
+    <a class="btn btn-primary" href="{% url 'projeto_update' projeto.pk %}">Editar</a>
+  
+    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarExclusaoModal">Excluir</button>
 
-<button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarExclusaoModal">
-  Excluir
-</button>
+  </nav>
 
-<!-- Modal -->
-<div class="modal fade" id="confirmarExclusaoModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalLabel">Confirmar exclusão</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-      </div>
-      <div class="modal-body">
-        Tem certeza que deseja excluir o projeto <strong>"{{ projeto.titulo }}"</strong>?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+  <!-- Modal -->
+  <div class="modal fade" id="confirmarExclusaoModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalLabel">Confirmar exclusão</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          Tem certeza que deseja excluir o projeto <strong>"{{ projeto.titulo }}"</strong>?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
 
-        <!-- Form que realmente deleta -->
-        <form method="post" action="{% url 'projeto_delete' projeto.pk %}">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-danger">Excluir</button>
-        </form>
+          <!-- Form que realmente deleta -->
+          <form method="post" action="{% url 'projeto_delete' projeto.pk %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Excluir</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
 {% endblock %}
