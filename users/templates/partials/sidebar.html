@@ -1,6 +1,10 @@
 {% load static %}
 <aside class="main-sidebar sidebar-dark-primary elevation-1 fundo-bd">
-  <a href="{% url 'index' %}" class="brand-link d-flex"><img src="{% static 'imgs/logotopo.svg' %}" class="w-100" alt="" /></a>
+  {% if identidade_visual.logo %}
+  <a href="{% url 'index' %}" class="brand-link"><img src="{{ identidade_visual.logo.url }}" class="w-100" alt="" /></a>
+  {% else %}
+  <a href="{% url 'index' %}" class="brand-link">Repex</a>
+  {% endif %}
   <div class="sidebar">
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
@@ -14,12 +18,6 @@
           <a href="{% url 'ver_perfil' %}" class="nav-link">
             <i class="fa-solid fa-table fa-lg nav-icon"></i>
             <p class="text">Dashboard</p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="{% url 'projeto_create' %}" class="nav-link">
-            <i class="fa-solid fa-plus fa-lg nav-icon"></i>
-            <p class="text">Adicionar projeto</p>
           </a>
         </li>
         <li class="nav-item">

@@ -1,5 +1,6 @@
 from django.db import models
 from users.models import Profile, User
+from PIL import Image, ImageOps
 
 class AreaConhecimento(models.Model):
     area = models.CharField(max_length=150)
@@ -37,6 +38,11 @@ class Projeto(models.Model):
     
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
+        if self.capa:
+            img = Image.open(self.capa.path)
+            output_size = (520, 320)
+            img = ImageOps.fit(img, output_size, Image.LANCZOS)
+            img.save(self.capa.path)
 
     
 class FotoProjeto(models.Model):
