@@ -47,7 +47,7 @@ class Projeto(models.Model):
     
 class FotoProjeto(models.Model):
     projeto = models.ForeignKey(Projeto, on_delete=models.CASCADE, related_name='photos')
-    photo = models.ImageField()
+    foto = models.ImageField()
 
     def __str__(self):
         return f"Foto do projeto {self.projeto.titulo}"

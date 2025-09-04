@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Projeto, Noticia, IdentidadeVisual
+from .models import Projeto, Noticia, IdentidadeVisual, FotoProjeto
 from django.core.paginator import Paginator
 from django.template.loader import render_to_string
 from django.http import JsonResponse
@@ -120,9 +120,12 @@ class ProjetoCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     success_url = reverse_lazy('painel')
 
     def form_valid(self, form):
-        response = super().form_valid(form)
+        self.object = form.save()
         self.object.componentes.add(self.request.user)
-        return response
+
+        for file in self.request.FILES.getlist("fotos"):
+            FotoProjeto.objects.create(projeto=self.object, foto=file)
+        return super().form_valid(form)
 
 class ProjetoUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Projeto

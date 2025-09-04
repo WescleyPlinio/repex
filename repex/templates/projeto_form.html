@@ -5,8 +5,8 @@
   <h1 class="mb-3">{% if form.instance.pk %}Editar {% else %}Novo {% endif %}Projeto</h1>
   <form method="post" enctype="multipart/form-data" class="card card-body">
     {% csrf_token %}
-    {{ form| crispy }}
     {{ form.media }}
+    {{ form| crispy }}
     <div class="d-flex gap-2">
       <button type="submit" class="btn btn-success">Salvar</button>
       <a href="{% if form.instance.pk %}{% url 'projeto_detail' form.instance.pk %}{% else %}{% url 'explorar' %}{% endif %}" class="btn btn-secondary">Cancelar</a>
