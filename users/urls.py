@@ -4,11 +4,11 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('cadastro/', views.cadastro, name='cadastro'),
-    path('perfil/', views.ver_perfil, name='ver_perfil'),
-    path("editar_perfil/<int:pk>", views.PerfilUpdate.as_view(), name="editar_perfil"),
+    path('perfil/', views.ver_perfil, name='perfil_detail'),
     path('painel/', views.paineladmin, name='painel'),
-    path('nova_rede_social/', views.RedeSocialCreate.as_view(), name='nova_rede_social'),
-    path('editar_rede_social/<int:pk>/', views.RedeSocialUpdate.as_view(), name='editar_rede_social'),
+    path('rede_social/nova/', views.RedeSocialCreate.as_view(), name='rede_social_create'),
     path('identidade_visual/nova/', views.IdentidadeVisualCreateView.as_view(), name='identidade_visual_create'),
+    path("perfil/<int:pk>/editar/", views.PerfilUpdateView.as_view(), name="perfil_update"),
+    path('rede_social/<int:pk>/editar', views.RedeSocialUpdate.as_view(), name='rede_social_update'),
     path('identidade_visual/<int:pk>/editar/', views.IdentidadeVisualUpdateView.as_view(), name='identidade_visual_update'),
 ]

@@ -51,11 +51,11 @@ class RedeSocialUpdate(UpdateView):
     fields = ['nome', 'icone', 'url_base']
     success_url = reverse_lazy('painel')
 
-class PerfilUpdate(UpdateView):
+class PerfilUpdateView(UpdateView):
     model = Profile
     template_name = 'editar_perfil.html'
     fields = ['bio', 'avatar']
-    success_url = reverse_lazy('ver_perfil')
+    success_url = reverse_lazy('perfil_detail')
 
 class IdentidadeVisualCreateView(CreateView):
     model = IdentidadeVisual

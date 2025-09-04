@@ -13,10 +13,9 @@ urlpatterns = [
     path('noticia/<int:pk>/', views.NoticiaDetailView.as_view(), name='noticia_detail'),
     path('profile/<int:pk>/', views.ProfileDetailView.as_view(), name='profile_detail'),
     path('projeto/<int:pk>/', views.ProjetoDetailView.as_view(), name='projeto_detail'),
-    path('novo/', ProjetoCreateView.as_view(), name='projeto_create'),
-    path('<int:pk>/editar/', ProjetoUpdateView.as_view(), name='projeto_update'),
-    path('<int:pk>/excluir/', ProjetoDeleteView.as_view(), name='projeto_delete'),
-    path('profile/<int:pk>/', views.ProfileDetailView.as_view(), name='profile_detail'),
+    path('projeto/novo/', ProjetoCreateView.as_view(), name='projeto_create'),
+    path('projeto/<int:pk>/editar/', ProjetoUpdateView.as_view(), name='projeto_update'),
+    path('projeto/<int:pk>/excluir/', ProjetoDeleteView.as_view(), name='projeto_delete'),
 
 ]
 

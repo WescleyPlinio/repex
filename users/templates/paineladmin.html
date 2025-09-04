@@ -7,7 +7,7 @@
 <div class="card mb-3">
   <div class="card-header d-flex">
     <h3 class="card-title fw-bold my-auto">Redes sociais</h3>
-    <a class="btn btn-primary ms-auto" href="{% url "nova_rede_social" %}">Cadastrar</a>
+    <a class="btn btn-primary ms-auto" href="{% url "rede_social_create" %}">Cadastrar</a>
   </div>
   <div class="card-body table-responsive p-0">
     <table class="table table-hover text-nowrap">
@@ -25,7 +25,7 @@
           <td>{{ r.icone }}</td>
           <td>{{ r.url_base }}</td>
           <td>
-            <a href="{% url "editar_rede_social" r.id %}" class="btn btn-sm btn-primary">Editar</a>
+            <a href="{% url "rede_social_update" r.id %}" class="btn btn-sm btn-primary">Editar</a>
             <a class="btn btn-sm btn-danger">Excluir</a>
           </td>
         </tr>

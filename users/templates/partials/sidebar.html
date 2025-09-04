@@ -15,7 +15,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{% url 'ver_perfil' %}" class="nav-link">
+          <a href="{% url 'perfil_detail' %}" class="nav-link">
             <i class="fa-solid fa-table fa-lg nav-icon"></i>
             <p class="text">Dashboard</p>
           </a>
@@ -27,7 +27,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="{% url 'editar_perfil' request.user.id %}" class="nav-link">
+          <a href="{% url 'perfil_update' request.user.id %}" class="nav-link">
             <i class="fa-solid fa-pen fa-lg nav-icon"></i>
             <p class="text">Editar Perfil</p>
           </a>

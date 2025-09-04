@@ -18,7 +18,7 @@
 
       <div class="d-flex gap-2 justify-content-between">
         {% if user.id == request.user.id %}
-          <a style="background-color: {{ identidade_visual.cor_sistema }};" class="btn text-white flex-grow-1" href="{% url 'ver_perfil' %}">Dashboard</a>
+          <a style="background-color: {{ identidade_visual.cor_sistema }};" class="btn text-white flex-grow-1" href="{% url 'perfil_detail' %}">Dashboard</a>
 
           <form action="{% url 'logout' %}" method="post" class="">
             {% csrf_token %}
