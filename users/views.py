@@ -22,12 +22,12 @@ def cadastro(request):
     return render(request, "registration/cadastro.html", {"form": form})
 
 @login_required
-def ver_perfil(request):
+def dashboard(request):
     context = {
         'projetos': Projeto.objects.all(),
         'user': request.user,
     }
-    return render(request, 'ver_perfil.html', context)
+    return render(request, 'dashboard.html', context)
 
 @login_required
 def paineladmin(request):

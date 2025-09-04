@@ -126,18 +126,41 @@ class ProjetoCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         for file in self.request.FILES.getlist("fotos"):
             FotoProjeto.objects.create(projeto=self.object, foto=file)
         return super().form_valid(form)
+    
+class NoticiaCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = Noticia
+    fields = ['titulo', 'descricao', 'conteudo', 'imagem', 'area_conhecimento']
+    template_name = 'noticia_form.html'
+    success_message = 'Notícia criada com sucesso!'
+    success_url = reverse_lazy('dashboard')
+
+    def form_valid(self, form):
+        form.instance.autor = self.request.user
+        return super().form_valid(form)
 
 class ProjetoUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Projeto
     form_class = ProjetoForm
     template_name = 'projeto_form.html'
     success_message = 'Projeto atualizado com sucesso!'
-    success_url = reverse_lazy('painel')
+    success_url = reverse_lazy('dashboard')
+
+class NoticiaUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Noticia
+    fields = ['titulo', 'descricao', 'conteudo', 'imagem', 'area_conhecimento']
+    template_name = 'noticia_form.html'
+    success_message = 'Notícia atualizada com sucesso!'
+    success_url = reverse_lazy('dashboard')
 
 class ProjetoDeleteView(LoginRequiredMixin, DeleteView):
     model = Projeto
-    template_name = 'confirm_delete.html'
-    success_url = reverse_lazy('painel')
+    template_name = 'projeto_confirm_delete.html'
+    success_url = reverse_lazy('dashboard')
+
+class NoticiaDeleteView(LoginRequiredMixin, DeleteView):
+    model = Noticia
+    template_name = 'noticia_confirm_delete.html'
+    success_url = reverse_lazy('dashboard')
 
 class ProfileDetailView(DetailView):
     model = User

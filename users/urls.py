@@ -4,7 +4,7 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('cadastro/', views.cadastro, name='cadastro'),
-    path('perfil/', views.ver_perfil, name='perfil_detail'),
+    path('dashboard/', views.dashboard, name='dashboard'),
     path('painel/', views.paineladmin, name='painel'),
     path('rede_social/nova/', views.RedeSocialCreate.as_view(), name='rede_social_create'),
     path('identidade_visual/nova/', views.IdentidadeVisualCreateView.as_view(), name='identidade_visual_create'),
