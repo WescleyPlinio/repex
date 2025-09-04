@@ -19,33 +19,33 @@
         <h5 style="color:{{ identidade_visual.cor_sistema }}">Modalidade:</h5>
         <p>{{ projeto.modalidade }}</p>
       </div>
-      {% if projeto.documentacao %}
-        <div class="w-100">
+      {% if projeto.doc %}
+        <div class="w-100 mb-3">
           <h5 style="color:{{ identidade_visual.cor_sistema }}">Documentação:</h5>
-          <a href="{{ projeto.documentacao.url }}">{{ projeto.documentacao.url }}</a>
+          <a class="text-dark" href="{{ projeto.doc.url }}" target="_blank">{{ projeto.doc.url }}</a>
         </div>
       {% endif %}
-      <div class="w-100">
+      <div class="w-100 mb-3">
         <h5 style="color:{{ identidade_visual.cor_sistema }}">Área de conhecimento:</h5>
         <p>{{ projeto.area_conhecimento }}</p>
       </div>
-      <div class="w-100">
+      <div class="w-100 mb-3">
         <h5 style="color:{{ identidade_visual.cor_sistema }}">Status:</h5>
         <p>{{ projeto.status }}</p>
       </div>
-      <div class="w-100">
+      <div class="w-100 mb-3">
         <h5 style="color:{{ identidade_visual.cor_sistema }}">Criado em:</h5>
         <p>{{ projeto.criado_em }}</p>
       </div>
-      <div class="w-100">
+      <div class="w-100 mb-3">
         <h5 style="color:{{ identidade_visual.cor_sistema }}">Palavras-chave:</h5>
         <p>{{ projeto.palavras_chave }}</p>
       </div>
-      <div class="w-100">
+      <div class="w-100 mb-3">
         <h5 style="color:{{ identidade_visual.cor_sistema }}">Componentes:</h5>
         <div class="d-flex gap-3 flex-wrap">
           {% for componente in projeto.componentes.all %}
-            <a href="{% url 'profile_detail' componente.id %}">
+            <a class="text-decoration-none" href="{% url 'profile_detail' componente.id %}" >
               <div class="d-flex flex-column align-items-center">
                 <img src="{% if componente.profile.avatar %}
                     {{ componente.profile.avatar.url }}
@@ -55,7 +55,7 @@
                   alt="componente.nome_completo"
                   class="img-fluid rounded-circle mb-1"
                   style="max-width: 55px;" />
-                {{ componente.nome_completo }}
+                <h6 class="text-dark">{{ componente.nome_completo }}</h6>
               </div>
             </a>
           {% endfor %}

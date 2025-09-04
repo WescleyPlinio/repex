@@ -39,37 +39,39 @@ def paineladmin(request):
         'redes_sociais': redes_sociais, 
         'identidades': identidade_visual
         }
-    return render(request, 'paineladmin.html', context)
+    return render(request, 'painel_admin.html', context)
 
 class RedeSocialCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = RedeSocial
-    template_name = 'form_rede_social.html'
+    template_name = 'rede_social_form.html'
     fields = ['nome', 'icone', 'url_base']
+    success_message = 'Rede social criada com sucesso!'
     success_url = reverse_lazy('painel')
 
 class RedeSocialUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = RedeSocial
-    template_name = 'form_rede_social.html'
+    template_name = 'rede_social_form.html'
     fields = ['nome', 'icone', 'url_base']
+    success_message = 'Rede social atualizada com sucesso!'
     success_url = reverse_lazy('painel')
 
 class PerfilUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Profile
-    template_name = 'editar_perfil.html'
+    template_name = 'perfil_update.html'
     fields = ['bio', 'avatar']
     success_message = 'Perfil atualizado com sucesso!'
     success_url = reverse_lazy('dashboard')
 
 class IdentidadeVisualCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = IdentidadeVisual
-    fields = ['logo', 'cor_sistema', 'cor_suplente', 'cor_titulo']
     template_name = 'identidade_visual_form.html'
+    fields = ['logo', 'cor_sistema', 'cor_suplente', 'cor_titulo']
     success_message = 'Identidade visual criada com sucesso!'
     success_url = reverse_lazy('painel')
 
 class IdentidadeVisualUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = IdentidadeVisual
-    fields = ['logo', 'cor_sistema', 'cor_suplente', 'cor_titulo']
     template_name = 'identidade_visual_form.html'
+    fields = ['logo', 'cor_sistema', 'cor_suplente', 'cor_titulo']
     success_message = 'Identidade visual atualizada com sucesso!'
     success_url = reverse_lazy('painel')
