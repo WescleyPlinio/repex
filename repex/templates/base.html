@@ -20,9 +20,13 @@
     <!-- Curva da navbar -->
     <div class="nav shadow shadow-none pb-3 d-flex"
       style="{% if identidade_visual.cor_suplente %}
+        
          background: linear-gradient(to right, {{ identidade_visual.cor_sistema }}, {{ identidade_visual.cor_suplente }});
+
       {% else %}
+        
         background-color: {{ identidade_visual.cor_sistema }};
+
       {% endif %}">
       <div class="container">
         {% block nav_bottom %}
@@ -31,7 +35,17 @@
       </div>
     </div>
 
-    <!-- Conteúdo -->
+    {% if messages %}
+      <div class="container mt-3">
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
     <main class="flex-grow-1 container my-5">
       {% block content %}
 
@@ -45,6 +59,7 @@
     <script src="{% static 'main.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     {% block extra_scripts %}
+
     {% endblock %}
     <script>
       $(document).on('click', '#ajax_projetos .pagination a', function (e) {

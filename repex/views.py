@@ -152,17 +152,17 @@ class NoticiaUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_message = 'Notícia atualizada com sucesso!'
     success_url = reverse_lazy('dashboard')
 
-class ProjetoDeleteView(LoginRequiredMixin, DeleteView):
+class ProjetoDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Projeto
     template_name = 'projeto_confirm_delete.html'
     success_url = reverse_lazy('dashboard')
 
-class NoticiaDeleteView(LoginRequiredMixin, DeleteView):
+class NoticiaDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Noticia
     template_name = 'noticia_confirm_delete.html'
     success_url = reverse_lazy('dashboard')
 
-class ProfileDetailView(DetailView):
+class ProfileDetailView(LoginRequiredMixin, DetailView):
     model = User
     template_name = 'profile_detail.html'
     context_object_name = 'user'

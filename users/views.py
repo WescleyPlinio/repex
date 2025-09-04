@@ -7,6 +7,8 @@ from .models import Profile, User
 from .forms import CadastroForm
 from django.views.generic import UpdateView, CreateView, DeleteView, DetailView
 from django.urls import reverse_lazy
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 User = get_user_model()
 
@@ -39,32 +41,33 @@ def paineladmin(request):
         }
     return render(request, 'paineladmin.html', context)
 
-class RedeSocialCreate(CreateView):
+class RedeSocialCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = RedeSocial
     template_name = 'form_rede_social.html'
     fields = ['nome', 'icone', 'url_base']
     success_url = reverse_lazy('painel')
 
-class RedeSocialUpdate(UpdateView):
+class RedeSocialUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = RedeSocial
     template_name = 'form_rede_social.html'
     fields = ['nome', 'icone', 'url_base']
     success_url = reverse_lazy('painel')
 
-class PerfilUpdateView(UpdateView):
+class PerfilUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Profile
     template_name = 'editar_perfil.html'
     fields = ['bio', 'avatar']
-    success_url = reverse_lazy('perfil_detail')
+    success_message = 'Perfil atualizado com sucesso!'
+    success_url = reverse_lazy('dashboard')
 
-class IdentidadeVisualCreateView(CreateView):
+class IdentidadeVisualCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = IdentidadeVisual
     fields = ['logo', 'cor_sistema', 'cor_suplente', 'cor_titulo']
     template_name = 'identidade_visual_form.html'
     success_message = 'Identidade visual criada com sucesso!'
     success_url = reverse_lazy('painel')
 
-class IdentidadeVisualUpdateView(UpdateView):
+class IdentidadeVisualUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = IdentidadeVisual
     fields = ['logo', 'cor_sistema', 'cor_suplente', 'cor_titulo']
     template_name = 'identidade_visual_form.html'

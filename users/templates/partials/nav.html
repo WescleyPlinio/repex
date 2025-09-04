@@ -5,7 +5,10 @@
     <div class="collapse navbar-collapse d-none d-lg-flex justify-content-between">
       <ul class="navbar-nav ms-auto d-flex align-items-center">
         <li class="nav-item ms-2">
-          <a class="nav-link" href="{% url 'logout' %}"><i class="fa-solid fa-arrow-right-from-bracket fa-xl"></i></a>
+          <form action="{% url "logout" %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="nav-link"><i class="fa-solid fa-arrow-right-from-bracket fa-xl"></i></button>
+          </form>
         </li>
       </ul>
     </div>
