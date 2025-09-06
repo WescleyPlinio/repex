@@ -64,23 +64,45 @@ def explorar(request):
 
 def ajax_projetos(request):
     query = request.GET.get('q', '')
+    status = request.GET.get('status', '')
+    modalidade = request.GET.get('modalidade', '')
 
     resultado_projeto_titulo = Projeto.objects.filter(titulo__icontains=query)
     resultado_projeto_objetivo = Projeto.objects.filter(objetivo__icontains=query)
     resultado_projeto_resumo = Projeto.objects.filter(resumo__icontains=query)
-    resultados_projetos = (resultado_projeto_titulo | resultado_projeto_objetivo | resultado_projeto_resumo).distinct()
+    resultados_projetos = (
+        resultado_projeto_titulo | resultado_projeto_objetivo | resultado_projeto_resumo
+    ).distinct()
+
+    if status:
+        resultados_projetos = resultados_projetos.filter(status=status)
+    if modalidade:
+        resultados_projetos = resultados_projetos.filter(modalidade=modalidade)
 
     paginator = Paginator(resultados_projetos, 6)
-    page_number = request.GET.get('page_projetos')
+    page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
     html = render_to_string(
         "partials/_ajax_projetos.html",
-        {"resultados_projetos": page_obj, "query": query},
-        request=request
+        {
+            "resultados_projetos": page_obj,
+            "query": query,
+        },
+        request=request,
     )
 
     return JsonResponse({"html": html})
+
+
+def buscar_projetos(request):
+    query = request.GET.get('q', '')
+    resultados = Projeto.objects.filter(nome__icontains=query) if query else []
+    data = [{"id": p.id, "nome": p.nome} for p in resultados]
+    return JsonResponse(data, safe=False)
+
+def pagina_pesquisa(request):
+    return render(request, "projetos/pesquisa.html")
 
 def ajax_noticias(request):
     query = request.GET.get('q', '')

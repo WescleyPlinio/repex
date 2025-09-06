@@ -4,7 +4,7 @@
   Explorar projetos
 {% endblock %}
 {% block nav_bottom %}
-<form method="get" name="q" value="{{ query }}" class="mb-4 d-flex justify-content-center gap-2 align-items-center">
+<form method="get" id="filtros-form" name="q" value="{{ query }}" class="mb-4 d-flex justify-content-center gap-2 align-items-center">
   <select name="status" class="form-select form-select-sm border border-0 w-auto">
     <option value="">Status</option>
     {% for valor, label in status_choices %}
@@ -169,15 +169,46 @@
 
 {% block extra_scripts %}
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const form = document.querySelector("form[name='q']")
-      const selects = form.querySelectorAll('select')
-    
-      selects.forEach((select) => {
-        select.addEventListener('change', function () {
-          form.submit()
-        })
-      })
-    })
+    $(document).on('change', '#filtros-form select', function () {
+    let formData = $('#filtros-form').serialize();
+    let query = $('#search-projetos').val();
+    $.ajax({
+      url: "{% url 'ajax_projetos' %}",
+      type: "GET",
+      data: formData + "&q=" + query,
+      beforeSend: function () {
+        $('#spinner').show();
+      },
+      success: function (data) {
+        $('#ajax_projetos').html(data.html);
+      },
+      complete: function () {
+        $('#spinner').hide();
+      }
+    });
+  });
+
+  $(document).on('click', '#ajax_projetos .pagination a', function (e) {
+  e.preventDefault();
+  let page = $(this).attr('href').split('page=')[1];
+  let formData = $('#filtros-form').serialize();
+  let query = $('#search-projetos').val();
+
+  $.ajax({
+    url: "{% url 'ajax_projetos' %}",
+    type: "GET",
+    data: formData + "&q=" + query + "&page=" + page,
+    beforeSend: function () {
+      $('#spinner').show();
+    },
+    success: function (data) {
+      $('#ajax_projetos').html(data.html);
+    },
+    complete: function () {
+      $('#spinner').hide();
+    }
+  });
+});
+
   </script>
 {% endblock %}
