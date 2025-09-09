@@ -17,23 +17,16 @@
   </head>
   <body class="d-flex flex-column min-vh-100">
     {% include 'partials/_navbar.html' %}
-    <!-- Curva da navbar -->
-    <div class="nav shadow shadow-none pb-3 d-flex"
-      style="{% if identidade_visual.cor_suplente %}
-        
-         background: linear-gradient(to right, {{ identidade_visual.cor_sistema }}, {{ identidade_visual.cor_suplente }});
-
+    <nav style="{% if identidade_visual.cor_suplente %}background: linear-gradient(to right, {{ identidade_visual.cor_sistema }}, {{ identidade_visual.cor_suplente }});
       {% else %}
-        
         background-color: {{ identidade_visual.cor_sistema }};
-
       {% endif %}">
       <div class="container">
         {% block nav_bottom %}
 
         {% endblock %}
       </div>
-    </div>
+    </nav>
 
     {% if messages %}
       <div class="container mt-3">

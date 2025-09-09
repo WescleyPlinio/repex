@@ -3,7 +3,7 @@
   {% if identidade_visual.logo %}
   <a href="{% url 'index' %}" class="brand-link"><img src="{{ identidade_visual.logo.url }}" class="w-100" alt="" /></a>
   {% else %}
-  <a href="{% url 'index' %}" class="brand-link">Repex</a>
+  <a href="{% url 'index' %}" class="brand-link text-center text-decoration-none"><h2>Repex</h2></a>
   {% endif %}
   <div class="sidebar">
     <nav class="mt-2">
@@ -23,7 +23,7 @@
         <li class="nav-item">
           <a href="{% url 'profile_detail' request.user.id %}" class="nav-link">
             <i class="fa-solid fa-user fa-lg nav-icon"></i>
-            <p class="text">Ver perfil</p>
+            <p class="text">Perfil público</p>
           </a>
         </li>
         <li class="nav-item">
@@ -34,7 +34,7 @@
         </li>
         <li class="nav-item">
           <a href="{% url 'painel' %}" class="nav-link">
-            <i class="fa-solid fa-user-tie fa-lg nav-icon"></i>
+            <i class="fa-solid fa-toolbox fa-lg nav-icon"></i>
             <p class="text">Opções do sistema</p>
           </a>
         </li>

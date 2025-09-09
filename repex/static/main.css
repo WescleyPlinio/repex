@@ -1,20 +1,16 @@
 body {
-  font-family: "Open Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 300;
-  font-style: normal;
-  font-variation-settings:
+    padding-top: 80px;
+    font-family: "Open Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-variation-settings:
     "wdth" 100;
 }
 
-.nav {
-    border-bottom-left-radius: 60% 80%;
-    border-bottom-right-radius: 60% 80%;
-}
-
-.footer {
-    border-top-left-radius: 60% 80%;
-    border-top-right-radius: 60% 80%;
+#mainNavbar {
+    height: 80px;
+    transition: top 0.3s;
 }
 
 .carousel-shell {
