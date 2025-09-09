@@ -55,24 +55,24 @@
 
     {% endblock %}
     <script>
-      $(document).on('keyup', '#search-projetos', function () {
-        let query = $(this).val();
-
+      $(document).on('click', '#ajax_projetos .pagination a', function (e) {
+        e.preventDefault()
+        let url = $(this).attr('href')
+      
         $.ajax({
-          url: "{% url 'ajax_projetos' %}",
-          type: "GET",
-          data: { q: query },
+          url: url,
+          type: 'GET',
           beforeSend: function () {
-            $('#spinner').show();
+            $('#spinner').show()
           },
           success: function (data) {
-            $('#ajax_projetos').html(data.html);
+            $('#ajax_projetos').html(data.html)
           },
           complete: function () {
-            $('#spinner').hide();
+            $('#spinner').hide()
           }
-        });
-      });
+        })
+      })
 
       $(document).on('click', '#ajax_noticias .pagination a', function (e) {
         e.preventDefault()

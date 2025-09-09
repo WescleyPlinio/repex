@@ -11,8 +11,7 @@
       {% endif %}
     </a>
 
-    <form method="GET" action="{% url 'explorar' %}" class="flex-grow-1 mw-100 mx-3 d-none d-md-block">
-      {% csrf_token %}
+    <form method="get" action="{% url 'explorar' %}" class="flex-grow-1 mw-100 mx-3 d-none d-md-block">
       <div class="position-relative">
         <input type="text" id="search-projetos" name="q" class="form-control" placeholder="Busque projetos:" value="{{ query }}" />
         <button type="submit" class="btn btn-link p-0 position-absolute top-50 end-0 translate-middle-y me-3"><i class="fas fa-search text-dark"></i></button>

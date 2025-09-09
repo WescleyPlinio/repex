@@ -80,7 +80,7 @@ def ajax_projetos(request):
         resultados_projetos = resultados_projetos.filter(modalidade=modalidade)
 
     paginator = Paginator(resultados_projetos, 6)
-    page_number = request.GET.get('page')
+    page_number = request.GET.get('page_projetos')
     page_obj = paginator.get_page(page_number)
 
     html = render_to_string(
@@ -100,9 +100,6 @@ def buscar_projetos(request):
     resultados = Projeto.objects.filter(nome__icontains=query) if query else []
     data = [{"id": p.id, "nome": p.nome} for p in resultados]
     return JsonResponse(data, safe=False)
-
-def pagina_pesquisa(request):
-    return render(request, "projetos/pesquisa.html")
 
 def ajax_noticias(request):
     query = request.GET.get('q', '')
