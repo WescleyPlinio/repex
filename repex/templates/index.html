@@ -14,11 +14,7 @@
               {% if group.0.id %}
                 <a href="{% url 'noticia_detail' group.0.id %}" class="text-decoration-none">
                   <div class="notice-card h-100 d-flex"
-                    style="background-image: url('{% if group.0.imagem %}
-                      {{ group.0.imagem.url }}
-                    {% else %}
-                      {% static 'imgs/placeholder.webp' %}
-                    {% endif %}');">
+                    style="background-image: url('{% if group.0.imagem %}{{ group.0.imagem.url }}{% else %}{% static 'imgs/placeholder.webp' %}{% endif %}');">
                     <span class="notice-label">
                       {% if group.0 %}
                         {{ group.0.area_conhecimento }}
@@ -26,7 +22,7 @@
                         Área de conhecimento
                       {% endif %}
                     </span>
-                    <h4 class="m-auto p-5" style="color: {{ identidade_visual.cor_titulo }};">
+                    <h4 class="m-auto p-5 text-white">
                       {% if group.0 %}
                         {{ group.0.titulo }}
                       {% else %}
@@ -44,11 +40,7 @@
                   {% if group.1.id %}
                     <a href="{% url 'noticia_detail' group.1.id %}" class="text-decoration-none">
                       <div class="notice-card h-100 d-flex"
-                        style="background-image: url('{% if group.1.imagem %}
-                          {{ group.1.imagem.url }}
-                        {% else %}
-                          {% static 'imgs/placeholder.webp' %}
-                        {% endif %}');">
+                        style="background-image: url('{% if group.1.imagem %}{{ group.1.imagem.url }}{% else %}{% static 'imgs/placeholder.webp' %}{% endif %}');">
                         <span class="notice-label">
                           {% if group.1 %}
                             {{ group.1.area_conhecimento }}
@@ -56,7 +48,7 @@
                             Área de conhecimento
                           {% endif %}
                         </span>
-                        <h4 class="m-auto p-5" style="color: {{ identidade_visual.cor_titulo }};">
+                        <h4 class="m-auto p-5 text-white">
                           {% if group.1 %}
                             {{ group.1.titulo }}
                           {% else %}
@@ -72,11 +64,7 @@
                   {% if group.2.id %}
                     <a href="{% url 'noticia_detail' group.2.id %}" class="text-decoration-none">
                       <div class="notice-card h-100 d-flex"
-                        style="background-image: url('{% if group.2.imagem %}
-                          {{ group.2.imagem.url }}
-                        {% else %}
-                          {% static 'imgs/placeholder.webp' %}
-                        {% endif %}');">
+                        style="background-image: url('{% if group.2.imagem %}{{ group.2.imagem.url }}{% else %}{% static 'imgs/placeholder.webp' %}{% endif %}');">
                         <span class="notice-label">
                           {% if group.2 %}
                             {{ group.2.area_conhecimento }}
@@ -84,7 +72,7 @@
                             Área de conhecimento
                           {% endif %}
                         </span>
-                        <h4 class="m-auto p-5" style="color: {{ identidade_visual.cor_titulo }};">
+                        <h4 class="m-auto p-5 text-white">
                           {% if group.2 %}
                             {{ group.2.titulo }}
                           {% else %}

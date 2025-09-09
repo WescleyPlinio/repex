@@ -4,21 +4,23 @@
   Explorar projetos
 {% endblock %}
 {% block nav_bottom %}
-<form method="get" id="filtros-form" name="q" value="{{ query }}" class="mb-4 d-flex justify-content-center gap-2 align-items-center">
-  <select name="status" class="form-select form-select-sm border border-0 w-auto">
-    <option value="">Status</option>
-    {% for valor, label in status_choices %}
-      <option class="border border-0" value="{{ valor }}" {% if request.GET.status == valor %}selected{% endif %}>{{ label }}</option>
-    {% endfor %}
-  </select>
+  {% if query %}
+    <form method="get" id="filtros-form" name="q" value="{{ query }}" class="mb-4 d-flex justify-content-center gap-2 align-items-center">
+      <select name="status" class="form-select form-select-sm border border-0 w-auto">
+        <option value="">Status</option>
+        {% for valor, label in status_choices %}
+          <option class="border border-0" value="{{ valor }}" {% if status_selected == valor %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+      </select>
 
-  <select name="modalidade" class="form-select form-select-sm border border-0 w-auto">
-    <option value="">Modalidade</option>
-    {% for valor, label in modalidade_choices %}
-      <option class="border border-0" value="{{ valor }}" {% if request.GET.modalidade == valor %}selected{% endif %}>{{ label }}</option>
-    {% endfor %}
-  </select>
-</form>
+      <select name="modalidade" class="form-select form-select-sm border border-0 w-auto">
+        <option value="">Modalidade</option>
+        {% for valor, label in modalidade_choices %}
+          <option class="border border-0" value="{{ valor }}" {% if modalidade_selected == valor %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+      </select>
+    </form>
+  {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -74,11 +76,7 @@
               {% if group.0.id %}
                 <a href="{% url 'noticia_detail' group.0.id %}" class="text-decoration-none">
                   <div class="notice-card h-100 d-flex"
-                    style="background-image: url('{% if group.0.imagem %}
-                      {{ group.0.imagem.url }}
-                    {% else %}
-                      {% static 'imgs/placeholder.webp' %}
-                    {% endif %}');">
+                  style="background-image: url('{% if group.0.imagem %}{{ group.0.imagem.url }}{% else %}{% static 'imgs/placeholder.webp' %}{% endif %}');">
                     <span class="notice-label">
                       {% if group.0 %}
                         {{ group.0.area_conhecimento }}
@@ -86,7 +84,7 @@
                         Área de conhecimento
                       {% endif %}
                     </span>
-                    <h4 class="m-auto p-5" style="color: {{ identidade_visual.cor_titulo }};">
+                    <h4 class="m-auto p-5 text-white">
                       {% if group.0 %}
                         {{ group.0.titulo }}
                       {% else %}
@@ -104,11 +102,7 @@
                   {% if group.1.id %}
                     <a href="{% url 'noticia_detail' group.1.id %}" class="text-decoration-none">
                       <div class="notice-card h-100 d-flex"
-                        style="background-image: url('{% if group.1.imagem %}
-                          {{ group.1.imagem.url }}
-                        {% else %}
-                          {% static 'imgs/placeholder.webp' %}
-                        {% endif %}');">
+                      style="background-image: url('{% if group.1.imagem %}{{ group.1.imagem.url }}{% else %}{% static 'imgs/placeholder.webp' %}{% endif %}');">
                         <span class="notice-label">
                           {% if group.1 %}
                             {{ group.1.area_conhecimento }}
@@ -116,7 +110,7 @@
                             Área de conhecimento
                           {% endif %}
                         </span>
-                        <h4 class="m-auto p-5" style="color: {{ identidade_visual.cor_titulo }};">
+                        <h4 class="m-auto p-5 text-white">
                           {% if group.1 %}
                             {{ group.1.titulo }}
                           {% else %}
@@ -132,11 +126,7 @@
                   {% if group.2.id %}
                     <a href="{% url 'noticia_detail' group.2.id %}" class="text-decoration-none">
                       <div class="notice-card h-100 d-flex"
-                        style="background-image: url('{% if group.2.imagem %}
-                          {{ group.2.imagem.url }}
-                        {% else %}
-                          {% static 'imgs/placeholder.webp' %}
-                        {% endif %}');">
+                      style="background-image: url('{% if group.2.imagem %}{{ group.2.imagem.url }}{% else %}{% static 'imgs/placeholder.webp' %}{% endif %}');">
                         <span class="notice-label">
                           {% if group.2 %}
                             {{ group.2.area_conhecimento }}
@@ -144,7 +134,7 @@
                             Área de conhecimento
                           {% endif %}
                         </span>
-                        <h4 class="m-auto p-5" style="color: {{ identidade_visual.cor_titulo }};">
+                        <h4 class="m-auto p-5 text-white">
                           {% if group.2 %}
                             {{ group.2.titulo }}
                           {% else %}
