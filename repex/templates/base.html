@@ -17,7 +17,7 @@
   </head>
   <body class="d-flex flex-column min-vh-100">
     {% include 'partials/_navbar.html' %}
-    <nav style="{% if identidade_visual.cor_suplente %}background: linear-gradient(to right, {{ identidade_visual.cor_sistema }}, {{ identidade_visual.cor_suplente }});
+    <nav class="{% if not identidade_visual.cor_sistema %}bg-dark{% endif %}" style="{% if identidade_visual.cor_suplente %}background: linear-gradient(to right, {{ identidade_visual.cor_sistema }}, {{ identidade_visual.cor_suplente }});
       {% else %}
         background-color: {{ identidade_visual.cor_sistema }};
       {% endif %}">

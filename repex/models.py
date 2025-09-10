@@ -97,4 +97,4 @@ class IdentidadeVisual(models.Model):
     cor_titulo = models.CharField(max_length=7, default="#FF9823")
 
     def __str__(self):
-        return f"Cores{self.cor_sistema, self.cor_suplente, self.cor_titulos}"
+        return f"Cores{self.cor_sistema, self.cor_suplente, self.cor_titulo}"
