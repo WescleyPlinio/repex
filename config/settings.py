@@ -42,6 +42,10 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'django_select2',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth_suap',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -134,3 +139,54 @@ LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'index'
 
 AUTH_USER_MODEL = 'users.User'
+
+from django.contrib import messages
+
+MESSAGE_TAGS = {
+    messages.ERROR: "danger",
+}
+
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+CLIENT_ID = os.getenv("SUAP_CLIENT_ID")
+CLIENT_SECRET = os.getenv("SUAP_CLIENT_SECRET")
+
+# config users
+LOGIN_URL = "account_login"
+LOGIN_REDIRECT_URL = "index"
+LOGOUT_REDIRECT_URL = "index"
+
+ACCOUNT_ADAPTER = "users.adapters.CustomAccountAdapter"
+ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_CHANGE_EMAIL = True
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_LOGIN_METHODS = {"email"}
+ACCOUNT_SESSION_REMEMBER = True
+OPEN_FOR_SIGNUP = False
+
+ACCOUNT_FORMS = {
+    "login": "users.forms.UserLoginForm",
+    "reset_password": "users.forms.UserResetPasswordForm",
+    "reset_password_from_key": "users.forms.UserResetPasswordKeyForm",
+}
+
+SOCIALACCOUNT_ADAPTER = "users.adapters.SuapSocialAccountAdapter"
+SOCIALACCOUNT_EMAIL_AUTHENTICATION_AUTO_CONNECT = True
+SOCIALACCOUNT_LOGIN_ON_GET = True
+SOCIALACCOUNT_PROVIDERS = {
+    "suap": {
+        "VERIFIED_EMAIL": True,
+        "EMAIL_AUTHENTICATION": True,
+        "SUAP_URL": "https://suap.ifrn.edu.br",
+        "SCOPE": ["identificacao", "email"],
+        "APP": {
+            "client_id": os.getenv("SUAP_CLIENT_ID"),
+            "secret": os.getenv("SUAP_CLIENT_SECRET"),
+        },
+    }
+}

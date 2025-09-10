@@ -9,8 +9,24 @@ from django.views.generic import UpdateView, CreateView, DeleteView, DetailView
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .oauth import get_authorize_url
+from . import oauth
 
 User = get_user_model()
+
+def login(request):
+    authorize_url, state = get_authorize_url()
+    request.session['oauth_state'] = state  # guarda o estado na sessão
+    return redirect(authorize_url)
+
+def logout(request):
+    request.session.pop('suap_token', None)
+    return redirect('index')
+
+def auth(request):
+    token = oauth.suap.authorize_access_token()
+    request.session['suap_token'] = token
+    return redirect('dashboard')
 
 def cadastro(request):
     if request.method == "POST":
