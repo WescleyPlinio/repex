@@ -16,7 +16,7 @@
       {% endif %}
     </div>
     <div class="col-md-6">
-      <p>{{ noticia.conteudo }}</p>
+      <p>{{ noticia.conteudo|safe }}</p>
     </div>
   </div>
 {% endblock %}

@@ -1,6 +1,8 @@
 from django.db import models
 from users.models import Profile, User
 from PIL import Image, ImageOps
+from tinymce.models import HTMLField
+from django.utils.translation import gettext_lazy as _
 
 class AreaConhecimento(models.Model):
     area = models.CharField(max_length=150)
@@ -20,15 +22,16 @@ class Projeto(models.Model):
     ]
 
     titulo = models.CharField(max_length=100)
-    resumo = models.TextField(max_length=3000)
-    justificativa = models.TextField(max_length=2000)
+    descricao = models.TextField(max_length=500)
+    resumo = HTMLField(_("Resumo"), blank=True)
+    justificativa = HTMLField(_("Justificativa"), blank=  True)
     area_conhecimento = models.ForeignKey(AreaConhecimento, on_delete=models.CASCADE, related_name='area_conhecimento', null=True, blank=True)
-    objetivo = models.TextField(max_length=2000)
-    criado_em = models.DateTimeField(auto_now_add=True, null=True)
-    resultados = models.TextField(max_length=3000)
+    objetivo = HTMLField(_("Objetivo"), blank=True)
+    criado_em = models.DateTimeField(auto_now_add=True)
+    resultados = HTMLField(_("Resultados"), blank=True)
     capa = models.ImageField(upload_to='media/', null=True, blank=True)
     doc = models.FileField(upload_to='media/', blank=True, null=True)
-    palavras_chave = models.CharField(max_length=200, blank=True, null=True)
+    palavras_chave = models.CharField(max_length=200)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
     modalidade = models.CharField(max_length=20, choices=MODALIDADE_CHOICES)
     componentes = models.ManyToManyField(User, related_name='projetos', blank=True)
@@ -55,7 +58,7 @@ class FotoProjeto(models.Model):
 class Noticia(models.Model):
     titulo = models.CharField(max_length=100)
     descricao = models.TextField(max_length=500)
-    conteudo = models.TextField(max_length=3000)
+    conteudo = HTMLField(_("Conteúdo"), blank=True)
     data_publicacao = models.DateTimeField(auto_now_add=True, null=True)
     imagem = models.ImageField(upload_to='media/', null=True, blank=True)
     area_conhecimento = models.ForeignKey(AreaConhecimento, on_delete=models.CASCADE, related_name='area_conhecimento_noticia', null=True, blank=True)

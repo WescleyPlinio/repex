@@ -12,10 +12,13 @@ urlpatterns = [
     path('projeto/<int:pk>/', views.ProjetoDetailView.as_view(), name='projeto_detail'),
     path('projeto/novo/', views.ProjetoCreateView.as_view(), name='projeto_create'),
     path('noticia/novo/', views.NoticiaCreateView.as_view(), name='noticia_create'),
+    path('area_conhecimento/nova/', views.AreaConhecimentoCreateView.as_view(), name='area_conhecimento_create'),
     path('noticia/<int:pk>/editar/', views.NoticiaUpdateView.as_view(), name='noticia_update'),
     path('projeto/<int:pk>/editar/', views.ProjetoUpdateView.as_view(), name='projeto_update'),
+    path('area_conhecimento/<int:pk>/editar/', views.AreaConhecimentoUpdateView.as_view(), name='area_conhecimento_update'),
     path('projeto/<int:pk>/excluir/', views.ProjetoDeleteView.as_view(), name='projeto_delete'),
     path('noticia/<int:pk>/excluir/', views.NoticiaDeleteView.as_view(), name='noticia_delete'),
+    path('area_conhecimento/<int:pk>/excluir/', views.AreaConhecimentoDeleteView.as_view(), name='area_conhecimento_delete'),
 
 ]
 

@@ -1,7 +1,7 @@
 {% extends "base_user.html" %}
 {% load static %}
 {% block title %}
-  Perfil de {{ user.username }}
+  Dashboard de {{ user.get_primeiro_nome }}
 {% endblock title %}
 
 {% block content %}

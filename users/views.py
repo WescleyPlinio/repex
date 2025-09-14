@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login as django_login, logout as django_logout
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth import get_user_model
-from repex.models import Projeto, RedeSocial, IdentidadeVisual
+from repex.models import Projeto, RedeSocial, IdentidadeVisual, AreaConhecimento
 from .models import Profile, User
 from django.views.generic import UpdateView, CreateView, DeleteView, DetailView
 from django.urls import reverse_lazy
@@ -38,7 +38,7 @@ def auth_callback(request):
     user, _ = User.objects.get_or_create(
         username=userinfo["identificacao"],
         defaults={
-            "email_google_classroom": userinfo.get("email", ""),
+            "email": userinfo.get("email_google_classroom", ""),
             "vinculo": userinfo.get("tipo_usuario", ""),
             "nome_usual": userinfo.get("nome_usual", ""),
             }
@@ -60,9 +60,11 @@ def dashboard(request):
 def paineladmin(request):
     redes_sociais = RedeSocial.objects.all()
     identidade_visual = IdentidadeVisual.objects.all()
+    area_conhecimento = AreaConhecimento.objects.all()
     context = {
         'redes_sociais': redes_sociais, 
-        'identidades': identidade_visual
+        'identidades': identidade_visual,
+        'areas': area_conhecimento,
         }
     return render(request, 'painel_admin.html', context)
 

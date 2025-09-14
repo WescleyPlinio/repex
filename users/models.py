@@ -23,12 +23,12 @@ class User(AbstractUser):
 
     def get_primeiro_nome(self):
         if self.nome_usual:
-            return self.nome_usual.split()[0]
+            return self.nome_usual.split(" ")[0]
         return self.username
     
     def get_ultimo_nome(self):
         if self.nome_usual:
-            return self.nome_usual.split()[-1]
+            return self.nome_usual.split(" ")[-1]
         return self.username
 
     def save(self, *args, **kwargs):

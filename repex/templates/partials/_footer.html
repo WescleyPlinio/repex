@@ -1,3 +1,3 @@
 {% load static %}
 <!-- Footer -->
-<footer class="py-5 footer mt-auto" style="{% if identidade_visual.cor_suplente %} background: linear-gradient(to right, {{ identidade_visual.cor_sistema }}, {{ identidade_visual.cor_suplente }}); {% else %}background-color: {{ identidade_visual.cor_sistema }};{% endif %}"></footer>
+<footer class="py-5 footer mt-auto{% if not identidade_visual.cor_sistema %} bg-dark{% endif %}" style="{% if identidade_visual.cor_suplente %} background: linear-gradient(to right, {{ identidade_visual.cor_sistema }}, {{ identidade_visual.cor_suplente }}); {% else %}background-color: {{ identidade_visual.cor_sistema }};{% endif %}"></footer>
