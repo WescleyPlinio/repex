@@ -24,6 +24,7 @@ urlpatterns = [
     path('', include('repex.urls')),
     path('users/', include('users.urls')),
     path("select2/", include("django_select2.urls")),
+    path('tinymce/', include('tinymce.urls')),
 ]
 
 if settings.DEBUG:

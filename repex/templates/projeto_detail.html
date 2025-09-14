@@ -65,19 +65,19 @@
     <div class="col-md-8">
       <div class="w-100">
         <h5 style="color:{{ identidade_visual.cor_sistema }}">Resumo:</h5>
-        <p>{{ projeto.resumo }}</p>
+        <p>{{ projeto.resumo|safe }}</p>
       </div>
       <div class="w-100">
         <h5 style="color:{{ identidade_visual.cor_sistema }}">Justificativa:</h5>
-        <p>{{ projeto.justificativa }}</p>
+        <p>{{ projeto.justificativa|safe }}</p>
       </div>
       <div class="w-100">
         <h5 style="color:{{ identidade_visual.cor_sistema }}">Objetivo:</h5>
-        <p>{{ projeto.objetivo }}</p>
+        <p>{{ projeto.objetivo|safe }}</p>
       </div>
       <div class="w-100">
         <h5 style="color:{{ identidade_visual.cor_sistema }}">Resultados esperados:</h5>
-        <p>{{ projeto.resultados }}</p>
+        <p>{{ projeto.resultados|safe }}</p>
       </div>
     </div>
   </div>

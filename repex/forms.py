@@ -2,6 +2,7 @@ from django import forms
 from django_select2.forms import Select2MultipleWidget
 from .models import Projeto, FotoProjeto
 from crispy_forms.layout import Layout, Field
+from tinymce.widgets import TinyMCE
 
 class MultiFileInput(forms.ClearableFileInput):
     allow_multiple_selected = True
@@ -35,11 +36,11 @@ class ProjetoForm(forms.ModelForm):
         ]
         widgets = {
             "titulo": forms.TextInput(attrs={"class": "form-control", "rows": 3}),
-            "resumo": forms.Textarea(attrs={"class": "form-control", "rows": 3}),
-            "justificativa": forms.Textarea(attrs={"class": "form-control", "rows": 3}),
+            "resumo": TinyMCE(attrs={"cols": 80, "rows": 10}),
+            "justificativa": TinyMCE(attrs={"cols": 80, "rows": 10}),
             "area_conhecimento": forms.Select(attrs={"class": "form-select"}),
-            "objetivo": forms.Textarea(attrs={"class": "form-control", "rows": 3}),
-            "resultados": forms.Textarea(attrs={"class": "form-control", "rows": 3}),
+            "objetivo": TinyMCE(attrs={"cols": 80, "rows": 10}),
+            "resultados": TinyMCE(attrs={"cols": 80, "rows": 10}),
             "capa": forms.ClearableFileInput(attrs={"class": "form-control"}),
             "doc": forms.ClearableFileInput(attrs={"class": "form-control"}),
             "palavras_chave": forms.TextInput(attrs={"class": "form-control"}),

@@ -28,7 +28,7 @@
       </div>
     </div>
     <div class="col-md-8">
-      <h4 class="fw-bold" style="color: {{ identidade_visual.cor_sistema }};">Projetos que {{ user.nome_completo }} está envolvido:</h4>
+      <h4 class="fw-bold" style="color: {{ identidade_visual.cor_sistema }};">Projetos que {{ user.nome_usual_get_primeiro_nome }} está envolvido:</h4>
       <div class="row g-3">
         {% for projeto in user.projetos.all %}
           <div class="col-md-6">

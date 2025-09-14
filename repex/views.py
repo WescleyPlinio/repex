@@ -136,7 +136,7 @@ class ProjetoCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = ProjetoForm
     template_name = 'projeto_form.html'
     success_message = 'Projeto criado com sucesso!'
-    success_url = reverse_lazy('painel')
+    success_url = reverse_lazy('dashboard')
 
     def form_valid(self, form):
         self.object = form.save()
