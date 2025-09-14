@@ -22,15 +22,16 @@ class Projeto(models.Model):
     ]
 
     titulo = models.CharField(max_length=100)
+    descricao = models.TextField(max_length=500)
     resumo = HTMLField(_("Resumo"), blank=True)
     justificativa = HTMLField(_("Justificativa"), blank=  True)
     area_conhecimento = models.ForeignKey(AreaConhecimento, on_delete=models.CASCADE, related_name='area_conhecimento', null=True, blank=True)
     objetivo = HTMLField(_("Objetivo"), blank=True)
-    criado_em = models.DateTimeField(auto_now_add=True, null=True)
+    criado_em = models.DateTimeField(auto_now_add=True)
     resultados = HTMLField(_("Resultados"), blank=True)
     capa = models.ImageField(upload_to='media/', null=True, blank=True)
     doc = models.FileField(upload_to='media/', blank=True, null=True)
-    palavras_chave = models.CharField(max_length=200, blank=True, null=True)
+    palavras_chave = models.CharField(max_length=200)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
     modalidade = models.CharField(max_length=20, choices=MODALIDADE_CHOICES)
     componentes = models.ManyToManyField(User, related_name='projetos', blank=True)

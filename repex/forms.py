@@ -21,6 +21,7 @@ class ProjetoForm(forms.ModelForm):
         model = Projeto
         fields = [
             "titulo",
+            "descricao",
             "resumo",
             "justificativa",
             "area_conhecimento",
@@ -34,8 +35,27 @@ class ProjetoForm(forms.ModelForm):
             "modalidade",
             "componentes",
         ]
+
+        labels = {
+            "titulo": "Título:",
+            "descricao": "Descrição:",
+            "resumo": "Resumo:",
+            "justificativa": "Justificativa:",
+            "area_conhecimento": "Área de Conhecimento:",
+            "objetivo": "Objetivo:",
+            "resultados": "Resultados:",
+            "capa": "Capa (opcional):",
+            "fotos": "Fotos extras (opcional):",
+            "doc": "Documento (opcional):",
+            "palavras_chave": "Palavras-chave (separadas por vírgula):",
+            "status": "Status:",
+            "modalidade": "Modalidade:",
+            "componentes": "Componentes:",
+        }
+
         widgets = {
-            "titulo": forms.TextInput(attrs={"class": "form-control", "rows": 3}),
+            "titulo": forms.TextInput(attrs={"class": "form-control", "rows": 3, }),
+            "descricao": forms.Textarea(attrs={"class": "form-control", "rows": 3}),
             "resumo": TinyMCE(attrs={"cols": 80, "rows": 10}),
             "justificativa": TinyMCE(attrs={"cols": 80, "rows": 10}),
             "area_conhecimento": forms.Select(attrs={"class": "form-select"}),

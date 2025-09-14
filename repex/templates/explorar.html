@@ -58,6 +58,8 @@
           <div class="card-item">
             {% include 'partials/_card.html' %}
           </div>
+          {% empty %}
+            <p>Sem notícias disponíveis no momento.</p>
         {% endfor %}
       </div>
     </div>
@@ -149,11 +151,13 @@
             </div>
           </div>
         </div>
+        {% empty %}
+          <p>Sem notícias disponíveis no momento.</p>
       {% endfor %}
     </div>
 
-    <button class="btn btn-light carousel-control carousel-prev" data-bs-target="#newsCarousel" data-bs-slide="prev" style="color: blue;" aria-label="Anterior">‹</button>
-    <button class="btn btn-light carousel-control carousel-next" data-bs-target="#newsCarousel" data-bs-slide="next" style="color: blue;" aria-label="Próximo">›</button>
+    <button class="btn btn-light carousel-control carousel-prev{% if not noticias %} d-none{% endif %}" data-bs-target="#newsCarousel" data-bs-slide="prev" style="color: blue;" aria-label="Anterior">‹</button>
+    <button class="btn btn-light carousel-control carousel-next{% if not noticias %} d-none{% endif %}" data-bs-target="#newsCarousel" data-bs-slide="next" style="color: blue;" aria-label="Próximo">›</button>
   </div>
 {% endblock %}
 

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Projeto, Noticia, IdentidadeVisual, FotoProjeto
+from .models import Projeto, Noticia, IdentidadeVisual, FotoProjeto, AreaConhecimento
 from django.core.paginator import Paginator
 from django.template.loader import render_to_string
 from django.http import JsonResponse
@@ -11,6 +11,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from users.models import User
 from django.db.models import Q
 
+
 def index(request):
     projetos = Projeto.objects.all().order_by("criado_em")[:9]
     noticias = Noticia.objects.all().order_by("criado_em")[:9]
@@ -19,6 +20,7 @@ def index(request):
         "noticias": noticias
     }
     return render(request, 'index.html', context)
+
 
 def explorar(request):
     query = request.GET.get('q', '')
@@ -62,6 +64,7 @@ def explorar(request):
     }
     return render(request, 'explorar.html', context)
 
+
 def ajax_projetos(request):
     query = request.GET.get('q', '')
     status = request.GET.get('status', '')
@@ -101,6 +104,7 @@ def buscar_projetos(request):
     data = [{"id": p.id, "nome": p.nome} for p in resultados]
     return JsonResponse(data, safe=False)
 
+
 def ajax_noticias(request):
     query = request.GET.get('q', '')
 
@@ -121,15 +125,18 @@ def ajax_noticias(request):
 
     return JsonResponse({"html": html})
 
+
 class ProjetoDetailView(DetailView):
     model = Projeto
     template_name = 'projeto_detail.html'
     context_object_name = 'projeto'
 
+
 class NoticiaDetailView(DetailView):
     model = Noticia
     template_name = 'noticia_detail.html'
     context_object_name = 'noticia'
+
 
 class ProjetoCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Projeto
@@ -145,7 +152,8 @@ class ProjetoCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         for file in self.request.FILES.getlist("fotos"):
             FotoProjeto.objects.create(projeto=self.object, foto=file)
         return super().form_valid(form)
-    
+
+
 class NoticiaCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Noticia
     fields = ['titulo', 'descricao', 'conteudo', 'imagem', 'area_conhecimento']
@@ -156,6 +164,15 @@ class NoticiaCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     def form_valid(self, form):
         form.instance.autor = self.request.user
         return super().form_valid(form)
+    
+
+class AreaConhecimentoCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = AreaConhecimento
+    fields = ['area']
+    template_name = 'area_conhecimento_form.html'
+    success_message = 'Área de conhecimento cadastrada com sucesso!'
+    success_url = reverse_lazy('painel')
+
 
 class ProjetoUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Projeto
@@ -164,6 +181,7 @@ class ProjetoUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_message = 'Projeto atualizado com sucesso!'
     success_url = reverse_lazy('dashboard')
 
+
 class NoticiaUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Noticia
     fields = ['titulo', 'descricao', 'conteudo', 'imagem', 'area_conhecimento']
@@ -171,15 +189,32 @@ class NoticiaUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_message = 'Notícia atualizada com sucesso!'
     success_url = reverse_lazy('dashboard')
 
+
+class AreaConhecimentoUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = AreaConhecimento
+    fields = ['area']
+    template_name = 'area_conhecimento_form.html'
+    success_message = 'Áre de conhecimento atualizada com sucesso!'
+    success_url = reverse_lazy('painel')
+
+
 class ProjetoDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Projeto
     template_name = 'projeto_confirm_delete.html'
     success_url = reverse_lazy('dashboard')
 
+
 class NoticiaDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Noticia
     template_name = 'noticia_confirm_delete.html'
     success_url = reverse_lazy('dashboard')
+
+
+class AreaConhecimentoDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+    model = AreaConhecimento
+    template_name = 'area_conhecimento_confirm_delete.html'
+    success_url = reverse_lazy('painel')
+
 
 class ProfileDetailView(LoginRequiredMixin, DetailView):
     model = User
