@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login as django_login, logout as django_logout
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth import get_user_model
-from repex.models import Projeto, RedeSocial, IdentidadeVisual, AreaConhecimento
+from repex.models import Projeto, RedeSocial, IdentidadeVisual, AreaConhecimento, Instituicao
 from .models import Profile, User
 from django.views.generic import UpdateView, CreateView, DeleteView, DetailView
 from django.urls import reverse_lazy
@@ -61,10 +61,12 @@ def paineladmin(request):
     redes_sociais = RedeSocial.objects.all()
     identidade_visual = IdentidadeVisual.objects.all()
     area_conhecimento = AreaConhecimento.objects.all()
+    instituicao = Instituicao.objects.all()
     context = {
         'redes_sociais': redes_sociais, 
         'identidades': identidade_visual,
         'areas': area_conhecimento,
+        'instituicoes': instituicao,
         }
     return render(request, 'painel_admin.html', context)
 

@@ -4,11 +4,13 @@ from PIL import Image, ImageOps
 from tinymce.models import HTMLField
 from django.utils.translation import gettext_lazy as _
 
+
 class AreaConhecimento(models.Model):
     area = models.CharField(max_length=150)
 
     def __str__(self):
         return self.area
+
 
 class Projeto(models.Model):
     STATUS_CHOICES = [
@@ -55,6 +57,7 @@ class FotoProjeto(models.Model):
     def __str__(self):
         return f"Foto do projeto {self.projeto.titulo}"
 
+
 class Noticia(models.Model):
     titulo = models.CharField(max_length=100)
     descricao = models.TextField(max_length=500)
@@ -70,6 +73,7 @@ class Noticia(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
+
 
 class RedeSocial(models.Model):
     nome = models.CharField(max_length=100, unique=True)
@@ -93,6 +97,7 @@ class UserSocialLink(models.Model):
     def __str__(self):
         return f"{self.user.username} - {self.rede.nome}"
 
+
 class IdentidadeVisual(models.Model):
     logo = models.ImageField(upload_to='media/', null=True, blank=True)
     cor_sistema = models.CharField(max_length=7, default="#005EFF")
@@ -101,3 +106,14 @@ class IdentidadeVisual(models.Model):
 
     def __str__(self):
         return f"Cores{self.cor_sistema, self.cor_suplente, self.cor_titulo}"
+    
+
+class Instituicao(models.Model):
+    logo = models.ImageField(upload_to='media/', null=True, blank=True)
+    nome = models.CharField(max_length=150)
+    cep = models.CharField(max_length=20, blank=True, null=True)
+    endereco = models.CharField(max_length=250, blank=True, null=True)
+    site = models.URLField(blank=True, null=True)
+
+    def __str__(self):
+        return self.nome

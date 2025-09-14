@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Projeto, Noticia, IdentidadeVisual, FotoProjeto, AreaConhecimento
+from .models import Projeto, Noticia, IdentidadeVisual, FotoProjeto, AreaConhecimento, Instituicao
 from django.core.paginator import Paginator
 from django.template.loader import render_to_string
 from django.http import JsonResponse
@@ -174,6 +174,14 @@ class AreaConhecimentoCreateView(LoginRequiredMixin, SuccessMessageMixin, Create
     success_url = reverse_lazy('painel')
 
 
+class InstituicaoCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = Instituicao
+    fields = ['logo', 'nome', 'cep', 'endereco', 'site']
+    template_name = 'instituicao_form.html'
+    success_message = 'Instituição cadastrada com sucesso!'
+    success_url = reverse_lazy('painel')
+
+
 class ProjetoUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Projeto
     form_class = ProjetoForm
@@ -197,6 +205,13 @@ class AreaConhecimentoUpdateView(LoginRequiredMixin, SuccessMessageMixin, Update
     success_message = 'Áre de conhecimento atualizada com sucesso!'
     success_url = reverse_lazy('painel')
 
+class InstituicaoUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Instituicao
+    fields = ['logo', 'nome', 'cep', 'endereco', 'site']
+    template_name = 'instituicao_form.html'
+    success_message = 'Instituição atualizada com sucesso!'
+    success_url = reverse_lazy('painel')
+
 
 class ProjetoDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Projeto
@@ -215,6 +230,12 @@ class AreaConhecimentoDeleteView(LoginRequiredMixin, SuccessMessageMixin, Delete
     template_name = 'area_conhecimento_confirm_delete.html'
     success_url = reverse_lazy('painel')
 
+
+class InstituicaoDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+    model = Instituicao
+    template_name = 'instituicao_confirm_delete.html'
+    success_url = reverse_lazy('painel')
+    
 
 class ProfileDetailView(LoginRequiredMixin, DetailView):
     model = User
