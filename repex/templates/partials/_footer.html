@@ -1,19 +1,40 @@
 {% load static %}
 <!-- Footer -->
-<footer class="py-5 footer mt-auto{% if not identidade_visual.cor_sistema %} bg-dark{% endif %}" style="{% if identidade_visual.cor_suplente %} background: linear-gradient(to right, {{ identidade_visual.cor_sistema }}, {{ identidade_visual.cor_suplente }}); {% else %}background-color: {{ identidade_visual.cor_sistema }};{% endif %}">
-    <div class="container row d-flex">
-        <div class="col-9 m-auto">
-            <div class="row">
-                <div class="col-3">
-                    <img src="{{ instituicao.logo.url }}" alt="{{ instituicao.nome }}" class="img-fluid" style="max-width: 100px;">
-                </div>
-                <div class="col-9">
-                    <p class="m-0 text-white">{{ instituicao.nome }}</p>
-                    <p class="m-0 text-white">{{ instituicao.endereco }}</p>
-                    <p class="m-0 text-white">CEP: {{ instituicao.cep }}</p>
-                    <p class="m-0 text-white">Site: <a href="{{ instituicao.site }}" class="text-white">{{ instituicao.site }}</a></p>
-                </div>
-            </div>
-        </div>
+<footer class="py-5 footer mt-auto{% if not identidade_visual.cor_sistema %} bg-dark{% endif %}"
+  style="{% if identidade_visual.cor_suplente %}
+     background: linear-gradient(to right, {{ identidade_visual.cor_sistema }}, {{ identidade_visual.cor_suplente }});
+  {% else %}
+    background-color: {{ identidade_visual.cor_sistema }};
+  {% endif %}">
+  <div class="container">
+    <div class="row">
+    <div class="col-md-3">
+        <a href="{{ instituicao.site }}" class="text-white"><img src="{{ instituicao.logo.url }}" alt="{{ instituicao.nome }}" class="img-fluid w-100" /></a>
     </div>
+    <div class="col-md-6">
+        <ul class="d-flex flex-column m-0 p-0">
+            <h4 class="text-white my-2 fw-bold">{{ instituicao.nome }}</h4>
+            <p class="text-white p-0 m-0">
+                <b class="fw-bold">CEP:</b> {{ instituicao.cep }}
+            </p>
+            <p class="text-white p-0 mb-2">{{ instituicao.endereco }}</p>
+        </ul>
+    </div>
+    <div class="col-3">
+        <ul class="list-unstyled">
+        <li class="mb-1">
+            <a class="text-decoration-none text-white" href="{% url 'explorar' %}">Explorar</a>
+        </li>
+        <li class="mb-1">
+            <a class="text-decoration-none text-white" href="{% url 'profile_detail' request.user.id %}">Ver perfil</a>
+        </li>
+        <li class="mb-1">
+            {% if user.is_authenticated %}
+            <a class="text-decoration-none text-white" href="{% url 'dashboard' %}">Dashboard</a>
+            {% endif %}
+        </li>
+        </ul>
+    </div>
+    </div>
+  </div>
 </footer>
