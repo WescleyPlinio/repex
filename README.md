@@ -2,23 +2,17 @@
 Para usar o sistema, siga esses passos:
 
 ### Após baixar o projeto, ative a venv e instale as dependências:
-
     pip install -r requirements.txt
 
 ### Após isso faça as migrações:
     python manage.py migrate
 
-### Instale objetos prontos (opcional, mas se instalar precisa ser nessa ordem):
-
-    python manage.py loaddata repex/fixtures/areas_conhecimento.json
-    python manage.py loaddata users/fixtures/users.json
-    python manage.py loaddata repex/fixtures/projetos.json
-    python manage.py loaddata repex/fixtures/noticias.json
-
+### Crie o arquivo .env e adicione:
+    SUAP_CLIENT_ID = <seu-client-id>
+    SUAP_CLIENT_SECRET = <seu-client-secret>
+    
 ### Crie um super usuário:
-
     python manage.py createsuperuser
 
 ### Por fim, rode:
-
     python manage.py runserver
