@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth_suap',
 ]
 
 MIDDLEWARE = [
@@ -155,38 +154,17 @@ CLIENT_ID = os.getenv("SUAP_CLIENT_ID")
 CLIENT_SECRET = os.getenv("SUAP_CLIENT_SECRET")
 
 # config users
-LOGIN_URL = "account_login"
+LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "index"
 LOGOUT_REDIRECT_URL = "index"
+SUAP_URL_BASE = "https://suap.ifrn.edu.br/"
 
-ACCOUNT_ADAPTER = "users.adapters.CustomAccountAdapter"
-ACCOUNT_EMAIL_VERIFICATION = "none"
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_CHANGE_EMAIL = True
-ACCOUNT_USER_MODEL_USERNAME_FIELD = None
-ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_LOGIN_METHODS = {"email"}
-ACCOUNT_SESSION_REMEMBER = True
-OPEN_FOR_SIGNUP = False
-
-ACCOUNT_FORMS = {
-    "login": "users.forms.UserLoginForm",
-    "reset_password": "users.forms.UserResetPasswordForm",
-    "reset_password_from_key": "users.forms.UserResetPasswordKeyForm",
-}
-
-SOCIALACCOUNT_ADAPTER = "users.adapters.SuapSocialAccountAdapter"
-SOCIALACCOUNT_EMAIL_AUTHENTICATION_AUTO_CONNECT = True
-SOCIALACCOUNT_LOGIN_ON_GET = True
-SOCIALACCOUNT_PROVIDERS = {
+OAUTH_PROVIDERS = {
     "suap": {
-        "VERIFIED_EMAIL": True,
-        "EMAIL_AUTHENTICATION": True,
-        "SUAP_URL": "https://suap.ifrn.edu.br",
-        "SCOPE": ["identificacao", "email"],
-        "APP": {
-            "client_id": os.getenv("SUAP_CLIENT_ID"),
-            "secret": os.getenv("SUAP_CLIENT_SECRET"),
-        },
+        "client_id": CLIENT_ID,
+        "client_secret": CLIENT_SECRET,
+        "authorize_url": f"{SUAP_URL_BASE}o/authorize/",
+        "access_token_url": f"{SUAP_URL_BASE}o/token/",
+        "userinfo_url": f"{SUAP_URL_BASE}api/rh/eu/",
     }
 }
