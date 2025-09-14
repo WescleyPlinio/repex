@@ -175,3 +175,5 @@ cython_debug/
 
 # Local environment variables
 .env
+
+media/

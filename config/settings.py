@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'django_select2',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -134,3 +138,33 @@ LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'index'
 
 AUTH_USER_MODEL = 'users.User'
+
+from django.contrib import messages
+
+MESSAGE_TAGS = {
+    messages.ERROR: "danger",
+}
+
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+CLIENT_ID = os.getenv("SUAP_CLIENT_ID")
+CLIENT_SECRET = os.getenv("SUAP_CLIENT_SECRET")
+
+# config users
+LOGIN_URL = "login"
+LOGIN_REDIRECT_URL = "index"
+LOGOUT_REDIRECT_URL = "index"
+SUAP_URL_BASE = "https://suap.ifrn.edu.br/"
+
+OAUTH_PROVIDERS = {
+    "suap": {
+        "client_id": CLIENT_ID,
+        "client_secret": CLIENT_SECRET,
+        "authorize_url": f"{SUAP_URL_BASE}o/authorize/",
+        "access_token_url": f"{SUAP_URL_BASE}o/token/",
+        "userinfo_url": f"{SUAP_URL_BASE}api/rh/eu/",
+    }
+}

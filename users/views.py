@@ -1,27 +1,52 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import login
+from django.contrib.auth import login as django_login, logout as django_logout
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth import get_user_model
 from repex.models import Projeto, RedeSocial, IdentidadeVisual
 from .models import Profile, User
-from .forms import CadastroForm
 from django.views.generic import UpdateView, CreateView, DeleteView, DetailView
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .oauthlib_client import get_oauth_client
+from django.conf import settings
 
 User = get_user_model()
 
-def cadastro(request):
-    if request.method == "POST":
-        form = CadastroForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect("index")
-    else:
-        form = CadastroForm()
-    return render(request, "registration/cadastro.html", {"form": form})
+def login(request):
+    oauth = get_oauth_client("suap")
+    provider = settings.OAUTH_PROVIDERS["suap"]
+    uri, state = oauth.create_authorization_url(provider["authorize_url"])
+    request.session["oauth_state"] = state
+    return redirect(uri)
+
+def logout(request):
+    django_logout(request)
+    return redirect('index')
+
+def auth_callback(request):
+    client = get_oauth_client("suap")
+    token = client.fetch_token(
+        settings.OAUTH_PROVIDERS["suap"]["access_token_url"],
+        authorization_response=request.build_absolute_uri()
+    )
+
+    resp = client.get(settings.OAUTH_PROVIDERS["suap"]["userinfo_url"])
+    userinfo = resp.json()
+    print(userinfo)
+
+    user, _ = User.objects.get_or_create(
+        username=userinfo["identificacao"],
+        defaults={
+            "email_google_classroom": userinfo.get("email", ""),
+            "vinculo": userinfo.get("tipo_usuario", ""),
+            "nome_usual": userinfo.get("nome_usual", ""),
+            }
+    )
+
+    django_login(request, user)
+
+    return redirect("dashboard")
 
 @login_required
 def dashboard(request):

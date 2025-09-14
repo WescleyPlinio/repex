@@ -23,7 +23,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('repex.urls')),
     path('users/', include('users.urls')),
-    path('', include('django.contrib.auth.urls')),
     path("select2/", include("django_select2.urls")),
 ]
 
