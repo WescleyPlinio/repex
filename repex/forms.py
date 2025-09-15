@@ -4,7 +4,6 @@ from .models import Projeto, FotoProjeto, IdentidadeVisual
 from crispy_forms.layout import Layout, Field
 from crispy_forms.helper import FormHelper
 from tinymce.widgets import TinyMCE
-from colorfield.widgets import ColorWidget
 
 class MultiFileInput(forms.ClearableFileInput):
     allow_multiple_selected = True
@@ -85,5 +84,8 @@ class IdentidadeVisualForm(forms.ModelForm):
         fields = "__all__"
 
     cor_sistema = forms.CharField(widget=forms.TextInput(attrs={"type": "color", "class":"form-control form-control-color"}))
-    cor_suplente = forms.CharField(widget=forms.TextInput(attrs={"type": "color", "class":"form-control form-control-color"}))
+    cor_suplente = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={"type": "color", "value": "", "class":"form-control form-control-color"})
+    )
     cor_titulo = forms.CharField(widget=forms.TextInput(attrs={"type": "color", "class":"form-control form-control-color"}))

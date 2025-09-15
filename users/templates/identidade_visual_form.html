@@ -9,7 +9,18 @@
     <div class="d-flex gap-2">
       <button type="submit" class="btn btn-success">Salvar</button>
       <a class="btn btn-primary" href="{% url "painel" %}">Cancelar</a>
-      <input type="color">
     </div>
   </form>
 {% endblock %}
+{% block extra_scripts %}
+  <script>
+    const input = document.getElementById('id_cor_suplente');
+    const defaultValue = input.value;
+
+    input.form.addEventListener('submit', () => {
+        if (input.value === defaultValue) {
+            input.disabled = true; 
+        }
+    });
+  </script>
+{% endblock extra_scripts %}
