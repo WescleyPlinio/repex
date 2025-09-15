@@ -4,7 +4,7 @@
       <img src="{% if projeto.capa %}{{ projeto.capa.url }}{% else %}{% static 'imgs/placeholder.webp' %}{% endif %}" alt="{{ projeto.titulo }}" class="img-fluid w-100 mb-3" />
     <div class="card-body">
       <h5 class="card-title" style="color: {{ identidade_visual.cor_titulo }};">{{ projeto.titulo }}</h5>
-      <p class="card-text">{{ projeto.objetivo }}</p>
+      <p class="card-text">{{ projeto.descricao }}</p>
     </div>
   </div>
 </a>

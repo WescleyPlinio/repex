@@ -3,7 +3,7 @@ from .models import Projeto, Noticia, IdentidadeVisual, FotoProjeto, AreaConheci
 from django.core.paginator import Paginator
 from django.template.loader import render_to_string
 from django.http import JsonResponse
-from .forms import ProjetoForm
+from .forms import ProjetoForm, IdentidadeVisualForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -182,6 +182,14 @@ class InstituicaoCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView)
     success_url = reverse_lazy('painel')
 
 
+class IdentidadeVisualCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = IdentidadeVisual
+    template_name = 'identidade_visual_form.html'
+    success_message = 'Identidade visual criada com sucesso!'
+    form_class = IdentidadeVisualForm
+    success_url = reverse_lazy('painel')
+
+
 class ProjetoUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Projeto
     form_class = ProjetoForm
@@ -205,11 +213,20 @@ class AreaConhecimentoUpdateView(LoginRequiredMixin, SuccessMessageMixin, Update
     success_message = 'Áre de conhecimento atualizada com sucesso!'
     success_url = reverse_lazy('painel')
 
+
 class InstituicaoUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Instituicao
     fields = ['logo', 'nome', 'cep', 'endereco', 'site']
     template_name = 'instituicao_form.html'
     success_message = 'Instituição atualizada com sucesso!'
+    success_url = reverse_lazy('painel')
+
+    
+class IdentidadeVisualUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = IdentidadeVisual
+    template_name = 'identidade_visual_form.html'
+    success_message = 'Identidade visual atualizada com sucesso!'
+    form_class = IdentidadeVisualForm
     success_url = reverse_lazy('painel')
 
 
