@@ -9,8 +9,6 @@ urlpatterns = [
     path('painel/', views.paineladmin, name='painel'),
     path('auth/callback/', views.auth_callback, name='auth_callback'),
     path('rede_social/nova/', views.RedeSocialCreate.as_view(), name='rede_social_create'),
-    path('identidade_visual/nova/', views.IdentidadeVisualCreateView.as_view(), name='identidade_visual_create'),
     path("perfil/<int:pk>/editar/", views.PerfilUpdateView.as_view(), name="perfil_update"),
     path('rede_social/<int:pk>/editar', views.RedeSocialUpdate.as_view(), name='rede_social_update'),
-    path('identidade_visual/<int:pk>/editar/', views.IdentidadeVisualUpdateView.as_view(), name='identidade_visual_update'),
 ]

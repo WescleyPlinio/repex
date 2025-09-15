@@ -1,7 +1,8 @@
 from django import forms
 from django_select2.forms import Select2MultipleWidget
-from .models import Projeto, FotoProjeto
+from .models import Projeto, FotoProjeto, IdentidadeVisual
 from crispy_forms.layout import Layout, Field
+from crispy_forms.helper import FormHelper
 from tinymce.widgets import TinyMCE
 
 class MultiFileInput(forms.ClearableFileInput):
@@ -75,3 +76,16 @@ class ProjetoForm(forms.ModelForm):
         fields = list(self.fields.keys())
         fields.insert(fields.index("capa") + 1, fields.pop(fields.index("fotos")))
         self.fields = {k: self.fields[k] for k in fields}
+
+
+class IdentidadeVisualForm(forms.ModelForm):
+    class Meta:
+        model = IdentidadeVisual
+        fields = "__all__"
+
+    cor_sistema = forms.CharField(widget=forms.TextInput(attrs={"type": "color", "class":"form-control form-control-color"}))
+    cor_suplente = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={"type": "color", "value": "", "class":"form-control form-control-color"})
+    )
+    cor_titulo = forms.CharField(widget=forms.TextInput(attrs={"type": "color", "class":"form-control form-control-color"}))
