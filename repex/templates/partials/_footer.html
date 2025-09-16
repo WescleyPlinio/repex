@@ -9,7 +9,9 @@
   <div class="container">
     <div class="row">
     <div class="col-md-3">
+        {% if instituicao.logo %}
         <a href="{{ instituicao.site }}" class="text-white"><img src="{{ instituicao.logo.url }}" alt="{{ instituicao.nome }}" class="img-fluid w-100" /></a>
+        {% endif %}
     </div>
     <div class="col-md-6">
         <ul class="d-flex flex-column m-0 p-0">
