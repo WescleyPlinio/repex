@@ -10,9 +10,6 @@ Para usar o sistema, siga esses passos:
 ### Crie o arquivo .env e adicione:
     SUAP_CLIENT_ID = <seu-client-id>
     SUAP_CLIENT_SECRET = <seu-client-secret>
-    
-### Crie um super usuário:
-    python manage.py createsuperuser
 
 ### Por fim, rode:
     python manage.py runserver
