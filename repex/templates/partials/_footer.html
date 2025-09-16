@@ -7,43 +7,58 @@
     background-color: {{ identidade_visual.cor_sistema }};
   {% endif %}">
   <div class="container">
-    <div class="row">
-    <div class="col-md-3">
-        {% if instituicao.logo %}
-        <a href="{{ instituicao.site }}" class="text-white"><img src="{{ instituicao.logo.url }}" alt="{{ instituicao.nome }}" class="img-fluid w-100" /></a>
+    <div class="row d-flex justify-content-center">
+        {% if instituicao %}
+        <div class="col-md-3">
+            {% if instituicao.logo %}
+            <a href="{{ instituicao.site }}" class="text-white"><img src="{{ instituicao.logo.url }}" alt="{{ instituicao.nome }}" class="img-fluid w-100" /></a>
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            <ul class="d-flex flex-column m-0 p-0">
+                {% if instituicao.nome %}
+                <h4 class="text-white my-2 fw-bold">{{ instituicao.nome }}</h4>
+                {% endif %}
+                {% if instituicao.cep %}
+                <p class="text-white p-0 m-0">
+                    <b class="fw-bold">CEP:</b> {{ instituicao.cep }}
+                </p>
+                {% endif %}
+                {% if instituicao.endereco %}
+                <p class="text-white p-0 mb-2">{{ instituicao.endereco }}</p>
+                {% endif %}
+            </ul>
+        </div>
         {% endif %}
-    </div>
-    <div class="col-md-6">
-        <ul class="d-flex flex-column m-0 p-0">
-            <h4 class="text-white my-2 fw-bold">{{ instituicao.nome }}</h4>
-            <p class="text-white p-0 m-0">
-                <b class="fw-bold">CEP:</b> {{ instituicao.cep }}
-            </p>
-            <p class="text-white p-0 mb-2">{{ instituicao.endereco }}</p>
-        </ul>
-    </div>
-    <div class="col-3">
-        <h4 class="text-white fw-bold">Links úteis:</h4>
-        <ul class="list-unstyled">
-        <li class="mb-1">
-            <a class="text-decoration-none text-white" href="{% url 'explorar' %}">Explorar</a>
-        </li>
-        {% if user.is_authenticated %}
-        <li class="mb-1">
-            <a class="text-decoration-none text-white" href="{% url 'profile_detail' request.user.id %}">Ver perfil</a>
-        </li>
-        {% else %}
-        <li>
-            <a href="text-decoration-none text-white" href="{% url "login" %}">Login</a>
-        </li>
-        {% endif %}
-        {% if user.is_authenticated %}
-        <li class="mb-1">
-            <a class="text-decoration-none text-white" href="{% url 'dashboard' %}">Dashboard</a>
-        </li>
-        {% endif %}
-        </ul>
-    </div>
+        <div class="col-3">
+            <h4 class="text-white fw-bold">Links úteis:</h4>
+            <ul class="list-unstyled">
+            <li class="mb-1">
+                <a class="text-decoration-none text-white" href="{% url 'explorar' %}">Explorar</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="mb-1">
+                <a class="text-decoration-none text-white" href="{% url 'profile_detail' request.user.id %}">Ver perfil</a>
+            </li>
+            {% else %}
+            {% if user.is_authenticated %}
+            <li>
+                <a href="text-decoration-none text-white" href="{% url "login" %}">Login</a>
+            </li>
+            {% endif %}
+            {% endif %}
+            {% if user.is_authenticated %}
+            <li class="mb-1">
+                <a class="text-decoration-none text-white" href="{% url 'dashboard' %}">Dashboard</a>
+            </li>
+            {% endif %}
+            {% if user.is_superuser %}
+            <li class="mb-1">
+                <a class="text-decoration-none text-white" href="{% url 'painel' %}">Painel Administrativo</a>
+            </li>
+            {% endif %}
+            </ul>
+        </div>
     </div>
   </div>
 </footer>

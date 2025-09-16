@@ -9,7 +9,9 @@
 <div class="card mb-3">
   <div class="card-header d-flex">
     <h3 class="card-title fw-bold my-auto">Seus projetos</h3>
+    {% if perms.users.add_projeto %}
     <a class="btn btn-success ms-auto" href="{% url "projeto_create" %}">Cadastrar</a>
+    {% endif %}
   </div>
   <div class="card-body table-responsive p-0">
     <table class="table table-hover text-nowrap">
@@ -30,11 +32,15 @@
           <td>{{ p.modalidade }}</td>
           <td class="d-flex gap-2">
             <a href="{% url "projeto_detail" p.id %}" class="btn btn-sm btn-primary">Ver</a>
+            {% if perms.users.change_projeto %}
             <a href="{% url "projeto_update" p.id %}" class="btn btn-sm btn-warning">Editar</a>
+            {% endif %}
+            {% if perms.users.delete_notica %}
             <form action="{% url "projeto_delete" p.id %}">
               {% csrf_token %}
               <button type="submit" class="btn btn-sm btn-danger">Excluir</buttin>
             </form>
+            {% endif %}
           </td>
         </tr>
         {% empty %}
@@ -50,7 +56,9 @@
 <div class="card">
   <div class="card-header d-flex">
     <h3 class="card-title fw-bold my-auto">Suas notícias</h3>
+    {% if perms.users.add_noticia %}
     <a class="btn btn-success ms-auto" href="{% url "noticia_create" %}">Cadastrar</a>
+    {% endif %}
   </div>
   <div class="card-body table-responsive p-0">
     <table class="table table-hover text-nowrap">
@@ -71,11 +79,15 @@
           <td>{{ n.criado_em }}</td>
           <td class="d-flex gap-2">
             <a href="{% url "noticia_detail" n.id %}" class="btn btn-sm btn-primary">Ver</a>
+            {% if perms.users.change_noticia %}
             <a href="{% url "noticia_update" n.id %}" class="btn btn-sm btn-warning">Editar</a>
+            {% endif %}
+            {% if perms.users.delete_notica %}
             <form action="{% url "noticia_delete" n.id %}">
               {% csrf_token %}
               <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
             </form>
+            {% endif %}
           </td>
         </tr>
         {% empty %}
