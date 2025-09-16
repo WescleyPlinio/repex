@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login as django_login, logout as django_logout
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.contrib.auth import get_user_model
 from repex.models import Projeto, RedeSocial, IdentidadeVisual, AreaConhecimento, Instituicao
 from .models import Profile, User
 from django.views.generic import UpdateView, CreateView, DeleteView, DetailView
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.models import Group, Permission
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .oauthlib_client import get_oauth_client
 from django.conf import settings
@@ -36,7 +37,6 @@ def auth_callback(request):
 
     resp = client.get(settings.OAUTH_PROVIDERS["suap"]["userinfo_url"])
     userinfo = resp.json()
-    print(userinfo)
 
     user, _ = User.objects.get_or_create(
         username=userinfo["identificacao"],
@@ -47,13 +47,28 @@ def auth_callback(request):
             }
     )
 
+    def group(request, user):
+        vinculo = userinfo.get("tipo_usuario")
+        if vinculo in ["Aluno"]:
+            grupo = Group.objects.get_or_create(name="Professor")
+            grupo.user_set.add(user)
+        pass
+
     django_login(request, user)
 
     return redirect("dashboard")
 
 
+def first_superuser(request):
+    user = User.objects.get(pk=1)
+    user.is_superuser = True
+    user.is_staff = True 
+    user.save()
+
+
 @login_required
 def dashboard(request):
+    first_superuser(request)
     context = {
         'projetos': Projeto.objects.all(),
         'user': request.user,
@@ -61,7 +76,11 @@ def dashboard(request):
     return render(request, 'dashboard.html', context)
 
 
-@login_required
+def is_superuser(user):
+    return user.is_superuser
+
+
+@user_passes_test(is_superuser)
 def paineladmin(request):
     redes_sociais = RedeSocial.objects.all()
     identidade_visual = IdentidadeVisual.objects.all()
