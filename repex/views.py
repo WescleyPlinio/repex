@@ -233,24 +233,28 @@ class IdentidadeVisualUpdateView(LoginRequiredMixin, SuccessMessageMixin, Update
 class ProjetoDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Projeto
     template_name = 'projeto_confirm_delete.html'
+    success_message = 'Projeto deletado com sucesso!'
     success_url = reverse_lazy('dashboard')
 
 
 class NoticiaDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Noticia
     template_name = 'noticia_confirm_delete.html'
+    success_message = 'Notícia deletada com sucesso!'
     success_url = reverse_lazy('dashboard')
 
 
 class AreaConhecimentoDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = AreaConhecimento
     template_name = 'area_conhecimento_confirm_delete.html'
+    success_message = 'Área de conhecimento deletada com sucesso!'
     success_url = reverse_lazy('painel')
 
 
 class InstituicaoDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Instituicao
     template_name = 'instituicao_confirm_delete.html'
+    success_message = 'Instituição deletada com sucesso!'
     success_url = reverse_lazy('painel')
     
 
