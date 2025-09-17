@@ -47,13 +47,13 @@ def auth_callback(request):
             }
     )
 
-    def group(request, user):
-        vinculo = userinfo.get("tipo_usuario")
-        if vinculo in ["Aluno"]:
-            grupo = Group.objects.get_or_create(name="Professor")
-            grupo.user_set.add(user)
-        pass
+    vinculo = userinfo.get("tipo_usuario")
+    if vinculo in ["Professor"]:
+        grupo, _ = Group.objects.get_or_create(name="Professor")
+        user.groups.add(grupo)
+    pass
 
+    first_superuser(request)
     django_login(request, user)
 
     return redirect("dashboard")
@@ -68,7 +68,6 @@ def first_superuser(request):
 
 @login_required
 def dashboard(request):
-    first_superuser(request)
     context = {
         'projetos': Projeto.objects.all(),
         'user': request.user,
