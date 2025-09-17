@@ -37,6 +37,7 @@ class Projeto(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
     modalidade = models.CharField(max_length=20, choices=MODALIDADE_CHOICES)
     componentes = models.ManyToManyField(User, related_name='projetos', blank=True)
+    views = models.PositiveIntegerField(default=0)
     
     def __str__(self):
         return self.titulo

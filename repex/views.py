@@ -131,6 +131,17 @@ class ProjetoDetailView(DetailView):
     template_name = 'projeto_detail.html'
     context_object_name = 'projeto'
 
+    def get(self, request, *args, **kwargs):
+        response = super().get(request, *args, **kwargs)
+        projeto = self.object  
+
+        session_key = f"viewed_projeto_{projeto.pk}"
+        if not request.session.get(session_key, False):
+            projeto.views += 1
+            projeto.save(update_fields=["views"])
+            request.session[session_key] = True
+
+        return response
 
 class NoticiaDetailView(DetailView):
     model = Noticia
