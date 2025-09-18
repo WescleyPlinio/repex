@@ -118,7 +118,7 @@
     <h4 style="color: {{ identidade_visual.cor_sistema }};">Projetos mais vistos:</h4>
     <div class="carousel-viewport">
       <div class="carousel-track w-100" id="cardTrack">
-        {% for projeto in projetos %}
+        {% for projeto in projetos_mais_vistos %}
           <div class="card-item">
             {% include 'partials/_card.html' %}
           </div>

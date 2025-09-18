@@ -71,7 +71,7 @@
   <div id="newsCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
     <h4 style="color: {{ identidade_visual.cor_sistema }};">Notícias relevantes:</h4>
     <div class="carousel-inner">
-      {% for group in noticias_random|chunks:3 %}
+      {% for group in noticias|chunks:3 %}
         <div class="carousel-item {% if forloop.first %}active{% endif %}">
           <div class="notice-shell row g-1 d-flex">
             <div class="col-md-6 col-lg-6 col-sm-12">
@@ -201,8 +201,8 @@
     complete: function () {
       $('#spinner').hide();
     }
+    });
   });
-});
 
   </script>
 {% endblock %}
