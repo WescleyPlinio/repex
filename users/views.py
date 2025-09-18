@@ -11,6 +11,8 @@ from django.contrib.auth.models import Group, Permission
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .oauthlib_client import get_oauth_client
 from django.conf import settings
+from django.core.paginator import Paginator
+from django.http import JsonResponse
 
 User = get_user_model()
 
@@ -90,9 +92,44 @@ def paineladmin(request):
         'identidades': identidade_visual,
         'areas': area_conhecimento,
         'instituicoes': instituicao,
-        }
+    }
     return render(request, 'painel_admin.html', context)
 
+
+@user_passes_test(is_superuser)
+def all_users(request):
+    users = User.objects.all()
+    paginator = Paginator(users, 15)
+    page_number = request.GET.get('page')
+    resultados = paginator.get_page(page_number)
+    context = {
+        'resultados': resultados,
+    }
+    return render(request, "users.html", context)
+
+
+@user_passes_test(is_superuser)
+def toggle_superuser(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    if request.method == "POST":
+        user.is_superuser = not user.is_superuser
+        user.save()
+    return JsonResponse({"status": "ok"})
+
+
+@user_passes_test(is_superuser)
+def toggle_professor(request, user_id):
+    user = get_object_or_404(User, id=user_id)
+    group, _ = Group.objects.get_or_create(name="Professor")
+    if request.method == "POST":
+        if request.POST.get('is_professor') == 'on':
+            user.groups.add(group)
+            print("Adicionado")
+        else:
+            user.groups.remove(group)
+            print("Removido")
+    return JsonResponse({"status": "ok"})
+    
 
 class RedeSocialCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = RedeSocial

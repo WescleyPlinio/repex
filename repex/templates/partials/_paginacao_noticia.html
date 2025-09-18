@@ -1,3 +1,4 @@
+{% if resultados_noticias.has_other_pages %}
 <nav class="mt-3">
   <ul class="pagination justify-content-end">
     {% if resultados_noticias.has_previous %}
@@ -49,3 +50,4 @@
     {% endif %}
   </ul>
 </nav>
+{% endif %}

@@ -13,11 +13,13 @@ from django.db.models import Q
 
 
 def index(request):
-    projetos = Projeto.objects.all().order_by("criado_em")[:9]
-    noticias = Noticia.objects.all().order_by("criado_em")[:9]
+    projetos = Projeto.objects.all().order_by("-criado_em")[:9]
+    projetos_mais_vistos = Projeto.objects.all().order_by("-views")[:9]
+    noticias = Noticia.objects.all().order_by("-criado_em")[:9]
     context = {
         "projetos": projetos,
-        "noticias": noticias
+        "noticias": noticias,
+        "projetos_mais_vistos": projetos_mais_vistos
     }
     return render(request, 'index.html', context)
 
@@ -51,13 +53,13 @@ def explorar(request):
     resultados_noticias = paginator_noticias.get_page(page_number_noticias)
 
     projetos_random = Projeto.objects.all().order_by("?")[:9]
-    noticias_random = Noticia.objects.all().order_by("?")[:9]
+    noticias = Noticia.objects.all().order_by("-criado_em")[:9]
 
     context = {
         'resultados_projetos': resultados_projetos,
         'resultados_noticias': resultados_noticias,
         'projetos_random': projetos_random,
-        'noticias_random': noticias_random,
+        'noticias': noticias,
         'query': query,
         'status_choices': Projeto.STATUS_CHOICES,
         'modalidade_choices': Projeto.MODALIDADE_CHOICES,

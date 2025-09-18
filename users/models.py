@@ -41,6 +41,13 @@ class User(AbstractUser):
             return self.first_name
         else:
             return self.email
+
+
+def is_professor(self):
+    return self.groups.filter(name="Professor").exists()
+
+User.add_to_class("is_professor", is_professor)
+
     
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
