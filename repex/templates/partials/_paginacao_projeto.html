@@ -3,17 +3,17 @@
   <ul class="pagination justify-content-end">
     {% if resultados_projetos.has_previous %}
       <li class="page-item">
-        <a style="color: {{ identidade_visual.cor_sistema }};" class="page-link" href="{% url 'ajax_projetos' %}?q={{ query }}&page_projetos=1">«</a>
+        <a {% if identidade_visual.cor_sistema %}style="color: {{ identidade_visual.cor_sistema }};"{% endif %} class="page-link" href="{% url 'ajax_projetos' %}?q={{ query }}&page_projetos=1">«</a>
       </li>
       <li class="page-item">
-        <a style="color: {{ identidade_visual.cor_sistema }};" class="page-link" href="{% url 'ajax_projetos' %}?q={{ query }}&page_projetos={{ resultados_projetos.previous_page_number }}">‹</a>
+        <a {% if identidade_visual.cor_sistema %}style="color: {{ identidade_visual.cor_sistema }};"{% endif %} class="page-link" href="{% url 'ajax_projetos' %}?q={{ query }}&page_projetos={{ resultados_projetos.previous_page_number }}">‹</a>
       </li>
     {% else %}
       <li class="page-item disabled">
-        <span style="color: {{ identidade_visual.cor_sistema }};" class="page-link">«</span>
+        <span {% if identidade_visual.cor_sistema %}style="color: {{ identidade_visual.cor_sistema }};"{% endif %} class="page-link">«</span>
       </li>
       <li class="page-item disabled">
-        <span style="color: {{ identidade_visual.cor_sistema }};" class="page-link">‹</span>
+        <span {% if identidade_visual.cor_sistema %}style="color: {{ identidade_visual.cor_sistema }};"{% endif %} class="page-link">‹</span>
       </li>
     {% endif %}
 
@@ -26,26 +26,26 @@
         background-color: {{ identidade_visual.cor_sistema }};
       {% endif %}" class="page-link text-white">{{ num }}</span>
         </li>
-      {% elif num > resultados_projetos.number|add:'-6' and num < resultados_projetos.number|add:'6' %}
+      {% elif num > resultados_projetos.number|add:'-3' and num < resultados_projetos.number|add:'3' %}
         <li class="page-item">
-          <a style="color: {{ identidade_visual.cor_sistema }};" class="page-link" href="{% url 'ajax_projetos' %}?q={{ query }}&page_projetos={{ num }}">{{ num }}</a>
+          <a {% if identidade_visual.cor_sistema %}style="color: {{ identidade_visual.cor_sistema }};"{% endif %} class="page-link" href="{% url 'ajax_projetos' %}?q={{ query }}&page_projetos={{ num }}">{{ num }}</a>
         </li>
       {% endif %}
     {% endfor %}
 
     {% if resultados_projetos.has_next %}
       <li class="page-item">
-        <a style="color: {{ identidade_visual.cor_sistema }};" class="page-link" href="{% url 'ajax_projetos' %}?q={{ query }}&page_projetos={{ resultados_projetos.next_page_number }}">›</a>
+        <a {% if identidade_visual.cor_sistema %}style="color: {{ identidade_visual.cor_sistema }};"{% endif %} class="page-link" href="{% url 'ajax_projetos' %}?q={{ query }}&page_projetos={{ resultados_projetos.next_page_number }}">›</a>
       </li>
       <li class="page-item">
-        <a style="color: {{ identidade_visual.cor_sistema }};" class="page-link" href="{% url 'ajax_projetos' %}?q={{ query }}&page_projetos={{ resultados_projetos.paginator.num_pages }}">»</a>
+        <a {% if identidade_visual.cor_sistema %}style="color: {{ identidade_visual.cor_sistema }};"{% endif %} class="page-link" href="{% url 'ajax_projetos' %}?q={{ query }}&page_projetos={{ resultados_projetos.paginator.num_pages }}">»</a>
       </li>
     {% else %}
       <li class="page-item disabled">
-        <span style="color: {{ identidade_visual.cor_sistema }};" class="page-link">›</span>
+        <span {% if identidade_visual.cor_sistema %}style="color: {{ identidade_visual.cor_sistema }};"{% endif %} class="page-link">›</span>
       </li>
       <li class="page-item disabled">
-        <span style="color: {{ identidade_visual.cor_sistema }};" class="page-link">»</span>
+        <span {% if identidade_visual.cor_sistema %}style="color: {{ identidade_visual.cor_sistema }};"{% endif %} class="page-link">»</span>
       </li>
     {% endif %}
   </ul>

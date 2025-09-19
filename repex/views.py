@@ -14,11 +14,13 @@ from django.db.models import Q
 
 def index(request):
     projetos = Projeto.objects.all().order_by("-criado_em")[:9]
+    projetos_random = Projeto.objects.all().order_by("?")[:9]
     projetos_mais_vistos = Projeto.objects.all().order_by("-views")[:9]
     noticias = Noticia.objects.all().order_by("-criado_em")[:9]
     context = {
-        "projetos": projetos,
         "noticias": noticias,
+        "projetos": projetos,
+        'projetos_random': projetos_random,
         "projetos_mais_vistos": projetos_mais_vistos
     }
     return render(request, 'index.html', context)
@@ -33,33 +35,18 @@ def explorar(request):
     resultado_projeto_objetivo = Projeto.objects.filter(objetivo__icontains=query)
     resultado_projeto_resumo = Projeto.objects.filter(resumo__icontains=query)
     resultados_projetos = (resultado_projeto_titulo | resultado_projeto_objetivo | resultado_projeto_resumo).distinct()
-
-    resultado_noticia_titulo = Noticia.objects.filter(titulo__icontains=query)
-    resultado_noticia_descricao = Noticia.objects.filter(descricao__icontains=query)
-    resultado_noticia_conteudo = Noticia.objects.filter(conteudo__icontains=query)
-    resultados_noticias = (resultado_noticia_titulo | resultado_noticia_descricao | resultado_noticia_conteudo).distinct()
     
     if status:
         resultados_projetos = resultados_projetos.filter(status=status).distinct()
     if modalidade:
         resultados_projetos = resultados_projetos.filter(modalidade=modalidade).distinct()
 
-    paginator_projetos = Paginator(resultados_projetos, 6)
+    paginator_projetos = Paginator(resultados_projetos, 16)
     page_number_projetos = request.GET.get('page_projetos')
     resultados_projetos = paginator_projetos.get_page(page_number_projetos)
 
-    paginator_noticias = Paginator(resultados_noticias, 3)
-    page_number_noticias = request.GET.get('page_noticias')
-    resultados_noticias = paginator_noticias.get_page(page_number_noticias)
-
-    projetos_random = Projeto.objects.all().order_by("?")[:9]
-    noticias = Noticia.objects.all().order_by("-criado_em")[:9]
-
     context = {
         'resultados_projetos': resultados_projetos,
-        'resultados_noticias': resultados_noticias,
-        'projetos_random': projetos_random,
-        'noticias': noticias,
         'query': query,
         'status_choices': Projeto.STATUS_CHOICES,
         'modalidade_choices': Projeto.MODALIDADE_CHOICES,
@@ -84,7 +71,7 @@ def ajax_projetos(request):
     if modalidade:
         resultados_projetos = resultados_projetos.filter(modalidade=modalidade)
 
-    paginator = Paginator(resultados_projetos, 6)
+    paginator = Paginator(resultados_projetos, 16)
     page_number = request.GET.get('page_projetos')
     page_obj = paginator.get_page(page_number)
 
@@ -105,27 +92,6 @@ def buscar_projetos(request):
     resultados = Projeto.objects.filter(nome__icontains=query) if query else []
     data = [{"id": p.id, "nome": p.nome} for p in resultados]
     return JsonResponse(data, safe=False)
-
-
-def ajax_noticias(request):
-    query = request.GET.get('q', '')
-
-    resultado_noticia_titulo = Noticia.objects.filter(titulo__icontains=query)
-    resultado_noticia_descricao = Noticia.objects.filter(descricao__icontains=query)
-    resultado_noticia_conteudo = Noticia.objects.filter(conteudo__icontains=query)
-    resultados_noticias = (resultado_noticia_titulo | resultado_noticia_descricao | resultado_noticia_conteudo).distinct()
-
-    paginator = Paginator(resultados_noticias, 3)
-    page_number = request.GET.get('page_noticias')
-    page_obj = paginator.get_page(page_number)
-
-    html = render_to_string(
-        "partials/_ajax_noticias.html",
-        {"resultados_noticias": page_obj, "query": query},
-        request=request
-    )
-
-    return JsonResponse({"html": html})
 
 
 class ProjetoDetailView(DetailView):
