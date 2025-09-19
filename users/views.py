@@ -17,6 +17,10 @@ from django.http import JsonResponse
 User = get_user_model()
 
 
+def palavra_existe(palavra, entrada):
+    return palavra in entrada
+
+
 def login(request):
     oauth = get_oauth_client("suap")
     provider = settings.OAUTH_PROVIDERS["suap"]
@@ -50,10 +54,16 @@ def auth_callback(request):
     )
 
     vinculo = userinfo.get("tipo_usuario")
-    if vinculo in ["Professor"]:
+
+    if palavra_existe("Docente", vinculo):
         grupo, _ = Group.objects.get_or_create(name="Professor")
         user.groups.add(grupo)
-    pass
+    elif palavra_existe("Professor", vinculo):
+        grupo, _ = Group.objects.get_or_create(name="Professor")
+        user.groups.add(grupo)
+    elif palavra_existe("Coordenador", vinculo):
+        grupo, _ = Group.objects.get_or_create(name="Professor")
+        user.groups.add(grupo)
 
     first_superuser(request)
     django_login(request, user)

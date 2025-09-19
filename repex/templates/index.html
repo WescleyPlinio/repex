@@ -5,7 +5,7 @@
 {% endblock %}
 {% block content %}
   <div id="newsCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
-    <h4 style="color: {{ identidade_visual.cor_sistema }};">Notícias relevantes:</h4>
+    <h4 style="color: {{ identidade_visual.cor_sistema }};">Últimas notícias:</h4>
     <div class="carousel-inner">
       {% for group in noticias|chunks:3 %}
         <div class="carousel-item {% if forloop.first %}active{% endif %}">
@@ -36,8 +36,8 @@
 
             <div class="col-md-6 col-lg-6 col-sm-12">
               <div class="row d-flex flex-column" style="height: 100%;">
-                <div class="col-lg-12 col-md-12 col-sm-12 flex-grow-1 mb-1">
-                  {% if group.1.id %}
+                {% if group.1.id %}
+                  <div class="col-lg-12 col-md-12 col-sm-12 flex-grow-1 mb-1">
                     <a href="{% url 'noticia_detail' group.1.id %}" class="text-decoration-none">
                       <div class="notice-card h-100 d-flex"
                         style="background-image: url('{% if group.1.imagem %}{{ group.1.imagem.url }}{% else %}{% static 'imgs/placeholder.webp' %}{% endif %}');">
@@ -57,11 +57,11 @@
                         </h4>
                       </div>
                     </a>
+                  </div>
                   {% endif %}
-                </div>
 
-                <div class="col-lg-12 col-md-12 col-sm-12 flex-grow-1">
-                  {% if group.2.id %}
+                {% if group.2.id %}
+                  <div class="col-lg-12 col-md-12 col-sm-12 flex-grow-1">
                     <a href="{% url 'noticia_detail' group.2.id %}" class="text-decoration-none">
                       <div class="notice-card h-100 d-flex"
                         style="background-image: url('{% if group.2.imagem %}{{ group.2.imagem.url }}{% else %}{% static 'imgs/placeholder.webp' %}{% endif %}');">
@@ -81,8 +81,8 @@
                         </h4>
                       </div>
                     </a>
-                  {% endif %}
-                </div>
+                  </div>
+                {% endif %}
               </div>
             </div>
           </div>
@@ -106,6 +106,24 @@
           </div>
           {% empty %}
             <p>Sem projetos disponíveis no momento.</p>
+        {% endfor %}
+      </div>
+    </div>
+
+    <button class="btn btn-light carousel-control carousel-prev" id="prevBtn" style="color: blue;" aria-label="Anterior">‹</button>
+    <button class="btn btn-light carousel-control carousel-next" id="nextBtn" style="color: blue;" aria-label="Próximo">›</button>
+  </div>
+
+  <div class="carousel-shell mb-5">
+    <h4 style="color: {{ identidade_visual.cor_sistema }};">Conheça projetos:</h4>
+    <div class="carousel-viewport">
+      <div class="carousel-track w-100" id="cardTrack">
+        {% for projeto in projetos_random %}
+          <div class="card-item">
+            {% include 'partials/_card.html' %}
+          </div>
+        {% empty %}
+          <p>Sem notícias disponíveis no momento.</p>
         {% endfor %}
       </div>
     </div>
