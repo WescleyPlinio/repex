@@ -80,8 +80,12 @@ def first_superuser(request):
 
 @login_required
 def dashboard(request):
+    projetos = request.user.projetos.all()
+    paginator = Paginator(projetos, 10)
+    page_number = request.GET.get('page')
+    resultados = paginator.get_page(page_number)
     context = {
-        'projetos': Projeto.objects.all(),
+        'resultados_projetos': resultados,
         'user': request.user,
     }
     return render(request, 'dashboard.html', context)
