@@ -1,5 +1,15 @@
 from django.contrib import admin
-from .models import Profile, User
+from .models import Profile, User, UserSocialLink
 
-admin.site.register(Profile)
+
+class ProfileAdmin(admin.ModelAdmin):
+    pass
+
+class UserSocialLinkAdmin(admin.ModelAdmin):
+    list_display = ['user', 'name', 'url']
+    list_filter = ['name']
+    search_fields = ['user__username', 'user__email', 'name']
+
+admin.site.register(Profile, ProfileAdmin)
 admin.site.register(User)
+admin.site.register(UserSocialLink, UserSocialLinkAdmin)

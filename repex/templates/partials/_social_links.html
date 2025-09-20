@@ -1,0 +1,17 @@
+{% load static %}
+<div class="social-links d-flex gap-2 flex-wrap mt-2">
+    {% for link in links %}
+        <a href="{{ link.url }}" target="_blank" class="btn btn-sm btn-outline-primary" title="{{ link.name }}">
+            <i class="fab fa-{{ link.name|lower }} me-1"></i>
+            {{ link.name }}
+        </a>
+    {% empty %}
+        <small class="text-muted">Nenhuma rede social cadastrada</small>
+    {% endfor %}
+    
+    {% if user.is_authenticated and user == request.user %}
+        <a href="{% url 'user_social_links_list' %}" class="btn btn-sm btn-outline-secondary" title="Gerenciar redes sociais">
+            <i class="fas fa-plus"></i>
+        </a>
+    {% endif %}
+</div>
