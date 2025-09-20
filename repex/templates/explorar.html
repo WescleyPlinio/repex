@@ -24,13 +24,15 @@
       </select>
 
      <select name="area_conhecimento" class="form-select form-select-sm border border-0 w-auto">
-      <option value="">Áreas de conhecimento</option>
-      {% for area in areas %}
-        <option class="border border-0" value="{{ area.id }}" {% if request.GET.area_conhecimento == area.id %}selected{% endif %}>{{ area.area }}</option>
-      {% endfor %}
-    </select>
+        <option value="">Áreas de conhecimento</option>
+        {% for area in areas %}
+          <option class="border border-0" value="{{ area.id }}" {% if request.GET.area_conhecimento == area.id %}selected{% endif %}>{{ area.area }}</option>
+        {% endfor %}
+      </select>
     </form>
+
   </nav>
+
   <div class="carousel-shell mb-5">
     {% if query or request.GET.status or request.GET.modalidade %}
     <h4 style="color: {{ identidade_visual.cor_sistema }};">Projetos correspondentes:</h4>
@@ -44,6 +46,7 @@
       {% include 'partials/_ajax_projetos.html' %}
     </div>
   </div>
+
 {% endblock %}
 
 {% block extra_scripts %}
@@ -54,7 +57,7 @@
       $.ajax({
         url: "{% url 'ajax_projetos' %}",
         type: 'GET',
-        data: formData + '&q=' + query,
+        data: formData + '&q=' + encodeURIComponent(query),
         beforeSend: function () {
           $('#spinner').show()
         },
@@ -69,14 +72,14 @@
     
     $(document).on('click', '#ajax_projetos .pagination a', function (e) {
       e.preventDefault()
-      let page = $(this).attr('href').split('page=')[1]
+      let page = $(this).attr('href').split('page=')[1] || 1
       let formData = $('#filtros-form').serialize()
       let query = $('#search-projetos').val()
     
       $.ajax({
         url: "{% url 'ajax_projetos' %}",
         type: 'GET',
-        data: formData + '&q=' + query + '&page=' + page,
+        data: formData + '&q=' + encodeURIComponent(query) + '&page=' + page,
         beforeSend: function () {
           $('#spinner').show()
         },
