@@ -30,6 +30,7 @@ def explorar(request):
     query = request.GET.get('q', '')
     status = request.GET.get('status')
     modalidade = request.GET.get('modalidade')
+    area_id = request.GET.get('area_conhecimento')
 
     resultado_projeto_titulo = Projeto.objects.filter(titulo__icontains=query)
     resultado_projeto_objetivo = Projeto.objects.filter(objetivo__icontains=query)
@@ -40,6 +41,8 @@ def explorar(request):
         resultados_projetos = resultados_projetos.filter(status=status).distinct()
     if modalidade:
         resultados_projetos = resultados_projetos.filter(modalidade=modalidade).distinct()
+    if area_id:
+        resultados_projetos = resultados_projetos.filter(area_id=area_id)
 
     paginator_projetos = Paginator(resultados_projetos, 16)
     page_number_projetos = request.GET.get('page_projetos')
@@ -50,6 +53,7 @@ def explorar(request):
         'query': query,
         'status_choices': Projeto.STATUS_CHOICES,
         'modalidade_choices': Projeto.MODALIDADE_CHOICES,
+        'areas': AreaConhecimento.objects.all()
     }
     return render(request, 'explorar.html', context)
 
@@ -58,6 +62,7 @@ def ajax_projetos(request):
     query = request.GET.get('q', '')
     status = request.GET.get('status', '')
     modalidade = request.GET.get('modalidade', '')
+    area_id = request.GET.get('area_conhecimento')
 
     resultado_projeto_titulo = Projeto.objects.filter(titulo__icontains=query)
     resultado_projeto_objetivo = Projeto.objects.filter(objetivo__icontains=query)
@@ -70,6 +75,8 @@ def ajax_projetos(request):
         resultados_projetos = resultados_projetos.filter(status=status)
     if modalidade:
         resultados_projetos = resultados_projetos.filter(modalidade=modalidade)
+    if area_id:
+        resultados_projetos = resultados_projetos.filter(area_conhecimento_id=area_id)
 
     paginator = Paginator(resultados_projetos, 16)
     page_number = request.GET.get('page_projetos')
