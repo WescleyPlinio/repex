@@ -1,0 +1,779 @@
+[
+  {
+    "model": "repex.IdentidadeVisual",
+    "pk": 1,
+    "fields": {
+      "logo": null,
+      "cor_sistema": "#005EFF",
+      "cor_suplente": "#00C896",
+      "cor_titulo": "#FF9823"
+    }
+  },
+  {
+    "model": "repex.Instituicao",
+    "pk": 1,
+    "fields": {
+      "logo": null,
+      "nome": "Instituto Federal do Rio Grande do Norte",
+      "cep": "59200-000",
+      "endereco": "Av. Principal, 123 - São Paulo do Potengi/RN",
+      "site": "https://portal.ifrn.edu.br"
+    }
+  },
+  {
+    "model": "repex.AreaConhecimento",
+    "pk": 1,
+    "fields": {
+      "area": "Ciências Exatas"
+    }
+  },
+  {
+    "model": "repex.AreaConhecimento",
+    "pk": 2,
+    "fields": {
+      "area": "Ciências Humanas"
+    }
+  },
+  {
+    "model": "repex.AreaConhecimento",
+    "pk": 3,
+    "fields": {
+      "area": "Engenharias"
+    }
+  },
+  {
+    "model": "repex.AreaConhecimento",
+    "pk": 4,
+    "fields": {
+      "area": "Ciências Biológicas"
+    }
+  },
+  {
+    "model": "repex.AreaConhecimento",
+    "pk": 5,
+    "fields": {
+      "area": "Ciências da Saúde"
+    }
+  },
+  {
+    "model": "repex.AreaConhecimento",
+    "pk": 6,
+    "fields": {
+      "area": "Ciências Sociais Aplicadas"
+    }
+  },
+  {
+    "model": "repex.AreaConhecimento",
+    "pk": 7,
+    "fields": {
+      "area": "Linguística, Letras e Artes"
+    }
+  },
+  {
+    "model": "repex.AreaConhecimento",
+    "pk": 8,
+    "fields": {
+      "area": "Agrárias"
+    }
+  },
+  {
+    "model": "repex.Noticia",
+    "pk": 1,
+    "fields": {
+      "titulo": "Novo Laboratório de Robótica Inaugurado",
+      "descricao": "O IFRN inaugura um laboratório moderno de robótica.",
+      "conteudo": "<p>O novo laboratório conta com kits de robótica, impressoras 3D e equipamentos de ponta para auxiliar os alunos em projetos multidisciplinares.</p>",
+      "data_publicacao": "2025-09-19T09:00:00Z",
+      "imagem": null,
+      "area_conhecimento": 3,
+      "autor": 1,
+      "criado_em": "2025-09-19T09:00:00Z"
+    }
+  },
+  {
+    "model": "repex.Noticia",
+    "pk": 2,
+    "fields": {
+      "titulo": "Projeto de Energia Solar Recebe Reconhecimento",
+      "descricao": "Estudantes desenvolvem projeto sustentável de energia solar.",
+      "conteudo": "<p>O projeto foi premiado em feira nacional e já está sendo implementado em algumas unidades do IFRN.</p>",
+      "data_publicacao": "2025-09-19T10:00:00Z",
+      "imagem": null,
+      "area_conhecimento": 1,
+      "autor": 1,
+      "criado_em": "2025-09-19T10:00:00Z"
+    }
+  },
+  {
+    "model": "repex.Noticia",
+    "pk": 3,
+    "fields": {
+      "titulo": "Semana de História e Cultura no IFRN",
+      "descricao": "Evento reúne palestrantes e estudantes para discutir temas históricos.",
+      "conteudo": "<p>A semana contou com mesas-redondas, minicursos e exposições culturais.</p>",
+      "data_publicacao": "2025-09-19T11:00:00Z",
+      "imagem": null,
+      "area_conhecimento": 2,
+      "autor": 1,
+      "criado_em": "2025-09-19T11:00:00Z"
+    }
+  },
+  {
+    "model": "repex.Noticia",
+    "pk": 4,
+    "fields": {
+      "titulo": "Pesquisa em Biotecnologia Avança",
+      "descricao": "Pesquisadores desenvolvem nova técnica de cultivo celular.",
+      "conteudo": "<p>O estudo pode revolucionar a produção de medicamentos e vacinas.</p>",
+      "data_publicacao": "2025-09-19T12:00:00Z",
+      "imagem": null,
+      "area_conhecimento": 4,
+      "autor": 1,
+      "criado_em": "2025-09-19T12:00:00Z"
+    }
+  },
+  {
+    "model": "repex.Noticia",
+    "pk": 5,
+    "fields": {
+      "titulo": "Curso de Enfermagem Realiza Campanha de Saúde",
+      "descricao": "Alunos do curso de enfermagem realizam ações de prevenção.",
+      "conteudo": "<p>Foram atendidas mais de 200 pessoas em ações de aferição de pressão e orientações médicas.</p>",
+      "data_publicacao": "2025-09-19T13:00:00Z",
+      "imagem": null,
+      "area_conhecimento": 5,
+      "autor": 1,
+      "criado_em": "2025-09-19T13:00:00Z"
+    }
+  },
+  {
+    "model": "repex.Noticia",
+    "pk": 6,
+    "fields": {
+      "titulo": "Economia Criativa é Destaque em Seminário",
+      "descricao": "Professores e estudantes discutem inovação e empreendedorismo.",
+      "conteudo": "<p>O evento destacou cases de sucesso de startups locais e projetos incubados no IFRN.</p>",
+      "data_publicacao": "2025-09-19T14:00:00Z",
+      "imagem": null,
+      "area_conhecimento": 6,
+      "autor": 1,
+      "criado_em": "2025-09-19T14:00:00Z"
+    }
+  },
+  {
+    "model": "repex.Noticia",
+    "pk": 7,
+    "fields": {
+      "titulo": "Mostra de Teatro e Literatura Encerra Semana Cultural",
+      "descricao": "Alunos apresentaram peças teatrais e recitais de poesia.",
+      "conteudo": "<p>O evento teve participação de escritores locais e grupos artísticos.</p>",
+      "data_publicacao": "2025-09-19T15:00:00Z",
+      "imagem": null,
+      "area_conhecimento": 7,
+      "autor": 1,
+      "criado_em": "2025-09-19T15:00:00Z"
+    }
+  },
+  {
+    "model": "repex.Noticia",
+    "pk": 8,
+    "fields": {
+      "titulo": "Projeto em Agricultura Sustentável é Premiado",
+      "descricao": "Iniciativa propõe técnicas de cultivo que reduzem uso de agrotóxicos.",
+      "conteudo": "<p>O projeto recebeu reconhecimento em feira nacional de ciências agrárias.</p>",
+      "data_publicacao": "2025-09-19T16:00:00Z",
+      "imagem": null,
+      "area_conhecimento": 8,
+      "autor": 1,
+      "criado_em": "2025-09-19T16:00:00Z"
+    }
+  },
+  {
+    "model": "repex.Projeto",
+    "pk": 1,
+    "fields": {
+      "titulo": "Plataforma de Monitoramento Ambiental com IoT",
+      "descricao": "Desenvolvimento de uma plataforma baseada em sensores IoT para monitorar a qualidade do ar e da água em áreas urbanas.",
+      "resumo": "<p>O projeto busca implementar sensores conectados para coletar dados ambientais e disponibilizá-los em tempo real através de dashboards acessíveis à comunidade.</p>",
+      "justificativa": "<p>A degradação ambiental urbana exige novas ferramentas de monitoramento. Tecnologias IoT permitem ampliar a transparência e a participação cidadã.</p>",
+      "area_conhecimento": 2,
+      "objetivo": "<p>Criar uma solução tecnológica de baixo custo para monitoramento ambiental em tempo real.</p>",
+      "criado_em": "2025-01-10T14:35:00Z",
+      "resultados": "<p>Protótipo de rede de sensores instalado em pontos estratégicos do campus e aplicação web funcionando para acompanhamento em tempo real.</p>",
+      "capa": null,
+      "doc": null,
+      "palavras_chave": "IoT, Meio Ambiente, Sensores, Sustentabilidade",
+      "status": "Em andamento",
+      "modalidade": "Pesquisa",
+      "componentes":[1],
+      "views": 128
+    }
+  },
+  {
+    "model": "repex.Projeto",
+    "pk": 2,
+    "fields": {
+      "titulo": "Aplicativo de Apoio ao Ensino de Matemática",
+      "descricao": "Criação de um aplicativo gamificado para apoiar o aprendizado de matemática no ensino médio.",
+      "resumo": "<p>O app utiliza jogos, quizzes e desafios interativos para melhorar o engajamento dos estudantes.</p>",
+      "justificativa": "<p>As dificuldades recorrentes em matemática refletem-se no baixo desempenho escolar. Estratégias digitais podem aumentar a motivação.</p>",
+      "area_conhecimento": 1,
+      "objetivo": "<p>Desenvolver um recurso pedagógico digital para facilitar a aprendizagem matemática com foco em problemas do ENEM.</p>",
+      "criado_em": "2025-02-01T09:20:00Z",
+      "resultados": "<p>Protótipo funcional com mais de 50 exercícios interativos e feedback automático implementado.</p>",
+      "capa": null,
+      "doc": null,
+      "palavras_chave": "Matemática, Ensino, Gamificação, Aplicativo",
+      "status": "Em andamento",
+      "modalidade": "Ensino",
+      "componentes":[1],
+      "views": 92
+    }
+  },
+  {
+    "model": "repex.Projeto",
+    "pk": 3,
+    "fields": {
+      "titulo": "Feira de Ciências e Tecnologia 2025",
+      "descricao": "Organização de feira estudantil para divulgação de projetos de ciência e tecnologia no IFRN.",
+      "resumo": "<p>Evento anual que reúne estudantes, professores e comunidade para apresentar iniciativas científicas e tecnológicas.</p>",
+      "justificativa": "<p>A feira de ciências é uma ferramenta essencial para aproximar ciência e sociedade, incentivando a cultura científica.</p>",
+      "area_conhecimento": 3,
+      "objetivo": "<p>Estimular a produção científica no ensino médio e técnico, ampliando a interação entre escola e comunidade.</p>",
+      "criado_em": "2025-02-15T18:40:00Z",
+      "resultados": "<p>Feira realizada com a participação de 300 visitantes e 45 projetos expostos.</p>",
+      "capa": null,
+      "doc": null,
+      "palavras_chave": "Feira, Divulgação Científica, Tecnologia, Extensão",
+      "status": "Concluído",
+      "modalidade": "Extensão",
+      "componentes":[1],
+      "views": 214
+    }
+  },
+  {
+    "model": "repex.Projeto",
+    "pk": 4,
+    "fields": {
+      "titulo": "Robótica Educacional para Escolas Públicas",
+      "descricao": "Projeto de extensão que leva oficinas de robótica para escolas da rede pública municipal.",
+      "resumo": "<p>Oficinas práticas de robótica com kits de baixo custo para despertar o interesse em tecnologia e inovação.</p>",
+      "justificativa": "<p>Escolas públicas possuem carência de recursos tecnológicos. A robótica educacional pode promover a inclusão digital e o aprendizado criativo.</p>",
+      "area_conhecimento": 4,
+      "objetivo": "<p>Capacitar estudantes e professores em robótica básica e programação aplicada ao ensino fundamental.</p>",
+      "criado_em": "2025-03-05T13:50:00Z",
+      "resultados": "<p>Foram realizadas 10 oficinas em 4 escolas, alcançando 200 alunos e 15 professores.</p>",
+      "capa": null,
+      "doc": null,
+      "palavras_chave": "Robótica, Educação, Inclusão Digital, Extensão",
+      "status": "Em andamento",
+      "modalidade": "Extensão",
+      "componentes":[1],
+      "views": 175
+    }
+  },
+  {
+    "model": "repex.Projeto",
+    "pk": 5,
+    "fields": {
+      "titulo": "Análise de Dados para Prevenção de Evasão Escolar",
+      "descricao": "Pesquisa aplicada em ciência de dados para identificar padrões de evasão no ensino médio integrado.",
+      "resumo": "<p>O estudo aplica técnicas de machine learning para prever e reduzir casos de evasão escolar.</p>",
+      "justificativa": "<p>A evasão escolar é um dos maiores desafios da educação pública. O uso de dados pode antecipar fatores de risco e orientar intervenções.</p>",
+      "area_conhecimento": 5,
+      "objetivo": "<p>Implementar modelos preditivos baseados em dados acadêmicos e socioeconômicos dos alunos.</p>",
+      "criado_em": "2025-01-25T11:10:00Z",
+      "resultados": "<p>Modelo preditivo alcançou 82% de acurácia na identificação de alunos em risco de evasão.</p>",
+      "capa": null,
+      "doc": null,
+      "palavras_chave": "Educação, Ciência de Dados, Evasão, Machine Learning",
+      "status": "Concluído",
+      "modalidade": "Pesquisa",
+      "componentes":[1],
+      "views": 301
+    }
+  },
+  {
+    "model": "repex.Projeto",
+    "pk": 6,
+    "fields": {
+      "titulo": "Desenvolvimento de Chatbot Educacional",
+      "descricao": "Criação de um chatbot para auxiliar alunos em dúvidas frequentes sobre disciplinas do ensino médio.",
+      "resumo": "<p>O chatbot será capaz de responder perguntas sobre conteúdos de matemática, física e química, fornecendo explicações passo a passo.</p>",
+      "justificativa": "<p>O suporte educacional automatizado pode reduzir dúvidas repetitivas e aumentar o engajamento do aluno.</p>",
+      "area_conhecimento": 1,
+      "objetivo": "<p>Desenvolver um assistente virtual que complemente o aprendizado em ambiente escolar.</p>",
+      "criado_em": "2025-03-10T10:00:00Z",
+      "resultados": "<p>Protótipo funcional com integração via webchat, cobrindo 3 disciplinas.</p>",
+      "capa": null,
+      "doc": null,
+      "palavras_chave": "Educação, Chatbot, Inteligência Artificial",
+      "status": "Em andamento",
+      "modalidade": "Ensino",
+      "componentes":[1],
+      "views": 45
+    }
+  },
+  {
+    "model": "repex.Projeto",
+    "pk": 7,
+    "fields": {
+      "titulo": "Análise de Redes Sociais e Fake News",
+      "descricao": "Pesquisa sobre disseminação de notícias falsas em redes sociais e suas consequências sociais.",
+      "resumo": "<p>O estudo aplica métodos de análise de dados e mineração de textos para identificar padrões de fake news.</p>",
+      "justificativa": "<p>A propagação de informações falsas impacta a sociedade e a democracia. Entender esse fenômeno é essencial para medidas preventivas.</p>",
+      "area_conhecimento": 5,
+      "objetivo": "<p>Mapear e analisar padrões de disseminação de notícias falsas em plataformas digitais.</p>",
+      "criado_em": "2025-03-12T15:30:00Z",
+      "resultados": "<p>Base de dados inicial coletada de 10.000 postagens com identificação preliminar de 1.200 fake news.</p>",
+      "capa": null,
+      "doc": null,
+      "palavras_chave": "Redes Sociais, Fake News, Análise de Dados, Sociologia",
+      "status": "Em andamento",
+      "modalidade": "Pesquisa",
+      "componentes":[1],
+      "views": 33
+    }
+  },
+  {
+    "model": "repex.Projeto",
+    "pk": 8,
+    "fields": {
+      "titulo": "Oficinas de Empreendedorismo Juvenil",
+      "descricao": "Oficinas práticas de empreendedorismo voltadas para jovens do ensino médio e técnico.",
+      "resumo": "<p>As oficinas incluem criação de ideias de negócio, planejamento estratégico e marketing digital.</p>",
+      "justificativa": "<p>Estimular a cultura empreendedora contribui para autonomia e inserção no mercado de trabalho.</p>",
+      "area_conhecimento": 4,
+      "objetivo": "<p>Capacitar jovens para desenvolver e apresentar projetos de microempreendedorismo.</p>",
+      "criado_em": "2025-03-18T09:00:00Z",
+      "resultados": "<p>Realizadas 5 oficinas, com a participação de 120 estudantes e 15 projetos apresentados.</p>",
+      "capa": null,
+      "doc": null,
+      "palavras_chave": "Empreendedorismo, Jovens, Oficinas, Extensão",
+      "status": "Em andamento",
+      "modalidade": "Extensão",
+      "componentes":[1],
+      "views": 57
+    }
+  },
+  {
+    "model": "repex.Projeto",
+    "pk": 9,
+    "fields": {
+      "titulo": "Plataforma de Cursos Online de Programação",
+      "descricao": "Desenvolvimento de uma plataforma online para disponibilizar cursos de programação para estudantes do ensino médio.",
+      "resumo": "<p>O projeto oferece cursos gratuitos com exercícios práticos, vídeos e quizzes interativos.</p>",
+      "justificativa": "<p>O acesso a conhecimento de programação é essencial para preparar jovens para o mercado digital.</p>",
+      "area_conhecimento": 1,
+      "objetivo": "<p>Disponibilizar cursos acessíveis que capacitem estudantes em lógica de programação e linguagens populares.</p>",
+      "criado_em": "2025-03-20T14:45:00Z",
+      "resultados": "<p>Protótipo com 3 cursos online implementados e feedback inicial de 50 estudantes.</p>",
+      "capa": null,
+      "doc": null,
+      "palavras_chave": "Programação, Ensino, Cursos Online, Tecnologia",
+      "status": "Em andamento",
+      "modalidade": "Ensino",
+      "componentes":[1],
+      "views": 64
+    }
+  },
+  {
+    "model": "repex.Projeto",
+    "pk": 10,
+    "fields": {
+      "titulo": "Mapeamento de Áreas de Risco Urbano",
+      "descricao": "Projeto de pesquisa para mapear áreas de risco urbano utilizando dados geográficos e estatísticos.",
+      "resumo": "<p>Aplicação de geotecnologias e análise estatística para identificar áreas vulneráveis a enchentes e deslizamentos.</p>",
+      "justificativa": "<p>Mapeamento preciso ajuda na prevenção de desastres e planejamento urbano sustentável.</p>",
+      "area_conhecimento": 2,
+      "objetivo": "<p>Gerar mapas interativos que auxiliem na tomada de decisão por órgãos municipais.</p>",
+      "criado_em": "2025-03-22T11:20:00Z",
+      "resultados": "<p>Mapas iniciais produzidos com identificação de 12 áreas de alto risco.</p>",
+      "capa": null,
+      "doc": null,
+      "palavras_chave": "Geotecnologia, Risco Urbano, Prevenção, Pesquisa",
+      "status": "Em andamento",
+      "modalidade": "Pesquisa",
+      "componentes":[1],
+      "views": 48
+    }
+  },
+  {
+    "model": "repex.Projeto",
+    "pk": 11,
+    "fields": {
+      "titulo": "Sistema de Agendamento Escolar Online",
+      "descricao": "Plataforma para facilitar o agendamento de reuniões entre professores, pais e alunos.",
+      "resumo": "<p>O sistema permite marcação de reuniões, envio de lembretes automáticos e relatórios de presença.</p>",
+      "justificativa": "<p>Reduz filas e melhora a comunicação entre escola e comunidade escolar.</p>",
+      "area_conhecimento": 1,
+      "objetivo": "<p>Criar um sistema intuitivo e eficiente para gestão de agendamentos escolares.</p>",
+      "criado_em": "2025-03-25T10:00:00Z",
+      "resultados": "<p>Protótipo inicial com interface web funcional e teste em 2 turmas piloto.</p>",
+      "capa": null,
+      "doc": null,
+      "palavras_chave": "Educação, Gestão, Plataforma, Ensino",
+      "status": "Em andamento",
+      "modalidade": "Ensino",
+      "componentes":[1],
+      "views": 25
+    }
+  },
+  {
+    "model": "repex.Projeto",
+    "pk": 12,
+    "fields": {
+      "titulo": "Oficinas de Artes Digitais",
+      "descricao": "Oficinas práticas de desenho digital e edição de imagens para estudantes do ensino médio.",
+      "resumo": "<p>Alunos aprendem técnicas de ilustração digital e edição utilizando softwares acessíveis.</p>",
+      "justificativa": "<p>Estimular a criatividade e familiaridade com ferramentas digitais é essencial no ensino moderno.</p>",
+      "area_conhecimento": 4,
+      "objetivo": "<p>Capacitar estudantes na criação de arte digital e portfólios criativos.</p>",
+      "criado_em": "2025-03-26T09:30:00Z",
+      "resultados": "<p>Realizadas 4 oficinas com participação de 60 alunos e 20 ilustrações produzidas.</p>",
+      "capa": null,
+      "doc": null,
+      "palavras_chave": "Arte Digital, Educação, Oficinas, Extensão",
+      "status": "Em andamento",
+      "modalidade": "Extensão",
+      "componentes":[1],
+      "views": 37
+    }
+  },
+  {
+    "model": "repex.Projeto",
+    "pk": 13,
+    "fields": {
+      "titulo": "Análise de Tráfego Urbano com Dados Abertos",
+      "descricao": "Projeto de pesquisa para analisar padrões de tráfego em cidades usando dados abertos de trânsito.",
+      "resumo": "<p>O estudo identifica horários de pico, engarrafamentos e propõe soluções para otimização do trânsito.</p>",
+      "justificativa": "<p>A gestão de tráfego urbano eficiente é crucial para segurança e mobilidade nas cidades.</p>",
+      "area_conhecimento": 2,
+      "objetivo": "<p>Desenvolver modelos preditivos de tráfego e dashboards para órgãos municipais.</p>",
+      "criado_em": "2025-03-27T11:15:00Z",
+      "resultados": "<p>Dados preliminares analisados e mapa de congestionamento inicial produzido.</p>",
+      "capa": null,
+      "doc": null,
+      "palavras_chave": "Trânsito, Mobilidade, Dados Abertos, Pesquisa",
+      "status": "Em andamento",
+      "modalidade": "Pesquisa",
+      "componentes":[1],
+      "views": 42
+    }
+  },
+  {
+    "model": "repex.Projeto",
+    "pk": 14,
+    "fields": {
+      "titulo": "Clubes de Ciência para Ensino Médio",
+      "descricao": "Criação de clubes de ciência em escolas para estimular pesquisa e experimentação entre alunos.",
+      "resumo": "<p>Os clubes promovem atividades práticas de química, física, biologia e astronomia.</p>",
+      "justificativa": "<p>Iniciativas extracurriculares incentivam a curiosidade científica e habilidades práticas nos estudantes.</p>",
+      "area_conhecimento": 3,
+      "objetivo": "<p>Implementar clubes em 5 escolas e engajar estudantes em projetos experimentais.</p>",
+      "criado_em": "2025-03-28T14:00:00Z",
+      "resultados": "<p>Clube piloto implementado em 2 escolas com 50 alunos participantes.</p>",
+      "capa": null,
+      "doc": null,
+      "palavras_chave": "Ciência, Ensino, Clubes, Extensão",
+      "status": "Em andamento",
+      "modalidade": "Extensão",
+      "componentes":[1],
+      "views": 29
+    }
+  },
+  {
+    "model": "repex.Projeto",
+    "pk": 15,
+    "fields": {
+      "titulo": "Plataforma de Apoio a Projetos Sustentáveis",
+      "descricao": "Sistema online para cadastrar, monitorar e divulgar projetos de sustentabilidade em escolas e universidades.",
+      "resumo": "<p>O sistema permite acompanhamento de iniciativas, resultados e compartilhamento de boas práticas.</p>",
+      "justificativa": "<p>Divulgar projetos sustentáveis amplia impacto social e ambiental das ações educativas.</p>",
+      "area_conhecimento": 2,
+      "objetivo": "<p>Desenvolver plataforma web para suporte e divulgação de projetos sustentáveis.</p>",
+      "criado_em": "2025-03-29T10:30:00Z",
+      "resultados": "<p>Protótipo inicial com cadastro de 10 projetos piloto.</p>",
+      "capa": null,
+      "doc": null,
+      "palavras_chave": "Sustentabilidade, Projetos, Educação, Plataforma",
+      "status": "Em andamento",
+      "modalidade": "Pesquisa",
+      "componentes":[1],
+      "views": 34
+    }
+  },
+  {
+    "model": "repex.Projeto",
+    "pk": 16,
+    "fields": {
+      "titulo": "Laboratório de Robótica Avançada",
+      "descricao": "Projeto de pesquisa e extensão para implementação de laboratório de robótica avançada no campus.",
+      "resumo": "<p>Alunos poderão desenvolver protótipos robóticos com sensores avançados e programação integrada.</p>",
+      "justificativa": "<p>O laboratório amplia a capacidade de aprendizado prático e inovação tecnológica dos estudantes.</p>",
+      "area_conhecimento": 4,
+      "objetivo": "<p>Estruturar laboratório funcional e capacitar alunos em robótica avançada.</p>",
+      "criado_em": "2025-03-30T09:15:00Z",
+      "resultados": "<p>Espaço definido e equipamentos iniciais adquiridos.</p>",
+      "capa": null,
+      "doc": null,
+      "palavras_chave": "Robótica, Laboratório, Extensão, Tecnologia",
+      "status": "Em andamento",
+      "modalidade": "Extensão",
+      "componentes":[1],
+      "views": 21
+    }
+  },
+  {
+    "model": "repex.Projeto",
+    "pk": 17,
+    "fields": {
+      "titulo": "Plataforma de Acompanhamento de Estágios",
+      "descricao": "Sistema para gerenciamento e acompanhamento de estágios de estudantes de ensino técnico e superior.",
+      "resumo": "<p>Permite registro de atividades, avaliação de desempenho e relatórios gerenciais.</p>",
+      "justificativa": "<p>Facilita a integração entre empresas e estudantes, garantindo melhor acompanhamento pedagógico.</p>",
+      "area_conhecimento": 1,
+      "objetivo": "<p>Desenvolver plataforma digital para gestão e acompanhamento de estágios.</p>",
+      "criado_em": "2025-03-31T14:50:00Z",
+      "resultados": "<p>Protótipo funcional testado com 2 empresas parceiras.</p>",
+      "capa": null,
+      "doc": null,
+      "palavras_chave": "Estágios, Educação, Plataforma, Gestão",
+      "status": "Em andamento",
+      "modalidade": "Ensino",
+      "componentes":[1],
+      "views": 39
+    }
+  },
+  {
+    "model": "repex.Projeto",
+    "pk": 18,
+    "fields": {
+      "titulo": "Estudo de Impacto do Uso de Redes Sociais na Educação",
+      "descricao": "Pesquisa para avaliar como o uso das redes sociais influencia o desempenho acadêmico de estudantes.",
+      "resumo": "<p>O estudo analisa dados de acesso a plataformas digitais, frequência e correlação com notas escolares.</p>",
+      "justificativa": "<p>Entender o impacto digital ajuda a desenvolver estratégias pedagógicas mais eficazes.</p>",
+      "area_conhecimento": 5,
+      "objetivo": "<p>Identificar padrões de uso e propor recomendações para o uso saudável de redes sociais.</p>",
+      "criado_em": "2025-04-01T10:20:00Z",
+      "resultados": "<p>Dados preliminares coletados de 200 estudantes e análise inicial realizada.</p>",
+      "capa": null,
+      "doc": null,
+      "palavras_chave": "Educação, Redes Sociais, Pesquisa, Impacto",
+      "status": "Em andamento",
+      "modalidade": "Pesquisa",
+      "componentes":[1],
+      "views": 27
+    }
+  },
+  {
+    "model": "repex.Projeto",
+    "pk": 19,
+    "fields": {
+      "titulo": "Oficinas de Impressão 3D Educacional",
+      "descricao": "Oficinas de impressão 3D para aplicação em projetos educativos e prototipagem rápida.",
+      "resumo": "<p>Os alunos aprendem a projetar e imprimir protótipos utilizando software CAD e impressoras 3D.</p>",
+      "justificativa": "<p>Estimular habilidades práticas e pensamento criativo por meio da tecnologia de fabricação digital.</p>",
+      "area_conhecimento": 4,
+      "objetivo": "<p>Capacitar estudantes na criação de protótipos educacionais utilizando impressão 3D.</p>",
+      "criado_em": "2025-04-02T11:40:00Z",
+      "resultados": "<p>Oficinas realizadas em 3 turmas, com 30 protótipos desenvolvidos.</p>",
+      "capa": null,
+      "doc": null,
+      "palavras_chave": "Impressão 3D, Educação, Oficinas, Extensão",
+      "status": "Em andamento",
+      "modalidade": "Extensão",
+      "componentes":[1],
+      "views": 31
+    }
+  },
+  {
+    "model": "repex.Projeto",
+    "pk": 20,
+    "fields": {
+      "titulo": "Aplicativo de Incentivo à Leitura",
+      "descricao": "Aplicativo que sugere livros, registra leituras e promove desafios literários entre estudantes.",
+      "resumo": "<p>O app permite acompanhar progresso, criar rankings e incentivar hábitos de leitura.</p>",
+      "justificativa": "<p>Incentivar a leitura melhora habilidades cognitivas, criatividade e desempenho acadêmico.</p>",
+      "area_conhecimento": 3,
+      "objetivo": "<p>Desenvolver ferramenta interativa que motive estudantes a ler mais.</p>",
+      "criado_em": "2025-04-03T09:10:00Z",
+      "resultados": "<p>Protótipo com cadastro inicial de 50 livros e 30 estudantes participantes.</p>",
+      "capa": null,
+      "doc": null,
+      "palavras_chave": "Leitura, Aplicativo, Educação, Gamificação",
+      "status": "Em andamento",
+      "modalidade": "Extensão",
+      "componentes":[1],
+      "views": 44
+    }
+  },
+  {
+    "model": "repex.Projeto",
+    "pk": 21,
+    "fields": {
+      "titulo": "Plataforma de Feedback Acadêmico",
+      "descricao": "Sistema online para que alunos avaliem disciplinas e professores de forma anônima e construtiva.",
+      "resumo": "<p>O sistema gera relatórios automatizados que ajudam na melhoria contínua do ensino.</p>",
+      "justificativa": "<p>Fornecer feedback estruturado contribui para a qualidade do ensino e engajamento dos alunos.</p>",
+      "area_conhecimento": 1,
+      "objetivo": "<p>Desenvolver plataforma que facilite coleta e análise de feedback acadêmico.</p>",
+      "criado_em": "2025-04-05T09:00:00Z",
+      "resultados": "<p>Protótipo testado em duas turmas, com 80% de participação dos alunos.</p>",
+      "capa": null,
+      "doc": null,
+      "palavras_chave": "Educação, Feedback, Plataforma, Ensino",
+      "status": "Em andamento",
+      "modalidade": "Ensino",
+      "componentes":[1],
+      "views": 22
+    }
+  },
+  {
+    "model": "repex.Projeto",
+    "pk": 22,
+    "fields": {
+      "titulo": "Aplicativo de Monitoramento de Hábitos Saudáveis",
+      "descricao": "Aplicativo que auxilia estudantes a registrar atividades físicas, sono e alimentação.",
+      "resumo": "<p>Permite acompanhamento de hábitos diários e gera relatórios para incentivar saúde e bem-estar.</p>",
+      "justificativa": "<p>Promover hábitos saudáveis contribui para melhor desempenho acadêmico e qualidade de vida.</p>",
+      "area_conhecimento": 5,
+      "objetivo": "<p>Desenvolver aplicativo móvel para monitoramento de saúde voltado a estudantes.</p>",
+      "criado_em": "2025-04-06T10:30:00Z",
+      "resultados": "<p>Protótipo funcional com registro de dados de 50 estudantes durante 1 mês.</p>",
+      "capa": null,
+      "doc": null,
+      "palavras_chave": "Saúde, Aplicativo, Bem-estar, Estudantes",
+      "status": "Em andamento",
+      "modalidade": "Pesquisa",
+      "componentes":[1],
+      "views": 28
+    }
+  },
+  {
+    "model": "repex.Projeto",
+    "pk": 23,
+    "fields": {
+      "titulo": "Oficinas de Criação de Jogos Digitais",
+      "descricao": "Oficinas práticas para desenvolvimento de jogos digitais educativos.",
+      "resumo": "<p>Estudantes aprendem lógica de programação, design de personagens e mecânicas de jogo.</p>",
+      "justificativa": "<p>Estimular habilidades digitais e criatividade por meio da gamificação no ensino.</p>",
+      "area_conhecimento": 1,
+      "objetivo": "<p>Capacitar estudantes na criação de jogos educativos e prototipagem digital.</p>",
+      "criado_em": "2025-04-07T11:00:00Z",
+      "resultados": "<p>3 oficinas realizadas com 40 estudantes e 10 jogos produzidos.</p>",
+      "capa": null,
+      "doc": null,
+      "palavras_chave": "Gamificação, Jogos Digitais, Educação, Oficinas",
+      "status": "Em andamento",
+      "modalidade": "Ensino",
+      "componentes":[1],
+      "views": 36
+    }
+  },
+  {
+    "model": "repex.Projeto",
+    "pk": 24,
+    "fields": {
+      "titulo": "Mapeamento de Flora e Fauna Local",
+      "descricao": "Projeto de pesquisa para catalogar espécies vegetais e animais do entorno do campus.",
+      "resumo": "<p>Coleta de dados de biodiversidade com registros fotográficos e georreferenciados.</p>",
+      "justificativa": "<p>Promover conhecimento ambiental e conservação da biodiversidade local.</p>",
+      "area_conhecimento": 2,
+      "objetivo": "<p>Criar banco de dados interativo de espécies locais para pesquisa e educação ambiental.</p>",
+      "criado_em": "2025-04-08T14:20:00Z",
+      "resultados": "<p>Primeira fase de coleta realizada com registro de 50 espécies vegetais e 30 animais.</p>",
+      "capa": null,
+      "doc": null,
+      "palavras_chave": "Biodiversidade, Pesquisa, Meio Ambiente, Catalogação",
+      "status": "Em andamento",
+      "modalidade": "Pesquisa",
+      "componentes":[1],
+      "views": 31
+    }
+  },
+  {
+    "model": "repex.Projeto",
+    "pk": 25,
+    "fields": {
+      "titulo": "Oficinas de Fotografia Digital",
+      "descricao": "Oficinas para alunos aprenderem técnicas de fotografia, edição e composição de imagens.",
+      "resumo": "<p>Inclui práticas de fotografia, edição em software livre e criação de portfólios digitais.</p>",
+      "justificativa": "<p>Estimular expressão artística e habilidades digitais complementa a formação dos estudantes.</p>",
+      "area_conhecimento": 4,
+      "objetivo": "<p>Capacitar estudantes em fotografia digital e produção de portfólios.</p>",
+      "criado_em": "2025-04-09T10:45:00Z",
+      "resultados": "<p>Oficinas realizadas em 2 turmas com 25 portfólios criados.</p>",
+      "capa": null,
+      "doc": null,
+      "palavras_chave": "Fotografia, Oficinas, Educação, Arte",
+      "status": "Em andamento",
+      "modalidade": "Extensão",
+      "componentes":[1],
+      "views": 30
+    }
+  },
+  {
+    "model": "repex.Projeto",
+    "pk": 26,
+    "fields": {
+      "titulo": "Aplicativo de Organização de Estudos",
+      "descricao": "App que auxilia estudantes a planejar horários, tarefas e metas de estudo.",
+      "resumo": "<p>Permite criar cronogramas, alertas de prazo e monitoramento de progresso.</p>",
+      "justificativa": "<p>Melhorar a organização pessoal contribui para desempenho acadêmico e produtividade.</p>",
+      "area_conhecimento": 1,
+      "objetivo": "<p>Desenvolver ferramenta digital para auxiliar gestão de estudos dos alunos.</p>",
+      "criado_em": "2025-04-10T09:10:00Z",
+      "resultados": "<p>Protótipo testado com 40 estudantes em período de avaliação.</p>",
+      "capa": null,
+      "doc": null,
+      "palavras_chave": "Organização, Estudos, Aplicativo, Educação",
+      "status": "Em andamento",
+      "modalidade": "Ensino",
+      "componentes":[1],
+      "views": 29
+    }
+  },
+  {
+    "model": "repex.Projeto",
+    "pk": 27,
+    "fields": {
+      "titulo": "Estudo de Sustentabilidade em Escolas",
+      "descricao": "Pesquisa para analisar práticas sustentáveis adotadas em escolas públicas e privadas.",
+      "resumo": "<p>Coleta de dados sobre consumo de água, energia e reciclagem nas instituições.</p>",
+      "justificativa": "<p>Promover sustentabilidade e educação ambiental desde cedo é essencial para formação cidadã.</p>",
+      "area_conhecimento": 2,
+      "objetivo": "<p>Gerar relatório de boas práticas e sugestões de melhorias ambientais.</p>",
+      "criado_em": "2025-04-11T11:25:00Z",
+      "resultados": "<p>Coleta inicial realizada em 5 escolas com indicadores preliminares consolidados.</p>",
+      "capa": null,
+      "doc": null,
+      "palavras_chave": "Sustentabilidade, Educação, Pesquisa, Meio Ambiente",
+      "status": "Em andamento",
+      "modalidade": "Pesquisa",
+      "componentes":[1],
+      "views": 33
+    }
+  },
+  {
+    "model": "repex.Projeto",
+    "pk": 28,
+    "fields": {
+      "titulo": "Oficinas de Programação Criativa",
+      "descricao": "Oficinas que combinam programação e criatividade para desenvolver projetos artísticos digitais.",
+      "resumo": "<p>Estudantes aprendem programação básica e criam animações, jogos e interações digitais.</p>",
+      "justificativa": "<p>Incentivar criatividade com tecnologia estimula habilidades cognitivas e inovação.</p>",
+      "area_conhecimento": 1,
+      "objetivo": "<p>Capacitar estudantes na aplicação criativa de programação.</p>",
+      "criado_em": "2025-04-12T10:15:00Z",
+      "resultados": "<p>2 oficinas realizadas com criação de 10 projetos digitais pelos alunos.</p>",
+      "capa": null,
+      "doc": null,
+      "palavras_chave": "Programação, Criatividade, Oficinas, Ensino",
+      "status": "Em andamento",
+      "modalidade": "Ensino",
+      "componentes":[1],
+      "views": 28
+    }
+  }
+]

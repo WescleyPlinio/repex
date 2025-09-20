@@ -28,14 +28,16 @@ def index(request):
 
 def explorar(request):
     query = request.GET.get('q', '')
-    status = request.GET.get('status')
-    modalidade = request.GET.get('modalidade')
-    area_id = request.GET.get('area_conhecimento')
+    status = request.GET.get('status', '')
+    modalidade = request.GET.get('modalidade', '')
+    area_id = request.GET.get('area_conhecimento', '')
 
     resultado_projeto_titulo = Projeto.objects.filter(titulo__icontains=query)
     resultado_projeto_objetivo = Projeto.objects.filter(objetivo__icontains=query)
     resultado_projeto_resumo = Projeto.objects.filter(resumo__icontains=query)
-    resultados_projetos = (resultado_projeto_titulo | resultado_projeto_objetivo | resultado_projeto_resumo).distinct()
+    resultados_projetos = (
+        resultado_projeto_titulo | resultado_projeto_objetivo | resultado_projeto_resumo
+        ).distinct()
     
     if status:
         resultados_projetos = resultados_projetos.filter(status=status).distinct()
@@ -45,7 +47,7 @@ def explorar(request):
         resultados_projetos = resultados_projetos.filter(area_id=area_id)
 
     paginator_projetos = Paginator(resultados_projetos, 16)
-    page_number_projetos = request.GET.get('page_projetos')
+    page_number_projetos = request.GET.get('page', 1)
     resultados_projetos = paginator_projetos.get_page(page_number_projetos)
 
     context = {
@@ -62,7 +64,7 @@ def ajax_projetos(request):
     query = request.GET.get('q', '')
     status = request.GET.get('status', '')
     modalidade = request.GET.get('modalidade', '')
-    area_id = request.GET.get('area_conhecimento')
+    area_id = request.GET.get('area_conhecimento', '')
 
     resultado_projeto_titulo = Projeto.objects.filter(titulo__icontains=query)
     resultado_projeto_objetivo = Projeto.objects.filter(objetivo__icontains=query)
@@ -79,14 +81,17 @@ def ajax_projetos(request):
         resultados_projetos = resultados_projetos.filter(area_conhecimento_id=area_id)
 
     paginator = Paginator(resultados_projetos, 16)
-    page_number = request.GET.get('page_projetos')
-    page_obj = paginator.get_page(page_number)
+    page_number_projetos = request.GET.get('page', 1)
+    resultados_projetos = paginator.get_page(page_number_projetos)
 
     html = render_to_string(
         "partials/_ajax_projetos.html",
         {
-            "resultados_projetos": page_obj,
+            "resultados_projetos": resultados_projetos,
             "query": query,
+            'status_choices': Projeto.STATUS_CHOICES,
+            'modalidade_choices': Projeto.MODALIDADE_CHOICES,
+            'areas': AreaConhecimento.objects.all()
         },
         request=request,
     )
