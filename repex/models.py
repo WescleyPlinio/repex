@@ -86,19 +86,6 @@ class RedeSocial(models.Model):
     def __str__(self):
         return self.nome
 
-
-class UserSocialLink(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="social_links")
-    rede = models.ForeignKey(RedeSocial, on_delete=models.CASCADE)
-    url = models.URLField("URL do perfil")
-
-    class Meta:
-        unique_together = ("user", "rede")   
-
-    def __str__(self):
-        return f"{self.user.username} - {self.rede.nome}"
-
-
 class IdentidadeVisual(models.Model):
     logo = models.ImageField(upload_to='media/', null=True, blank=True)
     cor_sistema = models.CharField(max_length=7, default="#005EFF")

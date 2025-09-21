@@ -4,6 +4,8 @@ from .managers import CustomUserManager
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from PIL import Image, ImageOps
+from django.conf import settings
+from django.apps import apps
 
 class User(AbstractUser):
     USERNAME_FIELD = "email"
@@ -54,6 +56,7 @@ class Profile(models.Model):
     bio = models.TextField(null=True, blank=True, max_length=500)
     avatar = models.ImageField(upload_to='media', blank=True, null=True)
 
+
     def __str__(self):
         return f'{self.user.username} Profile'
 
@@ -75,3 +78,20 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+
+
+class UserSocialLink(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="social_links"
+    )
+    name = models.CharField(max_length=50)  # Ex: Instagram, LinkedIn, GitHub
+    url = models.URLField("URL da rede social")
+
+    class Meta:
+        verbose_name = "Link de rede social"
+        verbose_name_plural = "Links de redes sociais"
+
+    def __str__(self):
+        return f"{self.user.username} - {self.name}"

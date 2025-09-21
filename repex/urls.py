@@ -23,6 +23,10 @@ urlpatterns = [
     path('noticia/<int:pk>/excluir/', views.NoticiaDeleteView.as_view(), name='noticia_delete'),
     path('area_conhecimento/<int:pk>/excluir/', views.AreaConhecimentoDeleteView.as_view(), name='area_conhecimento_delete'),
     path('instituicao/<int:pk>/excluir/', views.InstituicaoDeleteView.as_view(), name='instituicao_delete'),
+    path("users/", include("users.urls")),
+    path('rede_social/nova/', views.RedeSocialCreateView.as_view(), name='rede_social_create'),
+    path('rede_social/<int:pk>/editar/', views.RedeSocialUpdateView.as_view(), name='rede_social_update'),
+    path('rede_social/<int:pk>/excluir/', views.RedeSocialDeleteView.as_view(), name='rede_social_delete'),
 
 ]
 

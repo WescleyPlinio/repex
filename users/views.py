@@ -13,6 +13,12 @@ from .oauthlib_client import get_oauth_client
 from django.conf import settings
 from django.core.paginator import Paginator
 from django.http import JsonResponse
+from repex.models import RedeSocial
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import UserSocialLink
+from .forms import UserSocialLinkForm
+from django.contrib.auth.decorators import login_required
+
 
 User = get_user_model()
 
@@ -145,21 +151,50 @@ def toggle_professor(request, user_id):
     return JsonResponse({"status": "ok"})
     
 
-class RedeSocialCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
-    model = RedeSocial
-    template_name = 'rede_social_form.html'
-    fields = ['nome', 'icone', 'url_base']
-    success_message = 'Rede social criada com sucesso!'
-    success_url = reverse_lazy('painel')
+@login_required
+def user_social_links_list(request):
+    """Lista as redes sociais do usuário logado e fornece formulário para adicionar"""
+    social_links = UserSocialLink.objects.filter(user=request.user)
+    form = UserSocialLinkForm() 
+    return render(request, 'users/social_links_list.html', {
+        'social_links': social_links,
+        'form': form  # Adicione o formulário ao contexto
+    })
 
+@login_required
+def user_social_links_add(request):
+    if request.method == "POST":
+        form = UserSocialLinkForm(request.POST)
+        if form.is_valid():
+            social_link = form.save(commit=False)
+            social_link.user = request.user
+            social_link.save()
+            return redirect("user_social_links_list")
+    else:
+        form = UserSocialLinkForm()
 
-class RedeSocialUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
-    model = RedeSocial
-    template_name = 'rede_social_form.html'
-    fields = ['nome', 'icone', 'url_base']
-    success_message = 'Rede social atualizada com sucesso!'
-    success_url = reverse_lazy('painel')
+    return render(request, "users/user_social_links_form.html", {"form": form})
 
+@login_required
+def user_social_links_edit(request, pk):
+    """Edita um link já cadastrado"""
+    link = get_object_or_404(UserSocialLink, pk=pk, user=request.user)  # ← Corrigido
+    if request.method == 'POST':
+        form = UserSocialLinkForm(request.POST, instance=link)
+        if form.is_valid():
+            form.save()
+            return redirect('user_social_links_list')
+    else:
+        form = UserSocialLinkForm(instance=link)
+    
+    return render(request, 'users/user_social_links_form.html', {'form': form})
+
+@login_required
+def user_social_links_delete(request, pk):
+    """Deleta um link de rede social"""
+    link = get_object_or_404(UserSocialLink, pk=pk, user=request.user)  # ← Corrigido
+    link.delete()
+    return redirect('user_social_links_list')
 
 class PerfilUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Profile
@@ -168,4 +203,6 @@ class PerfilUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_message = 'Perfil atualizado com sucesso!'
     success_url = reverse_lazy('dashboard')
 
-
+    def get_object(self):
+        # Garante que o usuário só pode editar seu próprio perfil
+        return self.request.user.profile

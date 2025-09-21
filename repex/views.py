@@ -10,7 +10,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.messages.views import SuccessMessageMixin
 from users.models import User
 from django.db.models import Q
-
+from .models import RedeSocial
 
 def index(request):
     projetos = Projeto.objects.all().order_by("-criado_em")[:9]
@@ -253,3 +253,24 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
     model = User
     template_name = 'profile_detail.html'
     context_object_name = 'user'
+
+
+class RedeSocialCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = RedeSocial
+    fields = ['nome', 'icone', 'url_base']
+    template_name = 'rede_social_form.html'
+    success_message = 'Rede social criada com sucesso!'
+    success_url = reverse_lazy('painel')
+
+class RedeSocialUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = RedeSocial
+    fields = ['nome', 'icone', 'url_base']
+    template_name = 'rede_social_form.html'
+    success_message = 'Rede social atualizada com sucesso!'
+    success_url = reverse_lazy('painel')
+
+class RedeSocialDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+    model = RedeSocial
+    template_name = 'rede_social_confirm_delete.html'
+    success_message = 'Rede social deletada com sucesso!'
+    success_url = reverse_lazy('painel')
