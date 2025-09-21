@@ -14,20 +14,21 @@ urlpatterns = [
     path('area_conhecimento/nova/', views.AreaConhecimentoCreateView.as_view(), name='area_conhecimento_create'),
     path('instituicao/nova/', views.InstituicaoCreateView.as_view(), name='instituicao_create'),
     path('identidade_visual/nova/', views.IdentidadeVisualCreateView.as_view(), name='identidade_visual_create'),
+    path('rede_social/nova/', views.RedeSocialCreateView.as_view(), name='rede_social_create'),
+    path('social_link/nova/', views.UserSocialLinkCreateView.as_view(), name='user_social_link_create'),
     path('noticia/<int:pk>/editar/', views.NoticiaUpdateView.as_view(), name='noticia_update'),
     path('projeto/<int:pk>/editar/', views.ProjetoUpdateView.as_view(), name='projeto_update'),
     path('area_conhecimento/<int:pk>/editar/', views.AreaConhecimentoUpdateView.as_view(), name='area_conhecimento_update'),
     path('instituicao/<int:pk>/editar/', views.InstituicaoUpdateView.as_view(), name='instituicao_update'),
     path('identidade_visual/<int:pk>/editar/', views.IdentidadeVisualUpdateView.as_view(), name='identidade_visual_update'),
+    path('rede_social/<int:pk>/editar/', views.RedeSocialUpdateView.as_view(), name='rede_social_update'),
+    path('social_link/<int:pk>/editar/', views.UserSocialLinkUpdateView.as_view(), name='user_social_link_update'),
     path('projeto/<int:pk>/excluir/', views.ProjetoDeleteView.as_view(), name='projeto_delete'),
     path('noticia/<int:pk>/excluir/', views.NoticiaDeleteView.as_view(), name='noticia_delete'),
     path('area_conhecimento/<int:pk>/excluir/', views.AreaConhecimentoDeleteView.as_view(), name='area_conhecimento_delete'),
     path('instituicao/<int:pk>/excluir/', views.InstituicaoDeleteView.as_view(), name='instituicao_delete'),
     path("users/", include("users.urls")),
-    path('rede_social/nova/', views.RedeSocialCreateView.as_view(), name='rede_social_create'),
-    path('rede_social/<int:pk>/editar/', views.RedeSocialUpdateView.as_view(), name='rede_social_update'),
     path('rede_social/<int:pk>/excluir/', views.RedeSocialDeleteView.as_view(), name='rede_social_delete'),
-
 ]
 
 

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Projeto, Noticia, IdentidadeVisual, FotoProjeto, AreaConhecimento, Instituicao
+from .models import Projeto, Noticia, IdentidadeVisual, FotoProjeto, AreaConhecimento, Instituicao, RedeSocial, UserSocialLink
 from django.core.paginator import Paginator
 from django.template.loader import render_to_string
 from django.http import JsonResponse
@@ -10,7 +10,6 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.messages.views import SuccessMessageMixin
 from users.models import User
 from django.db.models import Q
-from .models import RedeSocial
 
 def index(request):
     projetos = Projeto.objects.all().order_by("-criado_em")[:9]
@@ -44,7 +43,7 @@ def explorar(request):
     if modalidade:
         resultados_projetos = resultados_projetos.filter(modalidade=modalidade).distinct()
     if area_id:
-        resultados_projetos = resultados_projetos.filter(area_id=area_id)
+        resultados_projetos = resultados_projetos.filter(area_conhecimento_id=area_id)
 
     paginator_projetos = Paginator(resultados_projetos, 16)
     page_number_projetos = request.GET.get('page', 1)
@@ -181,6 +180,26 @@ class IdentidadeVisualCreateView(LoginRequiredMixin, SuccessMessageMixin, Create
     success_url = reverse_lazy('painel')
 
 
+class RedeSocialCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = RedeSocial
+    fields = ['nome', 'url_base']
+    template_name = 'rede_social_form.html'
+    success_message = 'Rede social criada com sucesso!'
+    success_url = reverse_lazy('painel')
+
+
+class UserSocialLinkCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = UserSocialLink
+    fields = ["rede", "url"]
+    template_name = "profile_rede_social_form.html"
+    success_message = "Rede social pessoal adicionada com sucesso!"
+    success_url = reverse_lazy("dashboard")
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+
 class ProjetoUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Projeto
     form_class = ProjetoForm
@@ -221,6 +240,22 @@ class IdentidadeVisualUpdateView(LoginRequiredMixin, SuccessMessageMixin, Update
     success_url = reverse_lazy('painel')
 
 
+class RedeSocialUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = RedeSocial
+    fields = ['nome', 'url_base']
+    template_name = 'rede_social_form.html'
+    success_message = 'Rede social atualizada com sucesso!'
+    success_url = reverse_lazy('painel')
+
+
+class UserSocialLinkUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = UserSocialLink
+    fields = ["rede", "url"]
+    template_name = "profile_rede_social_form.html"
+    success_message = "Rede social pessoal atualizada com sucesso!"
+    success_url = reverse_lazy("dashboard")
+
+
 class ProjetoDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Projeto
     template_name = 'projeto_confirm_delete.html'
@@ -255,22 +290,16 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
     context_object_name = 'user'
 
 
-class RedeSocialCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
-    model = RedeSocial
-    fields = ['nome', 'icone', 'url_base']
-    template_name = 'rede_social_form.html'
-    success_message = 'Rede social criada com sucesso!'
-    success_url = reverse_lazy('painel')
-
-class RedeSocialUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
-    model = RedeSocial
-    fields = ['nome', 'icone', 'url_base']
-    template_name = 'rede_social_form.html'
-    success_message = 'Rede social atualizada com sucesso!'
-    success_url = reverse_lazy('painel')
-
 class RedeSocialDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = RedeSocial
     template_name = 'rede_social_confirm_delete.html'
     success_message = 'Rede social deletada com sucesso!'
     success_url = reverse_lazy('painel')
+
+
+class user_social_links_delete(DeleteView):
+    pass
+    # """Deleta um link de rede social"""
+    # link = get_object_or_404(UserSocialLink, pk=pk, user=request.user)  # ← Corrigido
+    # link.delete()
+    # return redirect('user_social_links_list')

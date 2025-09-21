@@ -1,0 +1,15 @@
+{% extends 'base_user.html' %}
+{% load static crispy_forms_tags %}
+{% block title %}{% if form.instance.pk %}Editar {% else %}Nova {% endif %}Rede social{% endblock %}
+{% block content %}
+  <h1 class="mb-3">{% if form.instance.pk %}Editar {% else %}Nova {% endif %}Rede social</h1>
+  <form method="post" enctype="multipart/form-data" class="card card-body">
+    {% csrf_token %}
+    {{ form.media }}
+    {{ form| crispy }}
+    <div class="d-flex gap-2">
+      <button type="submit" class="btn btn-success">Salvar</button>
+      <a href="{% url "dashboard" %}" class="btn btn-secondary">Cancelar</a>
+    </div>
+  </form>
+{% endblock %}
