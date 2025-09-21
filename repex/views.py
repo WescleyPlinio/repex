@@ -258,14 +258,12 @@ class UserSocialLinkUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateVi
 
 class ProjetoDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Projeto
-    template_name = 'projeto_confirm_delete.html'
     success_message = 'Projeto deletado com sucesso!'
     success_url = reverse_lazy('dashboard')
 
 
 class NoticiaDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Noticia
-    template_name = 'noticia_confirm_delete.html'
     success_message = 'Notícia deletada com sucesso!'
     success_url = reverse_lazy('dashboard')
 
@@ -297,9 +295,7 @@ class RedeSocialDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     success_url = reverse_lazy('painel')
 
 
-class user_social_links_delete(DeleteView):
-    pass
-    # """Deleta um link de rede social"""
-    # link = get_object_or_404(UserSocialLink, pk=pk, user=request.user)  # ← Corrigido
-    # link.delete()
-    # return redirect('user_social_links_list')
+class UserSocialLinkDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+    model = UserSocialLink
+    success_message = 'Rede social deletada com sucesso!'
+    success_url = reverse_lazy('dashboard')
