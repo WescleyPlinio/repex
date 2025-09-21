@@ -3,6 +3,8 @@ from users.models import Profile, User
 from PIL import Image, ImageOps
 from tinymce.models import HTMLField
 from django.utils.translation import gettext_lazy as _
+from django.conf import settings
+from django.apps import apps
 
 
 class AreaConhecimento(models.Model):
@@ -78,13 +80,31 @@ class Noticia(models.Model):
 
 class RedeSocial(models.Model):
     nome = models.CharField(max_length=100, unique=True)
-    icone = models.CharField(max_length=50, blank=True, null=True)
-    # Ex: fa-brands fa-instagram
     url_base = models.URLField(blank=True, null=True)
-    # Ex: "https://instagram.com/"
 
     def __str__(self):
         return self.nome
+    
+
+class UserSocialLink(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="social_links"
+    )
+    rede = models.ForeignKey(
+        RedeSocial,
+        on_delete=models.CASCADE,
+        related_name="rede"
+        )
+    url = models.CharField(max_length=200)
+
+    class Meta:
+        verbose_name = "Link de rede social"
+        verbose_name_plural = "Links de redes sociais"
+
+    def __str__(self):
+        return f"{self.user.username} - {self.name}"
 
 class IdentidadeVisual(models.Model):
     logo = models.ImageField(upload_to='media/', null=True, blank=True)

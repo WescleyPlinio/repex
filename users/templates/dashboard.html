@@ -7,6 +7,42 @@
 {% block content %}
   <div class="card mb-3">
     <div class="card-header d-flex">
+      <h3 class="card-title fw-bold my-auto">Suas redes sociais</h3>
+      {% if perms.repex.add_projeto %}
+        <a class="btn btn-success ms-auto" href="{% url 'user_social_link_create' %}">Cadastrar</a>
+      {% endif %}
+    </div>
+    <div class="card-body table-responsive p-0">
+      <table class="table table-hover text-nowrap">
+        <thead>
+          <tr>
+            <th>Rede social</th>
+            <th>URL</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in user.social_links.all %}
+            <tr>
+              <td>{{ r.rede.nome }}</td>
+              <td><a href="{{ r.rede.url_base }}/{{ r.url }}">{{ r.rede.url_base }}/{{ r.url }}</a></td>
+              
+              <td class="d-flex gap-2">
+                  <a href="{% url 'user_social_link_update' r.id %}" class="btn btn-sm btn-warning">Editar</a>
+                  <a class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarExclusaoModal">Excluir</a>
+              </td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="4">Você ainda não está em nenhum projeto.</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div class="card mb-3">
+    <div class="card-header d-flex">
       <h3 class="card-title fw-bold my-auto">Seus projetos</h3>
       {% if perms.repex.add_projeto %}
         <a class="btn btn-success ms-auto" href="{% url 'projeto_create' %}">Cadastrar</a>
@@ -25,7 +61,7 @@
           </tr>
         </thead>
         <tbody>
-          {% for p in user.projetos.all %}
+          {% for p in resultados_projetos %}
             <tr>
               <td>{{ p.id }}</td>
               <td>{{ p.titulo }}</td>
