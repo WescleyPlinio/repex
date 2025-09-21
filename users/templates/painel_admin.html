@@ -14,7 +14,6 @@
       <thead>
         <tr>
           <th>Título</th>
-          <th>Ícone</th>
           <th>URL</th>
         </tr>
       </thead>
@@ -22,7 +21,6 @@
         {% for r in redes_sociais %}
         <tr>
           <td>{{ r.nome }}</td>
-          <td>{{ r.icone }}</td>
           <td>{{ r.url_base }}</td>
           <td>
             <a href="{% url "rede_social_update" r.id %}" class="btn btn-sm btn-primary">Editar</a>

@@ -21,16 +21,17 @@
           </tr>
         </thead>
         <tbody>
-          {% for r in user.social_links.all %}
+          {% for s in user.social_links.all %}
             <tr>
-              <td>{{ r.rede.nome }}</td>
-              <td><a href="{{ r.rede.url_base }}/{{ r.url }}">{{ r.rede.url_base }}/{{ r.url }}</a></td>
+              <td>{{ s.rede.nome }}</td>
+              <td><a href="{{ s.rede.url_base }}/{{ s.url }}">{{ s.rede.url_base }}/{{ s.url }}</a></td>
               
               <td class="d-flex gap-2">
-                  <a href="{% url 'user_social_link_update' r.id %}" class="btn btn-sm btn-warning">Editar</a>
-                  <a class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarExclusaoModal">Excluir</a>
+                  <a href="{% url 'user_social_link_update' s.id %}" class="btn btn-sm btn-warning">Editar</a>
+                  <a class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarExclusaoSocialLinkModal{{ s.pk }}">Excluir</a>
               </td>
             </tr>
+            {% include "partials/_modal_delete_social_link.html" %}
           {% empty %}
             <tr>
               <td colspan="4">Você ainda não está em nenhum projeto.</td>
@@ -74,7 +75,7 @@
                   <a href="{% url 'projeto_update' p.id %}" class="btn btn-sm btn-warning">Editar</a>
                 {% endif %}
                 {% if perms.repex.delete_projeto %}
-                  <a class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarExclusaoModal">Excluir</a>
+                  <a class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarExclusaoProjetoModal{{ p.pk }}">Excluir</a>
                 {% endif %}
               </td>
             </tr>
@@ -122,7 +123,7 @@
                   <a href="{% url 'noticia_update' n.id %}" class="btn btn-sm btn-warning">Editar</a>
                 {% endif %}
                 {% if perms.repex.delete_noticia %}
-                  <a class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarExclusaoNoticiaModal">Excluir</a>
+                  <a class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarExclusaoNoticiaModal{{ n.pk }}">Excluir</a>
                 {% endif %}
               </td>
             </tr>

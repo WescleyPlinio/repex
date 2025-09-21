@@ -29,6 +29,8 @@ urlpatterns = [
     path('instituicao/<int:pk>/excluir/', views.InstituicaoDeleteView.as_view(), name='instituicao_delete'),
     path("users/", include("users.urls")),
     path('rede_social/<int:pk>/excluir/', views.RedeSocialDeleteView.as_view(), name='rede_social_delete'),
+    path('social_link/<int:pk>/excluir/', views.UserSocialLinkDeleteView.as_view(), name='user_social_link_delete'),
+
 ]
 
 
