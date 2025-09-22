@@ -6,7 +6,7 @@
 
 {% block content %}
   <h1 style="color: orange;" class="text-center fw-bold mb-3">{{ noticia.titulo }}</h1>
-  <p class="text-center fw-light">Publicado em: {{ noticia.criado_em }}</p>
+  <p class="text-center fw-light">Publicado em: {{ noticia.criado_em }} por {{ noticia.autor.nome_usual }}</p>
   <div class="row g-4">
     <div class="col-md-6">
       {% if noticia.imagem %}
