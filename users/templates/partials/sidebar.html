@@ -9,10 +9,22 @@
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
         <li class="nav-item">
+          <p class="mb-0 ms-2 text text-secondary">Navegação</p>
+        </li>
+        <li class="nav-item">
           <a href="{% url 'index' %}" class="nav-link">
             <i class="fa-solid fa-home fa-lg nav-icon"></i>
             <p class="text">Início</p>
           </a>
+        </li>
+        <li class="nav-item mb-3">
+          <a href="{% url 'profile_detail' request.user.id %}" class="nav-link">
+            <i class="fa-solid fa-user fa-lg nav-icon"></i>
+            <p class="text">Perfil público</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <p class="mb-0 ms-2 text text-secondary">Gestão do usuário</p>
         </li>
         <li class="nav-item">
           <a href="{% url 'dashboard' %}" class="nav-link">
@@ -20,19 +32,16 @@
             <p class="text">Dashboard</p>
           </a>
         </li>
-        <li class="nav-item">
-          <a href="{% url 'profile_detail' request.user.id %}" class="nav-link">
-            <i class="fa-solid fa-user fa-lg nav-icon"></i>
-            <p class="text">Perfil público</p>
-          </a>
-        </li>
-        <li class="nav-item">
+        <li class="nav-item mb-3">
           <a href="{% url 'perfil_update' request.user.id %}" class="nav-link">
             <i class="fa-solid fa-pen fa-lg nav-icon"></i>
             <p class="text">Editar Perfil</p>
           </a>
         </li>
         {% if user.is_superuser %}
+        <li class="nav-item">
+          <p class="mb-0 ms-2 text text-secondary">Administração do sistema</p>
+        </li>
         <li class="nav-item">
           <a href="{% url 'painel' %}" class="nav-link">
             <i class="fa-solid fa-toolbox fa-lg nav-icon"></i>
