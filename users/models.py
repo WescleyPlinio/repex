@@ -53,7 +53,7 @@ User.add_to_class("is_professor", is_professor)
     
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    bio = models.TextField(null=True, blank=True, max_length=500)
+    bio = models.TextField(null=True, blank=True)
     avatar = models.ImageField(upload_to='media', blank=True, null=True)
 
 
