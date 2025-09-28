@@ -12,7 +12,7 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
 
     email = models.EmailField(unique=True)
-    username = models.CharField(blank=True, null=True)
+    username = models.CharField(blank=True, null=True, max_length=150)
 
     vinculo = models.CharField(max_length=50, blank=True, null=True)
     nome_usual = models.CharField(max_length=150, blank=True, null=True)
