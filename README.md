@@ -17,6 +17,7 @@ Para usar o sistema, siga esses passos:
 ### Crie o arquivo .env e adicione:
     SUAP_CLIENT_ID = <seu-client-id>
     SUAP_CLIENT_SECRET = <seu-client-secret>
+    SECRET_KEY = desenvolvimento (Use outra em ambiente de produção)
 
 ### Por fim, rode:
     python .\manage.py runserver

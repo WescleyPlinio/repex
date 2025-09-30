@@ -12,7 +12,7 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
 
     email = models.EmailField(unique=True)
-    username = models.CharField(blank=True, null=True)
+    username = models.CharField(blank=True, null=True, max_length=150)
 
     vinculo = models.CharField(max_length=50, blank=True, null=True)
     nome_usual = models.CharField(max_length=150, blank=True, null=True)
@@ -53,7 +53,7 @@ User.add_to_class("is_professor", is_professor)
     
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    bio = models.TextField(null=True, blank=True, max_length=500)
+    bio = models.TextField(null=True, blank=True)
     avatar = models.ImageField(upload_to='media', blank=True, null=True)
 
 

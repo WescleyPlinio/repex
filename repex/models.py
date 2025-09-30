@@ -26,7 +26,7 @@ class Projeto(models.Model):
     ]
 
     titulo = models.CharField(max_length=100)
-    descricao = models.TextField(max_length=500)
+    descricao = HTMLField(_("Descricao"), blank=True)
     resumo = HTMLField(_("Resumo"), blank=True)
     justificativa = HTMLField(_("Justificativa"), blank=  True)
     area_conhecimento = models.ForeignKey(AreaConhecimento, on_delete=models.CASCADE, related_name='area_conhecimento', null=True, blank=True)
@@ -63,8 +63,8 @@ class FotoProjeto(models.Model):
 
 class Noticia(models.Model):
     titulo = models.CharField(max_length=100)
-    descricao = models.TextField(max_length=500)
-    conteudo = HTMLField(_("Conteúdo"), blank=True)
+    descricao = HTMLField(_("Descricao"), blank=True)
+    conteudo = HTMLField(_("Conteudo"), blank=True)
     data_publicacao = models.DateTimeField(auto_now_add=True, null=True)
     imagem = models.ImageField(upload_to='media/', null=True, blank=True)
     area_conhecimento = models.ForeignKey(AreaConhecimento, on_delete=models.CASCADE, related_name='area_conhecimento_noticia', null=True, blank=True)
@@ -104,7 +104,7 @@ class UserSocialLink(models.Model):
         verbose_name_plural = "Links de redes sociais"
 
     def __str__(self):
-        return f"{self.user.username} - {self.name}"
+        return f"{self.user.nome_usual} - {self.rede.nome}"
 
 class IdentidadeVisual(models.Model):
     logo = models.ImageField(upload_to='media/', null=True, blank=True)
