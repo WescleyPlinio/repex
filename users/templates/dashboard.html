@@ -8,9 +8,7 @@
   <div class="card mb-3">
     <div class="card-header d-flex">
       <h3 class="card-title fw-bold my-auto">Suas redes sociais</h3>
-      {% if perms.repex.add_projeto %}
-        <a class="btn btn-success ms-auto" href="{% url 'user_social_link_create' %}">Cadastrar</a>
-      {% endif %}
+      <a class="btn btn-success ms-auto" href="{% url 'user_social_link_create' %}">Cadastrar</a>
     </div>
     <div class="card-body table-responsive p-0">
       <table class="table table-hover text-nowrap">
@@ -18,20 +16,23 @@
           <tr>
             <th>Rede social</th>
             <th>URL</th>
+            <th>Opções</th>
           </tr>
         </thead>
         <tbody>
           {% for s in user.social_links.all %}
             <tr>
               <td>{{ s.rede.nome }}</td>
-              <td><a href="{{ s.rede.url_base }}/{{ s.url }}">{{ s.rede.url_base }}/{{ s.url }}</a></td>
-              
+              <td>
+                <a href="{{ s.rede.url_base }}/{{ s.url }}">{{ s.rede.url_base }}/{{ s.url }}</a>
+              </td>
+
               <td class="d-flex gap-2">
-                  <a href="{% url 'user_social_link_update' s.id %}" class="btn btn-sm btn-warning">Editar</a>
-                  <a class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarExclusaoSocialLinkModal{{ s.pk }}">Excluir</a>
+                <a href="{% url 'user_social_link_update' s.id %}" class="btn btn-sm btn-warning">Editar</a>
+                <a class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarExclusaoSocialLinkModal{{ s.pk }}">Excluir</a>
               </td>
             </tr>
-            {% include "partials/_modal_delete_social_link.html" %}
+            {% include 'partials/_modal_delete_social_link.html' %}
           {% empty %}
             <tr>
               <td colspan="4">Você ainda não está em nenhum projeto.</td>
@@ -41,7 +42,7 @@
       </table>
     </div>
   </div>
-  
+
   <div class="card mb-3">
     <div class="card-header d-flex">
       <h3 class="card-title fw-bold my-auto">Seus projetos</h3>
@@ -92,51 +93,51 @@
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-header d-flex">
-      <h3 class="card-title fw-bold my-auto">Suas notícias</h3>
-      {% if perms.repex.add_noticia %}
+  {% if perms.repex.add_noticia %}
+    <div class="card">
+      <div class="card-header d-flex">
+        <h3 class="card-title fw-bold my-auto">Suas notícias</h3>
         <a class="btn btn-success ms-auto" href="{% url 'noticia_create' %}">Cadastrar</a>
-      {% endif %}
-    </div>
-    <div class="card-body table-responsive p-0">
-      <table class="table table-hover text-nowrap">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Título</th>
-            <th>Área de conhecimento</th>
-            <th>Criado em</th>
-            <th>Opções</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for n in user.noticias.all %}
+      </div>
+      <div class="card-body table-responsive p-0">
+        <table class="table table-hover text-nowrap">
+          <thead>
             <tr>
-              <td>{{ n.id }}</td>
-              <td>{{ n.titulo }}</td>
-              <td>{{ n.area_conhecimento }}</td>
-              <td>{{ n.criado_em }}</td>
-              <td class="d-flex gap-2">
-                <a href="{% url 'noticia_detail' n.id %}" class="btn btn-sm btn-primary">Ver</a>
-                {% if perms.repex.change_noticia %}
-                  <a href="{% url 'noticia_update' n.id %}" class="btn btn-sm btn-warning">Editar</a>
-                {% endif %}
-                {% if perms.repex.delete_noticia %}
-                  <a class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarExclusaoNoticiaModal{{ n.pk }}">Excluir</a>
-                {% endif %}
-              </td>
+              <th>ID</th>
+              <th>Título</th>
+              <th>Área de conhecimento</th>
+              <th>Criado em</th>
+              <th>Opções</th>
             </tr>
-            {% if perms.repex.delete_noticia %}
-              {% include 'partials/_modal_delete_noticia.html' %}
-            {% endif %}
-          {% empty %}
-            <tr>
-              <td colspan="4">Você ainda não criou nenhuma notícia.</td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {% for n in user.noticias.all %}
+              <tr>
+                <td>{{ n.id }}</td>
+                <td>{{ n.titulo }}</td>
+                <td>{{ n.area_conhecimento }}</td>
+                <td>{{ n.criado_em }}</td>
+                <td class="d-flex gap-2">
+                  <a href="{% url 'noticia_detail' n.id %}" class="btn btn-sm btn-primary">Ver</a>
+                  {% if perms.repex.change_noticia %}
+                    <a href="{% url 'noticia_update' n.id %}" class="btn btn-sm btn-warning">Editar</a>
+                  {% endif %}
+                  {% if perms.repex.delete_noticia %}
+                    <a class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarExclusaoNoticiaModal{{ n.pk }}">Excluir</a>
+                  {% endif %}
+                </td>
+              </tr>
+              {% if perms.repex.delete_noticia %}
+                {% include 'partials/_modal_delete_noticia.html' %}
+              {% endif %}
+            {% empty %}
+              <tr>
+                <td colspan="4">Você ainda não criou nenhuma notícia.</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
+  {% endif %}
 {% endblock %}

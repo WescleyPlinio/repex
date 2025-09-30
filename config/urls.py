@@ -25,6 +25,7 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path("select2/", include("django_select2.urls")),
     path('tinymce/', include('tinymce.urls')),
+    path('', include('django.contrib.auth.urls')),
 ]
 
 if settings.DEBUG:
