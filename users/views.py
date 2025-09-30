@@ -75,11 +75,6 @@ def auth_callback(request):
     return redirect("dashboard")
 
 
-def login_page(request):
-    template_name = "login_page.html"
-    return render(request, template_name)
-
-
 def first_superuser(request):
     user = User.objects.get(pk=1)
     user.is_superuser = True

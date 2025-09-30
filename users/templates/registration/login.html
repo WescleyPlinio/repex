@@ -2,23 +2,28 @@
 {% load static crispy_forms_tags %}
 
 {% block content %}
-  <div class="login-container bg-white p-5 rounded shadow shadow-lg">
-    <a class="text-decoratiom-none" href="{% url 'index' %}">
-      {% if identidade_visual.logo %}
-        <img class="w-100" src="{{ identidade_visual.logo.url }}" />
-      {% else %}
-        Repex
-      {% endif %}
-    </a>
+  <div style="width: 400px;" class="card shadow login-card">
+    <div class="card-body p-4">
+      <h4 class="text-center mb-4">Acesse o Repex</h4>
+      
+      <form class="my-2">
+        {{ form| crispy }}
+        <button type="submit" class="btn btn-primary w-100">Entrar</button>
+      </form>
 
-    <h2 class="text-center text-primary">Login</h2>
-    <form method="post">
-      {% csrf_token %}
-      {{ form|crispy }}
-      <button class="btn btn-primary mb-2" type="submit">Entrar</button>
-    </form>
-    <p>
-      Ainda não tem conta? <a href="{% url 'cadastro' %}">Cadastre-se</a>
-    </p>
+      <div class="text-center my-2">
+        <small class="text-muted">Entre ou cadastre-se com:</small>
+      </div>
+      
+      <a href="{% url "login_suap" %}" class="btn btn-dark w-100 mb-3 d-flex align-items-center justify-content-center gap-2">
+        <img src="https://suap.ifrn.edu.br/static/comum/img/favicon.png" alt="Logo SUAP" width="20" height="20" />
+        <span>Entrar com SUAP</span>
+      </a>
+
+      <button type="button" class="btn bg-white border w-100 mb-3 d-flex align-items-center justify-content-center gap-2 shadow-sm">
+        <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google logo" width="20" height="20" />
+        <span class="text-muted">Entrar com Google</span>
+      </button>
+    </div>
   </div>
 {% endblock %}
