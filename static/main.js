@@ -3,46 +3,63 @@ document.addEventListener('DOMContentLoaded', () => {
     const track = shell.querySelector('.carousel-track');
     if (!track) return;
 
-    const items = Array.from(track.children);
+    let items = Array.from(track.children);
     const prevBtn = shell.querySelector('.carousel-prev');
     const nextBtn = shell.querySelector('.carousel-next');
 
     let index = 0;
     let visible = 2.5;
-    let maxIndex = 0;
+    let itemWidth = 0;
+
+    const clonesBefore = items.slice(-3).map(el => el.cloneNode(true));
+    const clonesAfter = items.slice(0, 3).map(el => el.cloneNode(true));
+
+    clonesBefore.forEach(clone => track.prepend(clone));
+    clonesAfter.forEach(clone => track.append(clone));
+
+    items = Array.from(track.children);
+
+    index = 3;
 
     function recalc() {
       visible = window.innerWidth < 768 ? 1.25 : 2.5;
-
-      maxIndex = Math.max(0, items.length - Math.ceil(visible));
-
-      // força index válido
-      if (index > maxIndex) index = maxIndex;
-      updateButtons();
-      move();
+      itemWidth = items[0]?.getBoundingClientRect().width || 0;
+      move(true);
     }
 
-    function move() {
-      const itemWidth = items[0]?.getBoundingClientRect().width || 0;
+    function move(skipTransition = false) {
+      if (skipTransition) {
+        track.style.transition = 'none';
+      } else {
+        track.style.transition = 'transform 0.3s ease';
+      }
+
       const translateX = index * itemWidth;
       track.style.transform = `translateX(-${translateX}px)`;
     }
 
-    function updateButtons() {
-      prevBtn.style.visibility = index > 0 ? 'visible' : 'hidden';
-      nextBtn.style.visibility = index < maxIndex ? 'visible' : 'hidden';
+    function checkLoop() {
+      if (index >= items.length - 3) {
+        index = 3;
+        move(true); 
+      }
+
+      if (index < 3) {
+        index = items.length - 6;
+        move(true); 
+      }
     }
 
     prevBtn.addEventListener('click', () => {
-      index = Math.max(0, index - 1);
+      index--;
       move();
-      updateButtons();
+      setTimeout(checkLoop, 310);
     });
 
     nextBtn.addEventListener('click', () => {
-      index = Math.min(maxIndex, index + 1);
+      index++;
       move();
-      updateButtons();
+      setTimeout(checkLoop, 310);
     });
 
     window.addEventListener('resize', recalc);
