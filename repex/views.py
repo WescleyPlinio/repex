@@ -121,6 +121,15 @@ class ProjetoDetailView(DetailView):
             request.session[session_key] = True
 
         return response
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        projeto = self.object
+        projetos = Projeto.objects.filter(area_conhecimento=projeto.area_conhecimento).exclude(pk=projeto.pk)[:9]
+
+        context['projetos'] = projetos
+        return context
+
 
 class NoticiaDetailView(DetailView):
     model = Noticia

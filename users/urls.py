@@ -13,5 +13,6 @@ urlpatterns = [
     path("users/<int:user_id>/toggle_prof/", views.toggle_professor, name="toggle_professor"),
     path('auth/callback/', views.auth_callback, name='auth_callback'),
     path("perfil/<int:pk>/editar/", views.PerfilUpdateView.as_view(), name="perfil_update"),
+    path("cadastro/", views.UserCreateView.as_view(), name="cadastro"),
     
 ]

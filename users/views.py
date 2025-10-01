@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required, permission_required, 
 from django.contrib.auth import get_user_model
 from repex.models import Projeto, RedeSocial, IdentidadeVisual, AreaConhecimento, Instituicao
 from .models import Profile, User
+from .forms import CustomUserCreationForm
 from django.views.generic import UpdateView, CreateView, DeleteView, DetailView
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
@@ -157,5 +158,11 @@ class PerfilUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_url = reverse_lazy('dashboard')
 
     def get_object(self):
-        # Garante que o usuário só pode editar seu próprio perfil
         return self.request.user.profile
+    
+
+class UserCreateView(CreateView):
+    model = User
+    template_name = 'registration/cadastro.html'
+    form_class = CustomUserCreationForm
+    success_url = reverse_lazy('index')
