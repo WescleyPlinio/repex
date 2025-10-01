@@ -2,18 +2,17 @@
 {% load static crispy_forms_tags %}
 
 {% block content %}
-  <div style="width: 400px;" class="card shadow login-card">
+  <div style="width: 400px;" class="card border border-0 shadow">
     <div class="card-body p-4">
       <div class="d-flex">
         {% if identidade_visual.logo %}
-          <img src="{{ identidade_visual.logo.url }}" alt="Logo repex" class="img-fluid mw-100 m-auto" style="max-height: 200px;">
+          <a href="{% url "index" %}">
+            <img src="{{ identidade_visual.logo.url }}" alt="Início" class="img-fluid mw-100 m-auto">
+          </a>
+        {% else %}
+          <a href="{% url "index" %}">Voltar ao início</a>
         {% endif %}
       </div>
-      
-      <form class="my-2">
-        {{ form| crispy }}
-        <button type="submit" class="btn btn-primary w-100">Entrar</button>
-      </form>
 
       <div class="text-center my-2">
         <small class="text-muted">Entre ou cadastre-se com:</small>
