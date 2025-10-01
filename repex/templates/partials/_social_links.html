@@ -3,7 +3,6 @@
   {% for link in links %}
     <a href="{{ link.rede.url_base }}/{{ link.url }}" target="_blank" class="btn btn-sm btn-outline-primary" title="{{ link.rede.nome }} de {{ link.user.get_primeiro_nome }}">
       <i class="fab fa-{{ link.rede.nome|lower }} me-1"></i>
-      Perfil de {{ link.user.get_primeiro_nome }}
     </a>
   {% empty %}
     <small class="text-muted">Nenhuma rede social cadastrada</small>

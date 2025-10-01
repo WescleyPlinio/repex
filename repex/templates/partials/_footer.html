@@ -7,14 +7,14 @@
     background-color: {{ identidade_visual.cor_sistema }};
   {% endif %}">
   <div class="container">
-    <div class="row d-flex justify-content-center">
+    <div class="row d-flex justify-content-between">
         {% if instituicao %}
         <div class="col-md-3">
             {% if instituicao.logo %}
             <a href="{{ instituicao.site }}" class="text-white"><img src="{{ instituicao.logo.url }}" alt="{{ instituicao.nome }}" class="img-fluid w-100" /></a>
             {% endif %}
         </div>
-        <div class="col-md-5">
+        <div class="col-md-6">
             <ul class="d-flex flex-column m-0 p-0">
                 {% if instituicao.nome %}
                 <h4 class="text-white my-2 fw-bold">{{ instituicao.nome }}</h4>
@@ -30,7 +30,7 @@
             </ul>
         </div>
         {% endif %}
-        <div class="col-md-4">
+        <div class="col-md-2">
             <h4 class="text-white fw-bold">Links úteis:</h4>
             <ul class="list-unstyled">
             <li class="mb-1">
