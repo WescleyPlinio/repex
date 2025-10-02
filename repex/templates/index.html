@@ -1,7 +1,20 @@
 {% extends 'base.html' %}
 {% load static news_extras %}
 {% block nav_bottom %}
-  <h2 class="text-white text-center m-auto my-5 fw-bold">Repositório IFSPP, aqui é o lar de todos os nossos projetos!</h2>
+  <div class="row d-flex">
+    {% if identidade_visual.imagem %}
+      <div class="col-md-9 d-flex py-5">
+        <h2 class="text-white my-auto fw-bold">{{ identidade_visual.pagina_inicial_frase }}</h2>
+      </div>
+      <div class="col-md-3 py-5">
+        <img class="img-fluid mw-100" src="{{ identidade_visual.imagem.url }}" />
+      </div>
+    {% else %}
+      <div class="col-12 d-flex justify-content-center my-5">
+        <h2 class="text-white my-auto fw-bold text-center">{{ identidade_visual.pagina_inicial_frase }}</h2>
+      </div>
+    {% endif %}
+  </div>
 {% endblock %}
 {% block content %}
   <div id="newsCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
@@ -14,7 +27,11 @@
               {% if group.0.id %}
                 <a href="{% url 'noticia_detail' group.0.id %}" class="text-decoration-none">
                   <div class="notice-card h-100 d-flex"
-                    style="background-image: url('{% if group.0.imagem %}{{ group.0.imagem.url }}{% else %}{% static 'imgs/placeholder.webp' %}{% endif %}');">
+                    style="background-image: url('{% if group.0.imagem %}
+                      {{ group.0.imagem.url }}
+                    {% else %}
+                      {% static 'imgs/placeholder.webp' %}
+                    {% endif %}');">
                     <span class="notice-label">
                       {% if group.0 %}
                         {{ group.0.area_conhecimento }}
@@ -40,7 +57,11 @@
                   <div class="col-lg-12 col-md-12 col-sm-12 flex-grow-1 mb-1">
                     <a href="{% url 'noticia_detail' group.1.id %}" class="text-decoration-none">
                       <div class="notice-card h-100 d-flex"
-                        style="background-image: url('{% if group.1.imagem %}{{ group.1.imagem.url }}{% else %}{% static 'imgs/placeholder.webp' %}{% endif %}');">
+                        style="background-image: url('{% if group.1.imagem %}
+                          {{ group.1.imagem.url }}
+                        {% else %}
+                          {% static 'imgs/placeholder.webp' %}
+                        {% endif %}');">
                         <span class="notice-label">
                           {% if group.1 %}
                             {{ group.1.area_conhecimento }}
@@ -58,13 +79,17 @@
                       </div>
                     </a>
                   </div>
-                  {% endif %}
+                {% endif %}
 
                 {% if group.2.id %}
                   <div class="col-lg-12 col-md-12 col-sm-12 flex-grow-1">
                     <a href="{% url 'noticia_detail' group.2.id %}" class="text-decoration-none">
                       <div class="notice-card h-100 d-flex"
-                        style="background-image: url('{% if group.2.imagem %}{{ group.2.imagem.url }}{% else %}{% static 'imgs/placeholder.webp' %}{% endif %}');">
+                        style="background-image: url('{% if group.2.imagem %}
+                          {{ group.2.imagem.url }}
+                        {% else %}
+                          {% static 'imgs/placeholder.webp' %}
+                        {% endif %}');">
                         <span class="notice-label">
                           {% if group.2 %}
                             {{ group.2.area_conhecimento }}
@@ -87,8 +112,8 @@
             </div>
           </div>
         </div>
-        {% empty %}
-          <p>Sem notícias disponíveis no momento.</p>
+      {% empty %}
+        <p>Sem notícias disponíveis no momento.</p>
       {% endfor %}
     </div>
 
@@ -104,8 +129,8 @@
           <div class="card-item">
             {% include 'partials/_card.html' %}
           </div>
-          {% empty %}
-            <p>Sem projetos disponíveis no momento.</p>
+        {% empty %}
+          <p>Sem projetos disponíveis no momento.</p>
         {% endfor %}
       </div>
     </div>
@@ -140,8 +165,8 @@
           <div class="card-item">
             {% include 'partials/_card.html' %}
           </div>
-          {% empty %}
-            <p>Sem projetos disponíveis no momento.</p>
+        {% empty %}
+          <p>Sem projetos disponíveis no momento.</p>
         {% endfor %}
       </div>
     </div>
