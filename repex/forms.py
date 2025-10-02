@@ -35,6 +35,7 @@ class ProjetoForm(forms.ModelForm):
             "status",
             "modalidade",
             "componentes",
+            "colab",
         ]
 
         labels = {
@@ -52,6 +53,7 @@ class ProjetoForm(forms.ModelForm):
             "status": "Status:",
             "modalidade": "Modalidade:",
             "componentes": "Componentes:",
+            "colab": "colab:",
         }
 
         widgets = {
@@ -68,6 +70,7 @@ class ProjetoForm(forms.ModelForm):
             "status": forms.Select(attrs={"class": "form-select"}),
             "modalidade": forms.Select(attrs={"class": "form-select"}),
             "componentes": Select2MultipleWidget(attrs={"class": "form-control"}),
+            "colab": Select2MultipleWidget(attrs={"class": "form-control"}),
         }
     
     def __init__(self, *args, **kwargs):
