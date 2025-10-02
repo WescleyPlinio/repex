@@ -1,137 +1,156 @@
 {% extends 'base.html' %}
 {% load static news_extras %}
 {% block title %}
-  {{ projeto.titulo }}
+{{ projeto.titulo }}
 {% endblock %}
 
 {% block content %}
-  <h1 style="color: orange;" class="text-center fw-bold mb-3">{{ projeto.titulo }}</h1>
-  <div class="row g-4 mb-3">
-    <div class="col-md-4">
-      <img src="{% if projeto.capa %}
+<h1 style="color: orange;" class="text-center fw-bold mb-3">{{ projeto.titulo }}</h1>
+<div class="row g-4 mb-3">
+  <div class="col-md-4">
+    <img src="{% if projeto.capa %}
           {{ projeto.capa.url }}
         {% else %}
           {% static 'imgs/placeholder.webp' %}
-        {% endif %}"
-        alt="{{ projeto.titulo }}"
-        class="img-fluid w-100 mb-3" />
-      <div class="w-100">
-        <h5 style="color:{{ identidade_visual.cor_sistema }}">Modalidade:</h5>
-        <p>{{ projeto.modalidade }}</p>
-      </div>
-      {% if projeto.doc %}
-        <div class="w-100 mb-3">
-          <h5 style="color:{{ identidade_visual.cor_sistema }}">Documentação:</h5>
-          <a class="text-dark" href="{{ projeto.doc.url }}" target="_blank">{{ projeto.doc.url }}</a>
-        </div>
-      {% endif %}
-      <div class="w-100 mb-3">
-        <h5 style="color:{{ identidade_visual.cor_sistema }}">Área de conhecimento:</h5>
-        <p>{{ projeto.area_conhecimento }}</p>
-      </div>
-      <div class="w-100 mb-3">
-        <h5 style="color:{{ identidade_visual.cor_sistema }}">Status:</h5>
-        <p>{{ projeto.status }}</p>
-      </div>
-      <div class="w-100 mb-3">
-        <h5 style="color:{{ identidade_visual.cor_sistema }}">Criado em:</h5>
-        <p>{{ projeto.criado_em }}</p>
-      </div>
-      <div class="w-100 mb-3">
-        <h5 style="color:{{ identidade_visual.cor_sistema }}">Palavras-chave:</h5>
-        <p>{{ projeto.palavras_chave }}</p>
-      </div>
-      <div class="w-100 mb-3">
-        <h5 style="color:{{ identidade_visual.cor_sistema }}">Componentes:</h5>
-        <div class="d-flex gap-3 flex-wrap">
-          {% for componente in projeto.componentes.all %}
-            <a class="text-decoration-none" href="{% url 'profile_detail' componente.id %}">
-              <div class="d-flex flex-column align-items-center">
-                <img src="{% if componente.profile.avatar %}
+        {% endif %}" alt="{{ projeto.titulo }}" class="img-fluid w-100 mb-3" />
+    <div class="w-100">
+      <h5 style="color:{{ identidade_visual.cor_sistema }}">Modalidade:</h5>
+      <p>{{ projeto.modalidade }}</p>
+    </div>
+    {% if projeto.doc %}
+    <div class="w-100 mb-3">
+      <h5 style="color:{{ identidade_visual.cor_sistema }}">Documentação:</h5>
+      <a class="text-dark" href="{{ projeto.doc.url }}" target="_blank">{{ projeto.doc.url }}</a>
+    </div>
+    {% endif %}
+    <div class="w-100 mb-3">
+      <h5 style="color:{{ identidade_visual.cor_sistema }}">Área de conhecimento:</h5>
+      <p>{{ projeto.area_conhecimento }}</p>
+    </div>
+    <div class="w-100 mb-3">
+      <h5 style="color:{{ identidade_visual.cor_sistema }}">Status:</h5>
+      <p>{{ projeto.status }}</p>
+    </div>
+    <div class="w-100 mb-3">
+      <h5 style="color:{{ identidade_visual.cor_sistema }}">Criado em:</h5>
+      <p>{{ projeto.criado_em }}</p>
+    </div>
+    <div class="w-100 mb-3">
+      <h5 style="color:{{ identidade_visual.cor_sistema }}">Palavras-chave:</h5>
+      <p>{{ projeto.palavras_chave }}</p>
+    </div>
+    <div class="w-100 mb-3">
+      <h5 style="color:{{ identidade_visual.cor_sistema }}">Componentes:</h5>
+      <div class="d-flex gap-3 flex-wrap">
+        {% for componente in projeto.componentes.all %}
+        <a class="text-decoration-none" href="{% url 'profile_detail' componente.id %}">
+          <div class="d-flex flex-column align-items-center">
+            <img src="{% if componente.profile.avatar %}
                     {{ componente.profile.avatar.url }}
                   {% else %}
                     {% static 'imgs/user_placeholder.png' %}
-                  {% endif %}"
-                  alt="{{ componente.nome_completo }}"
-                  class="img-fluid rounded-circle mb-1"
-                  style="max-width: 55px;" />
-                <h6 class="text-dark mb-1">{{ componente.nome_completo }}</h6>
+                  {% endif %}" alt="{{ componente.nome_completo }}" class="img-fluid rounded-circle mb-1"
+              style="max-width: 55px;" />
+            <h6 class="text-dark mb-1">{{ componente.nome_completo }}</h6>
 
-                {# INCLUDE DOS LINKS SOCIAIS DO COMPONENTE #}
-                {% include 'partials/_social_links.html' with links=componente.social_links.all %}
-              </div>
-            </a>
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-    <div class="col-md-8">
-      <div class="w-100">
-        <h5 style="color:{{ identidade_visual.cor_sistema }}">Resumo:</h5>
-        <p>{{ projeto.resumo|safe }}</p>
-      </div>
-      <div class="w-100">
-        <h5 style="color:{{ identidade_visual.cor_sistema }}">Justificativa:</h5>
-        <p>{{ projeto.justificativa|safe }}</p>
-      </div>
-      <div class="w-100">
-        <h5 style="color:{{ identidade_visual.cor_sistema }}">Objetivo:</h5>
-        <p>{{ projeto.objetivo|safe }}</p>
-      </div>
-      <div class="w-100">
-        <h5 style="color:{{ identidade_visual.cor_sistema }}">Resultados esperados:</h5>
-        <p>{{ projeto.resultados|safe }}</p>
-      </div>
-    </div>
-  </div>
-
-  {% if projeto in request.user.projetos.all and perms.repex.delete_projeto%}
-    <nav class="d-flex justify-content-end gap-2 mb-5">
-      <a class="btn btn-primary" href="{% url 'projeto_update' projeto.pk %}">Editar</a>
-      <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarExclusaoModal">Excluir</button>
-    </nav>
-
-    <!-- Modal -->
-    <div class="modal fade" id="confirmarExclusaoModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalLabel">Confirmar exclusão</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            {# INCLUDE DOS LINKS SOCIAIS DO COMPONENTE #}
+            {% include 'partials/_social_links.html' with links=componente.social_links.all %}
           </div>
-          <div class="modal-body">
-            Tem certeza que deseja excluir o projeto <strong>"{{ projeto.titulo }}"</strong>?
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-
-            <!-- Form que realmente deleta -->
-            <form method="post" action="{% url 'projeto_delete' projeto.pk %}">
-              {% csrf_token %}
-              <button type="submit" class="btn btn-danger">Excluir</button>
-            </form>
-          </div>
-        </div>
+        </a>
+        {% endfor %}
       </div>
-    </div>
-  {% endif %}
+      <div class="d-flex gap-3 flex-wrap">
+        <h5 style="color:{{ identidade_visual.cor_sistema }}">Projetos em colaboração:</h5>
+        {% for colaborador in projeto.colab.all %}
+        <a class="text-decoration-none" href="{% url 'projeto_detail' colaborador.id %}">
+          <div class="d-flex flex-column align-items-center">
+            <img src="{% if colaborador.capa %}
+                          {{ colaborador.capa.url }}
+                        {% else %}
+                          {% static 'imgs/project_placeholder.png' %}
+                        {% endif %}" alt="{{ colaborador.titulo }}" class="img-fluid rounded mb-1"
+              style="max-width: 80px; height: 60px; object-fit: cover;" />
 
-  <div class="carousel-shell mb-5">
-    <h4 style="color: {{ identidade_visual.cor_sistema }};">Projetos da mesma área de conhecimento:</h4>
-    <div class="carousel-viewport">
-      <div class="carousel-track w-100" id="cardTrack">
-        {% for projeto in projetos %}
-          <div class="card-item">
-            {% include 'partials/_card.html' %}
+            <h6 class="text-dark mb-1 text-center">
+              {{ colaborador.titulo }}
+            </h6>
           </div>
-          {% empty %}
-            <p>Sem projetos disponíveis no momento.</p>
+        </a>
+        {% empty %}
+        <p class="text-muted">Nenhum projeto colaborador.</p>
         {% endfor %}
       </div>
     </div>
-
-    <button class="btn btn-light carousel-control carousel-prev" id="prevBtn" style="color: blue;" aria-label="Anterior">‹</button>
-    <button class="btn btn-light carousel-control carousel-next" id="nextBtn" style="color: blue;" aria-label="Próximo">›</button>
   </div>
+  <div class="col-md-8">
+    <div class="w-100">
+      <h5 style="color:{{ identidade_visual.cor_sistema }}">Resumo:</h5>
+      <p>{{ projeto.resumo|safe }}</p>
+    </div>
+    <div class="w-100">
+      <h5 style="color:{{ identidade_visual.cor_sistema }}">Justificativa:</h5>
+      <p>{{ projeto.justificativa|safe }}</p>
+    </div>
+    <div class="w-100">
+      <h5 style="color:{{ identidade_visual.cor_sistema }}">Objetivo:</h5>
+      <p>{{ projeto.objetivo|safe }}</p>
+    </div>
+    <div class="w-100">
+      <h5 style="color:{{ identidade_visual.cor_sistema }}">Resultados esperados:</h5>
+      <p>{{ projeto.resultados|safe }}</p>
+    </div>
+  </div>
+</div>
+
+{% if projeto in request.user.projetos.all and perms.repex.delete_projeto%}
+<nav class="d-flex justify-content-end gap-2 mb-5">
+  <a class="btn btn-primary" href="{% url 'projeto_update' projeto.pk %}">Editar</a>
+  <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarExclusaoModal">Excluir</button>
+</nav>
+
+<!-- Modal -->
+<div class="modal fade" id="confirmarExclusaoModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalLabel">Confirmar exclusão</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">
+        Tem certeza que deseja excluir o projeto <strong>"{{ projeto.titulo }}"</strong>?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+
+        <!-- Form que realmente deleta -->
+        <form method="post" action="{% url 'projeto_delete' projeto.pk %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">Excluir</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<div class="carousel-shell mb-5">
+  <h4 style="color: {{ identidade_visual.cor_sistema }};">Projetos da mesma área de conhecimento:</h4>
+  <div class="carousel-viewport">
+    <div class="carousel-track w-100" id="cardTrack">
+      {% for projeto in projetos %}
+      <div class="card-item">
+        {% include 'partials/_card.html' %}
+      </div>
+      {% empty %}
+      <p>Sem projetos disponíveis no momento.</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <button class="btn btn-light carousel-control carousel-prev" id="prevBtn" style="color: blue;"
+    aria-label="Anterior">‹</button>
+  <button class="btn btn-light carousel-control carousel-next" id="nextBtn" style="color: blue;"
+    aria-label="Próximo">›</button>
+</div>
 
 {% endblock %}
