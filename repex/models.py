@@ -109,13 +109,15 @@ class UserSocialLink(models.Model):
 
 class IdentidadeVisual(models.Model):
     logo = models.ImageField(upload_to='media/', null=True, blank=True)
+    pagina_inicial_frase = models.CharField(max_length=300, default="Repositório IFSPP, aqui é o lar de todos os nossos projetos!")
+    imagem = models.ImageField(upload_to='media/', null=True, blank=True)
     cor_sistema = models.CharField(max_length=7, default="#005EFF")
     cor_suplente = models.CharField(max_length=7, blank=True, null=True)
     cor_titulo = models.CharField(max_length=7, default="#FF9823")
 
     def __str__(self):
         return f"Cores{self.cor_sistema, self.cor_suplente, self.cor_titulo}"
-    
+ 
 
 class Instituicao(models.Model):
     logo = models.ImageField(upload_to='media/', null=True, blank=True)

@@ -53,7 +53,7 @@ class ProjetoForm(forms.ModelForm):
             "status": "Status:",
             "modalidade": "Modalidade:",
             "componentes": "Componentes:",
-            "colab": "colab:",
+            "colab": "Projetos em colaboração:",
         }
 
         widgets = {
