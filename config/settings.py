@@ -196,3 +196,5 @@ OAUTH_PROVIDERS = {
         "userinfo_url": f"{SUAP_URL_BASE}api/rh/eu/",
     }
 }
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
