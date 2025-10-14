@@ -18,6 +18,7 @@ Para usar o sistema, siga esses passos:
     SUAP_CLIENT_ID = <seu-client-id>
     SUAP_CLIENT_SECRET = <seu-client-secret>
     SECRET_KEY = desenvolvimento (Use outra em ambiente de produção)
+    REDIRECT_URI = http://127.0.0.1:8000/users/auth/callback/ (Use <seu-dominio>/users/auth/callback/ em ambiente de produção)
 
 ### Por fim, rode:
     python .\manage.py runserver
