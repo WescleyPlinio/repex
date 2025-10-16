@@ -24,3 +24,5 @@ tzdata==2025.2
 urllib3==2.5.0
 psycopg[binary]
 whitenoise
+cloudinary
+django-cloudinary-storage
