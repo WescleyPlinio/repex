@@ -151,16 +151,17 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
 CRISPY_ALLOWED_TEMPLATE_PACKS = ["bootstrap5"]
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
+
 LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'index'
-
 AUTH_USER_MODEL = 'users.User'
 
-from django.contrib import messages
 
+from django.contrib import messages
 MESSAGE_TAGS = {
     messages.ERROR: "danger",
 }
@@ -172,13 +173,11 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 
 CLIENT_ID = os.getenv("SUAP_CLIENT_ID")
 CLIENT_SECRET = os.getenv("SUAP_CLIENT_SECRET")
 SECRET_KEY = os.getenv('SECRET_KEY')
+
 
 # config users
 LOGIN_URL = "login"
@@ -196,9 +195,8 @@ OAUTH_PROVIDERS = {
     }
 }
 
+
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
-
-
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
