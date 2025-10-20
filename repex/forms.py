@@ -9,15 +9,6 @@ class MultiFileInput(forms.ClearableFileInput):
     allow_multiple_selected = True
 
 class ProjetoForm(forms.ModelForm):
-    fotos = forms.FileField(
-        widget=MultiFileInput(attrs={
-            "class": "form-control", 
-            "multiple": True, 
-            "name": "fotos",
-            }), 
-        required=False, 
-        label="Fotos extras (opcional):"
-    )
     class Meta:
         model = Projeto
         fields = [
@@ -29,7 +20,6 @@ class ProjetoForm(forms.ModelForm):
             "objetivo",
             "resultados",
             "capa",
-            "fotos",
             "doc",
             "palavras_chave",
             "status",
@@ -40,14 +30,13 @@ class ProjetoForm(forms.ModelForm):
 
         labels = {
             "titulo": "Título:",
-            "descricao": "Descrição:",
+            "descricao": "Descrição (Simples e chamativa):",
             "resumo": "Resumo:",
             "justificativa": "Justificativa:",
             "area_conhecimento": "Área de Conhecimento:",
             "objetivo": "Objetivo:",
             "resultados": "Resultados:",
-            "capa": "Capa (opcional):",
-            "fotos": "Fotos extras (opcional):",
+            "capa": "Capa:",
             "doc": "Documento (opcional):",
             "palavras_chave": "Palavras-chave (separadas por vírgula):",
             "status": "Status:",
@@ -72,13 +61,7 @@ class ProjetoForm(forms.ModelForm):
             "componentes": Select2MultipleWidget(attrs={"class": "form-control"}),
             "colab": Select2MultipleWidget(attrs={"class": "form-control"}),
         }
-    
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
 
-        fields = list(self.fields.keys())
-        fields.insert(fields.index("capa") + 1, fields.pop(fields.index("fotos")))
-        self.fields = {k: self.fields[k] for k in fields}
 
 
 class IdentidadeVisualForm(forms.ModelForm):
