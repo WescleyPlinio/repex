@@ -5,10 +5,10 @@
       <i class="fab fa-{{ link.rede.nome|lower }} me-1"></i>
     </a>
   {% empty %}
-    <small class="text-muted">Nenhuma rede social cadastrada</small>
+    <small class="text-muted">{{ profile.user.get_primeiro_nome }} não cadastrou rede sociais</small>
   {% endfor %}
 
-  {% if user.is_authenticated and user == request.user %}
+  {% if user.is_authenticated and profile.id == request.user.id %}
     <a href="{% url 'user_social_link_create' %}" class="btn btn-sm btn-outline-secondary" title="Gerenciar redes sociais"><i class="fas fa-plus"></i></a>
   {% endif %}
 </div>
