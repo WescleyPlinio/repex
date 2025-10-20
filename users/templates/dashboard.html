@@ -62,13 +62,34 @@
             <th>Opções</th>
           </tr>
         </thead>
-        <tbody id="ajax_projetos">
-          {% include "partials/_dashboard_ajax_projetos.html" %}
+        <tbody>
+          {% for p in projetos %}
+            <tr>
+              <td>{{ p.id }}</td>
+              <td>{{ p.titulo }}</td>
+              <td>{{ p.status }}</td>
+              <td>{{ p.modalidade }}</td>
+              <td>{{ p.views }}</td>
+              <td class="d-flex gap-2">
+                <a href="{% url 'projeto_detail' p.id %}" class="btn btn-sm btn-primary">Ver</a>
+                {% if perms.repex.change_projeto %}
+                  <a href="{% url 'projeto_update' p.id %}" class="btn btn-sm btn-warning">Editar</a>
+                {% endif %}
+                {% if perms.repex.delete_projeto %}
+                  <a class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarExclusaoProjetoModal{{ p.pk }}">Excluir</a>
+                {% endif %}
+              </td>
+            </tr>
+            {% if perms.repex.delete_projeto %}
+              {% include 'partials/_modal_delete_projeto.html' %}
+            {% endif %}
+          {% empty %}
+            <tr>
+              <td colspan="4">Você ainda não está em nenhum projeto.</td>
+            </tr>
+          {% endfor %}
         </tbody>
       </table>
-    </div>
-    <div id="ajax_pagination">
-      {% include "partials/_dashboard_pagination_projetos.html" %}
     </div>
   </div>
 
@@ -120,31 +141,3 @@
     </div>
   {% endif %}
 {% endblock %}
-{% block extra_scripts %}
-<script>
-  $(document).on('click', '#ajax_pagination .pagination a', function (e) {
-  e.preventDefault();
-
-  let page = $(this).attr('href').split('page=')[1] || 1;
-
-  $.ajax({
-    url: "{% url 'dashboard_ajax_projetos' %}",
-    type: 'GET',
-    data: { page: page },
-    beforeSend: function () {
-      $('#spinner').show();
-    },
-    success: function (data) {
-      $('#ajax_projetos').html(data.html_tabela);
-      $('#ajax_pagination').html(data.html_paginacao);
-    },
-    complete: function () {
-      $('#spinner').hide();
-    },
-    error: function (xhr, status, error) {
-      console.error('Erro ao carregar página:', error);
-    }
-  });
-});
-</script>
-{% endblock extra_scripts %}

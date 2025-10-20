@@ -80,7 +80,10 @@
           <a class="nav-link active" href="{% url 'profile_detail' request.user.id %}" style="color: {{ identidade_visual.cor_sistema }};">Ver perfil</a>
         </li>
         <li class="nav-item mb-1">
-          <a class="nav-link active" href="{% url 'logout' %}" style="color: {{ identidade_visual.cor_sistema }};">Logout</a>
+          <form method="post" action="{% url "logout" %}">
+            {% csrf_token %}
+            <button type="submit" class="nav-link active" href="{% url 'logout' %}" style="color: {{ identidade_visual.cor_sistema }};">Logout</button>
+          </form>
         </li>
       {% else %}
         <li class="nav-item mb-1">
