@@ -7,7 +7,6 @@ urlpatterns = [
     path('login_suap/', views.login, name='login_suap'),
     path('logout/', views.logout, name='logout'),
     path('dashboard/', views.dashboard, name='dashboard'),
-    path('dashboard_ajax_projetos/', views.dashboard_ajax_projetos, name='dashboard_ajax_projetos'),
     path('painel/', views.paineladmin, name='painel'),
     path('users', views.all_users, name="users"),
     path("users/<int:user_id>/toggle/", views.toggle_superuser, name="toggle_superuser"),

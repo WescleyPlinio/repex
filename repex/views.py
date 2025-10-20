@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
-from users.models import User
+from users.models import User, Profile
 from django.db.models import Q
 
 def index(request):
@@ -291,8 +291,8 @@ class InstituicaoDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView)
     success_url = reverse_lazy('painel')
     
 
-class ProfileDetailView(LoginRequiredMixin, DetailView):
-    model = User
+class ProfileDetailView(DetailView):
+    model = Profile
     template_name = 'profile_detail.html'
     context_object_name = 'user'
 
