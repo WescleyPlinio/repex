@@ -49,9 +49,9 @@
                     {{ componente.profile.avatar.url }}
                   {% else %}
                     {% static 'imgs/user_placeholder.png' %}
-                  {% endif %}" alt="{{ componente.nome_completo }}" class="img-fluid rounded-circle mb-1"
+                  {% endif %}" alt="{{ componente.get_primeiro_nome }}" class="img-fluid rounded-circle mb-1"
               style="max-width: 55px;" />
-            <h6 class="text-dark mb-1">{{ componente.nome_completo }}</h6>
+            <h6 class="text-dark mb-1">{{ componente.get_primeiro_nome }}</h6>
           </div>
         </a>
         {% endfor %}
