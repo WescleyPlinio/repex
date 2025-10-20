@@ -56,28 +56,17 @@
         </a>
         {% endfor %}
       </div>
-      {% if projeto.colab.exists %}
-      <div class="d-flex gap-3 flex-wrap">
-        <h5 style="color:{{ identidade_visual.cor_sistema }}">Projetos em colaboração:</h5>
-        {% for colaborador in projeto.colab.all %}
-        <a class="text-decoration-none" href="{% url 'projeto_detail' colaborador.id %}">
-          <div class="d-flex flex-column align-items-center">
-            <img src="{% if colaborador.capa %}
-                          {{ colaborador.capa.url }}
-                        {% else %}
-                          {% static 'imgs/project_placeholder.png' %}
-                        {% endif %}" alt="{{ colaborador.titulo }}" class="img-fluid rounded mb-1"
-              style="max-width: 80px; height: 60px; object-fit: cover;" />
-
-            <h6 class="text-dark mb-1 text-center">
-              {{ colaborador.titulo }}
-            </h6>
-          </div>
-        </a>
-        {% endfor %}
-      </div>
-      {% endif %}
     </div>
+    {% if projeto.colab.exists %}
+    <div class="w-100 mb-3">
+      <h5 style="color:{{ identidade_visual.cor_sistema }}">Projetos em colaboração:</h5>
+      {% for colaborador in projeto.colab.all %}
+      <a class="text-dark text-nowrap" href="{% url 'projeto_detail' colaborador.id %}">
+        {{ colaborador.titulo }}
+      </a>
+      {% endfor %}
+    </div>
+    {% endif %}
   </div>
   <div class="col-md-8">
     <div class="w-100">
