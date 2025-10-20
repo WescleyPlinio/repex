@@ -294,7 +294,7 @@ class InstituicaoDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView)
 class ProfileDetailView(DetailView):
     model = Profile
     template_name = 'profile_detail.html'
-    context_object_name = 'user'
+    context_object_name = 'profile'
 
 
 class RedeSocialDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
