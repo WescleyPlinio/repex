@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}
-  Perfil de {{ user.get_primeiro_nome }}
+  Perfil de {{ profile.user.get_primeiro_nome }}
 {% endblock %}
 {% block content %}
   <div class="row g-4">
     <div class="col-md-4">
       {% if profile.avatar %}
         <img src="{{ profile.avatar.url }}" alt="avatar" class="w-100 rounded-circle shadow mb-2" />
-      {% elif id == request.id %}
+      {% elif profile.id == request.user.id %}
         <div style="width: 100%; aspect-ratio: 1 / 1;" class="bg-body-tertiary rounded-circle d-flex">
           <a href="{% url 'perfil_update' request.user.id %}" class="text-decoration-none m-auto p-5">
             <i class="fa-solid fa-image"></i>
@@ -18,7 +18,7 @@
       {% else %}
         <img src="{% static 'imgs/user_placeholder.png' %}" alt="avatar" class="w-100 rounded-circle shadow mb-2" />
       {% endif %}
-      <h3 class="fw-bold mt-1" style="color: {{ identidade_visual.cor_titulo }};">{{ nome_usual }}</h3>
+      <h3 class="fw-bold mt-1" style="color: {{ identidade_visual.cor_titulo }};">{{ profile.user.nome_usual }}</h3>
       {% if profile.bio %}
         <p>{{ profile.bio }}</p>
       {% elif profile.id == request.user.id %}
