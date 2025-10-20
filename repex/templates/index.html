@@ -18,7 +18,7 @@
 {% endblock %}
 {% block content %}
   <div id="newsCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
-    <h4 style="color: {{ identidade_visual.cor_sistema }};">Últimas notícias:</h4>
+    <h4 class="fw-bold" style="color: {{ identidade_visual.cor_sistema }};">Últimas notícias:</h4>
     <div class="carousel-inner">
       {% for group in noticias|chunks:3 %}
         <div class="carousel-item {% if forloop.first %}active{% endif %}">
@@ -110,7 +110,7 @@
   </div>
 
   <div class="carousel-shell mb-5">
-    <h4 style="color: {{ identidade_visual.cor_sistema }};">Últimos projetos adicionados:</h4>
+    <h4 class="fw-bold" style="color: {{ identidade_visual.cor_sistema }};">Últimos projetos adicionados:</h4>
     <div class="carousel-viewport">
       <div class="carousel-track w-100" id="cardTrack">
         {% for projeto in projetos %}
@@ -128,7 +128,7 @@
   </div>
 
   <div class="carousel-shell mb-5">
-    <h4 style="color: {{ identidade_visual.cor_sistema }};">Conheça projetos:</h4>
+    <h4 class="fw-bold" style="color: {{ identidade_visual.cor_sistema }};">Conheça projetos:</h4>
     <div class="carousel-viewport">
       <div class="carousel-track w-100" id="cardTrack">
         {% for projeto in projetos_random %}
@@ -146,7 +146,7 @@
   </div>
 
   <div class="carousel-shell mb-5">
-    <h4 style="color: {{ identidade_visual.cor_sistema }};">Projetos mais vistos:</h4>
+    <h4 class="fw-bold" style="color: {{ identidade_visual.cor_sistema }};">Projetos mais vistos:</h4>
     <div class="carousel-viewport">
       <div class="carousel-track w-100" id="cardTrack">
         {% for projeto in projetos_mais_vistos %}
