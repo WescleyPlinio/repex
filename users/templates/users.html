@@ -14,7 +14,7 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th>Matrícula</th>
+            <th>Email</th>
             <th>Nome</th>
             <th>Permissão de professor</th>
             <th>Super usuário</th>
@@ -24,7 +24,7 @@
           {% for u in resultados %}
             <tr>
               <td>{{ u.id }}</td>
-              <td>{{ u.username }}</td>
+              <td>{{ u.email }}</td>
               <td>{{ u.nome_usual }}</td>
               <td>
                 <form class="m-0" method="post" data-url="{% url 'toggle_professor' u.id %}">
