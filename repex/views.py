@@ -5,11 +5,17 @@ from django.template.loader import render_to_string
 from django.http import JsonResponse
 from .forms import ProjetoForm, IdentidadeVisualForm
 from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
 from users.models import User, Profile
 from django.db.models import Q
+from users.views import is_superuser
+
+
+def ta_no_grupo(user):
+    return user.groups.filter(name='Professor').exists()
+
 
 def index(request):
     projetos = Projeto.objects.all().order_by("-criado_em")[:9]
@@ -112,7 +118,7 @@ class ProjetoDetailView(DetailView):
 
     def get(self, request, *args, **kwargs):
         response = super().get(request, *args, **kwargs)
-        projeto = self.object  
+        projeto = self.get_object()  
 
         session_key = f"viewed_projeto_{projeto.pk}"
         if not request.session.get(session_key, False):
@@ -124,7 +130,7 @@ class ProjetoDetailView(DetailView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        projeto = self.object
+        projeto = self.get_object()
         projetos = Projeto.objects.filter(area_conhecimento=projeto.area_conhecimento).exclude(pk=projeto.pk)[:9]
 
         context['projetos'] = projetos
@@ -135,14 +141,25 @@ class NoticiaDetailView(DetailView):
     model = Noticia
     template_name = 'noticia_detail.html'
     context_object_name = 'noticia'
+    
+
+class ProfileDetailView(DetailView):
+    model = Profile
+    template_name = 'profile_detail.html'
+    context_object_name = 'profile'
 
 
-class ProjetoCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+# ----------------- Creates -----------------
+
+class ProjetoCreateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Projeto
     form_class = ProjetoForm
     template_name = 'projeto_form.html'
     success_message = 'Projeto criado com sucesso!'
     success_url = reverse_lazy('dashboard')
+    
+    def test_func(self):
+        return ta_no_grupo(self.request.user) or is_superuser(self.request.user)
 
     def form_valid(self, form):
         self.object = form.save()
@@ -153,48 +170,63 @@ class ProjetoCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         return super().form_valid(form)
 
 
-class NoticiaCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class NoticiaCreateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Noticia
     fields = ['titulo', 'descricao', 'conteudo', 'imagem', 'area_conhecimento']
     template_name = 'noticia_form.html'
     success_message = 'Notícia criada com sucesso!'
     success_url = reverse_lazy('dashboard')
+    
+    def test_func(self):
+        return ta_no_grupo(self.request.user)
 
     def form_valid(self, form):
         form.instance.autor = self.request.user
         return super().form_valid(form)
     
 
-class AreaConhecimentoCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class AreaConhecimentoCreateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = AreaConhecimento
     fields = ['area']
     template_name = 'area_conhecimento_form.html'
     success_message = 'Área de conhecimento cadastrada com sucesso!'
     success_url = reverse_lazy('painel')
+    
+    def test_func(self):
+        return is_superuser(self.request.user)
 
 
-class InstituicaoCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class InstituicaoCreateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Instituicao
     fields = ['logo', 'nome', 'cep', 'endereco', 'site']
     template_name = 'instituicao_form.html'
     success_message = 'Instituição cadastrada com sucesso!'
     success_url = reverse_lazy('painel')
 
+    def test_func(self):
+        is_superuser(self.request.user)
 
-class IdentidadeVisualCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+
+class IdentidadeVisualCreateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = IdentidadeVisual
     template_name = 'identidade_visual_form.html'
     success_message = 'Identidade visual criada com sucesso!'
     form_class = IdentidadeVisualForm
     success_url = reverse_lazy('painel')
 
+    def test_func(self):
+        is_superuser(self.request.user)
 
-class RedeSocialCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+
+class RedeSocialCreateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = RedeSocial
     fields = ['nome', 'url_base']
     template_name = 'rede_social_form.html'
     success_message = 'Rede social criada com sucesso!'
     success_url = reverse_lazy('painel')
+
+    def test_func(self):
+        is_superuser(self.request.user)
 
 
 class UserSocialLinkCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
@@ -209,102 +241,151 @@ class UserSocialLinkCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateVi
         return super().form_valid(form)
 
 
-class ProjetoUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+# ----------------- Updates -----------------
+
+class ProjetoUpdateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Projeto
     form_class = ProjetoForm
     template_name = 'projeto_form.html'
     success_message = 'Projeto atualizado com sucesso!'
     success_url = reverse_lazy('dashboard')
+    
+    def test_func(self):
+        projeto = self.get_object()
+        user = self.request.user
+        return ta_no_grupo(user) and projeto.componentes.filter(id=user.id).exists()
 
 
-class NoticiaUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class NoticiaUpdateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Noticia
     fields = ['titulo', 'descricao', 'conteudo', 'imagem', 'area_conhecimento']
     template_name = 'noticia_form.html'
     success_message = 'Notícia atualizada com sucesso!'
     success_url = reverse_lazy('dashboard')
+    
+    def test_func(self):
+        noticia = self.get_object()
+        user = self.request.user
+        return ta_no_grupo(user) and noticia.autor.id == user.id
 
 
-class AreaConhecimentoUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class AreaConhecimentoUpdateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = AreaConhecimento
     fields = ['area']
     template_name = 'area_conhecimento_form.html'
     success_message = 'Áre de conhecimento atualizada com sucesso!'
     success_url = reverse_lazy('painel')
 
+    def test_func(self):
+        is_superuser(self.request.user)
 
-class InstituicaoUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+
+class InstituicaoUpdateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Instituicao
     fields = ['logo', 'nome', 'cep', 'endereco', 'site']
     template_name = 'instituicao_form.html'
     success_message = 'Instituição atualizada com sucesso!'
     success_url = reverse_lazy('painel')
 
+    def test_func(self):
+        is_superuser(self.request.user)
+
     
-class IdentidadeVisualUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class IdentidadeVisualUpdateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = IdentidadeVisual
     template_name = 'identidade_visual_form.html'
     success_message = 'Identidade visual atualizada com sucesso!'
     form_class = IdentidadeVisualForm
     success_url = reverse_lazy('painel')
 
+    def test_func(self):
+        is_superuser(self.request.user)
 
-class RedeSocialUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+
+class RedeSocialUpdateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = RedeSocial
     fields = ['nome', 'url_base']
     template_name = 'rede_social_form.html'
     success_message = 'Rede social atualizada com sucesso!'
     success_url = reverse_lazy('painel')
 
+    def test_func(self):
+        is_superuser(self.request.user)
 
-class UserSocialLinkUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+
+class UserSocialLinkUpdateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = UserSocialLink
     fields = ["rede", "url"]
     template_name = "profile_rede_social_form.html"
     success_message = "Rede social pessoal atualizada com sucesso!"
     success_url = reverse_lazy("dashboard")
+    
+    def test_func(self):
+        link = self.get_object()
+        user = self.request.user
+        return link.user.id == user.id
 
 
-class ProjetoDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+# ----------------- Deletes -----------------
+
+class ProjetoDeleteView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Projeto
     success_message = 'Projeto deletado com sucesso!'
     success_url = reverse_lazy('dashboard')
+    
+    def test_func(self):
+        projeto = self.get_object()
+        user = self.request.user
+        return ta_no_grupo(self.request.user) and projeto.componentes.filter(id=user.id).exists()
 
 
-class NoticiaDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+class NoticiaDeleteView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Noticia
     success_message = 'Notícia deletada com sucesso!'
     success_url = reverse_lazy('dashboard')
+    
+    def test_func(self):
+        noticia = self.get_object()
+        user = self.request.user
+        return ta_no_grupo(user) and noticia.autor.id == user.id
 
 
-class AreaConhecimentoDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+class AreaConhecimentoDeleteView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = AreaConhecimento
     template_name = 'area_conhecimento_confirm_delete.html'
     success_message = 'Área de conhecimento deletada com sucesso!'
     success_url = reverse_lazy('painel')
+    
+    def test_func(self):
+        return is_superuser(self.request.user)
 
 
-class InstituicaoDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+class InstituicaoDeleteView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Instituicao
     template_name = 'instituicao_confirm_delete.html'
     success_message = 'Instituição deletada com sucesso!'
     success_url = reverse_lazy('painel')
     
-
-class ProfileDetailView(DetailView):
-    model = Profile
-    template_name = 'profile_detail.html'
-    context_object_name = 'profile'
+    def test_func(self):
+        return is_superuser(self.request.user)
 
 
-class RedeSocialDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+class RedeSocialDeleteView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = RedeSocial
     template_name = 'rede_social_confirm_delete.html'
     success_message = 'Rede social deletada com sucesso!'
     success_url = reverse_lazy('painel')
+    
+    def test_func(self):
+        return is_superuser(self.request.user)
 
 
-class UserSocialLinkDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+class UserSocialLinkDeleteView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = UserSocialLink
     success_message = 'Rede social deletada com sucesso!'
     success_url = reverse_lazy('dashboard')
+    
+    def test_func(self):
+        link = self.get_object()
+        user = self.request.user
+        return link.user.id == user.id
