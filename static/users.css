@@ -5,3 +5,7 @@ body {
 .login-container {
     width: 400px;
 }
+
+.select2-container {
+  width: 100% !important;
+}

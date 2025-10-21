@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-<h1 style="color: orange;" class="text-center fw-bold mb-3">{{ projeto.titulo }}</h1>
+<h1 style="color: {{ identidade_visual.cor_titulo }}" class="text-center fw-bold mb-3">{{ projeto.titulo }}</h1>
 <div class="row g-4 mb-3">
   <div class="col-md-4">
     <img src="{% if projeto.capa %}
@@ -13,78 +13,96 @@
         {% else %}
           {% static 'imgs/placeholder.webp' %}
         {% endif %}" alt="{{ projeto.titulo }}" class="img-fluid w-100 mb-3" />
-    <div class="w-100">
-      <h5 class="fw-bold" style="color:{{ identidade_visual.cor_sistema }}">Modalidade:</h5>
-      <p>{{ projeto.modalidade }}</p>
-    </div>
-    {% if projeto.doc %}
-    <div class="w-100 mb-3">
-      <h5 class="fw-bold" style="color:{{ identidade_visual.cor_sistema }}">Documentação:</h5>
-      <a class="text-dark" href="{{ projeto.doc.url }}" target="_blank">{{ projeto.doc.url }}</a>
-    </div>
+    {% if projeto.modalidade %}
+      <div class="w-100">
+        <h5 class="fw-bold" style="color:{{ identidade_visual.cor_sistema }}">Modalidade:</h5>
+        <p>{{ projeto.modalidade }}</p>
+      </div>
     {% endif %}
-    <div class="w-100 mb-3">
-      <h5 class="fw-bold" style="color:{{ identidade_visual.cor_sistema }}">Área de conhecimento:</h5>
-      <p>{{ projeto.area_conhecimento }}</p>
-    </div>
-    <div class="w-100 mb-3">
-      <h5 class="fw-bold" style="color:{{ identidade_visual.cor_sistema }}">Status:</h5>
-      <p>{{ projeto.status }}</p>
-    </div>
+    {% if projeto.doc %}
+      <div class="w-100 mb-3">
+        <h5 class="fw-bold" style="color:{{ identidade_visual.cor_sistema }}">Documentação:</h5>
+        <a class="text-dark" href="{{ projeto.doc.url }}" target="_blank">{{ projeto.doc.url }}</a>
+      </div>
+    {% endif %}
+    {% if projeto.area_conhecimento %}
+      <div class="w-100 mb-3">
+        <h5 class="fw-bold" style="color:{{ identidade_visual.cor_sistema }}">Área de conhecimento:</h5>
+        <p>{{ projeto.area_conhecimento }}</p>
+      </div>
+    {% endif %}
+    {% if projeto.status %}
+      <div class="w-100 mb-3">
+        <h5 class="fw-bold" style="color:{{ identidade_visual.cor_sistema }}">Status:</h5>
+        <p>{{ projeto.status }}</p>
+      </div>
+    {% endif %}
     <div class="w-100 mb-3">
       <h5 class="fw-bold" style="color:{{ identidade_visual.cor_sistema }}">Criado em:</h5>
       <p>{{ projeto.criado_em }}</p>
     </div>
-    <div class="w-100 mb-3">
-      <h5 class="fw-bold" style="color:{{ identidade_visual.cor_sistema }}">Palavras-chave:</h5>
-      <p>{{ projeto.palavras_chave }}</p>
-    </div>
-    <div class="w-100 mb-3">
-      <h5 class="fw-bold" style="color:{{ identidade_visual.cor_sistema }}">Componentes:</h5>
-      <div class="d-flex gap-3 flex-wrap">
-        {% for componente in projeto.componentes.all %}
-        <a class="text-decoration-none" href="{% url 'profile_detail' componente.id %}">
-          <div class="d-flex flex-column align-items-center">
-            <img src="{% if componente.profile.avatar %}
-                    {{ componente.profile.avatar.url }}
-                  {% else %}
-                    {% static 'imgs/user_placeholder.png' %}
-                  {% endif %}" alt="{{ componente.get_primeiro_nome }}" class="img-fluid rounded-circle mb-1"
-              style="max-width: 55px;" />
-            <h6 class="text-dark mb-1">{{ componente.get_primeiro_nome }}</h6>
-          </div>
-        </a>
+    {% if projeto.palavras_chave %}
+      <div class="w-100 mb-3">
+        <h5 class="fw-bold" style="color:{{ identidade_visual.cor_sistema }}">Palavras-chave:</h5>
+        <p>{{ projeto.palavras_chave }}</p>
+      </div>
+    {% endif %}
+    {% if projeto.componentes.exists %}
+      <div class="w-100 mb-3">
+        <h5 class="fw-bold" style="color:{{ identidade_visual.cor_sistema }}">Componentes:</h5>
+        <div class="d-flex gap-3 flex-wrap">
+          {% for componente in projeto.componentes.all %}
+          <a class="text-decoration-none" href="{% url 'profile_detail' componente.id %}">
+            <div class="d-flex flex-column align-items-center">
+              <img src="{% if componente.profile.avatar %}
+                      {{ componente.profile.avatar.url }}
+                    {% else %}
+                      {% static 'imgs/user_placeholder.png' %}
+                    {% endif %}" alt="{{ componente.get_primeiro_nome }}" class="img-fluid rounded-circle mb-1"
+                style="max-width: 55px;" />
+              <h6 class="text-dark mb-1">{{ componente.get_primeiro_nome }}</h6>
+            </div>
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+    {% if projeto.colab.exists %}
+      <div class="w-100 mb-3">
+        <h5 class="fw-bold" style="color:{{ identidade_visual.cor_sistema }}">Projetos em colaboração:</h5>
+        {% for colaborador in projeto.colab.all %}
+        <a class="text-dark" href="{% url 'projeto_detail' colaborador.id %}">
+          {{ colaborador.titulo }}
+        </a><br>
         {% endfor %}
       </div>
-    </div>
-    {% if projeto.colab.exists %}
-    <div class="w-100 mb-3">
-      <h5 class="fw-bold" style="color:{{ identidade_visual.cor_sistema }}">Projetos em colaboração:</h5>
-      {% for colaborador in projeto.colab.all %}
-      <a class="text-dark" href="{% url 'projeto_detail' colaborador.id %}">
-        {{ colaborador.titulo }}
-      </a><br>
-      {% endfor %}
-    </div>
     {% endif %}
   </div>
   <div class="col-md-8">
-    <div class="w-100">
-      <h5 class="fw-bold" style="color:{{ identidade_visual.cor_sistema }}">Resumo:</h5>
-      <p>{{ projeto.resumo|safe }}</p>
-    </div>
-    <div class="w-100">
-      <h5 class="fw-bold" style="color:{{ identidade_visual.cor_sistema }}">Justificativa:</h5>
-      <p>{{ projeto.justificativa|safe }}</p>
-    </div>
-    <div class="w-100">
-      <h5 class="fw-bold" style="color:{{ identidade_visual.cor_sistema }}">Objetivo:</h5>
-      <p>{{ projeto.objetivo|safe }}</p>
-    </div>
-    <div class="w-100">
-      <h5 class="fw-bold" style="color:{{ identidade_visual.cor_sistema }}">Resultados esperados:</h5>
-      <p>{{ projeto.resultados|safe }}</p>
-    </div>
+    {% if projeto.resumo %}
+      <div class="w-100">
+        <h5 class="fw-bold" style="color:{{ identidade_visual.cor_sistema }}">Resumo:</h5>
+        <p>{{ projeto.resumo|safe }}</p>
+      </div>
+    {% endif %}
+    {% if projeto.justificativa %}
+      <div class="w-100">
+        <h5 class="fw-bold" style="color:{{ identidade_visual.cor_sistema }}">Justificativa:</h5>
+        <p>{{ projeto.justificativa|safe }}</p>
+      </div>
+    {% endif %}
+    {% if projeto.objetivo %}
+      <div class="w-100">
+        <h5 class="fw-bold" style="color:{{ identidade_visual.cor_sistema }}">Objetivo:</h5>
+        <p>{{ projeto.objetivo|safe }}</p>
+      </div>
+    {% endif %}
+    {% if projeto.resultados %}
+      <div class="w-100">
+        <h5 class="fw-bold" style="color:{{ identidade_visual.cor_sistema }}">Resultados esperados:</h5>
+        <p>{{ projeto.resultados|safe }}</p>
+      </div>
+    {% endif %}
   </div>
 </div>
 

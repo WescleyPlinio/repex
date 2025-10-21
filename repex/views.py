@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Projeto, Noticia, IdentidadeVisual, FotoProjeto, AreaConhecimento, Instituicao, RedeSocial, UserSocialLink
 from django.core.paginator import Paginator
 from django.template.loader import render_to_string
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from .forms import ProjetoForm, IdentidadeVisualForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -162,12 +162,13 @@ class ProjetoCreateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageM
         return ta_no_grupo(self.request.user) or is_superuser(self.request.user)
 
     def form_valid(self, form):
-        self.object = form.save()
+        self.object = form.save(commit=False)
+        self.object.save()
         self.object.componentes.add(self.request.user)
 
         for file in self.request.FILES.getlist("fotos"):
             FotoProjeto.objects.create(projeto=self.object, foto=file)
-        return super().form_valid(form)
+        return HttpResponseRedirect(self.get_success_url())
 
 
 class NoticiaCreateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, CreateView):
