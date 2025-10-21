@@ -179,7 +179,7 @@ class NoticiaCreateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageM
     success_url = reverse_lazy('dashboard')
     
     def test_func(self):
-        return ta_no_grupo(self.request.user)
+        return ta_no_grupo(self.request.user) or is_superuser(self.request.user)
 
     def form_valid(self, form):
         form.instance.autor = self.request.user

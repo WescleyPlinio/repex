@@ -16,7 +16,9 @@ class AreaConhecimento(models.Model):
 
 class Projeto(models.Model):
     STATUS_CHOICES = [
+        ("Proposta", "Proposta"),
         ("Em andamento", "Em andamento"),
+        ("Pausado", "Pausado"),
         ("Concluído", "Concluído"),
     ]
     MODALIDADE_CHOICES = [

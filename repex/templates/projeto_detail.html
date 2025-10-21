@@ -136,25 +136,26 @@
   </div>
 </div>
 {% endif %}
-
-<div class="carousel-shell mb-5">
-  <h4 class="fw-bold" style="color: {{ identidade_visual.cor_sistema }};">Projetos da mesma área de conhecimento:</h4>
-  <div class="carousel-viewport">
-    <div class="carousel-track w-100" id="cardTrack">
-      {% for projeto in projetos %}
-      <div class="card-item">
-        {% include 'partials/_card.html' %}
+{% if projetos.exists %}
+  <div class="carousel-shell mb-5">
+    <h4 class="fw-bold" style="color: {{ identidade_visual.cor_sistema }};">Projetos da mesma área de conhecimento:</h4>
+    <div class="carousel-viewport">
+      <div class="carousel-track w-100" id="cardTrack">
+        {% for projeto in projetos %}
+        <div class="card-item">
+          {% include 'partials/_card.html' %}
+        </div>
+        {% empty %}
+        <p>Sem projetos disponíveis no momento.</p>
+        {% endfor %}
       </div>
-      {% empty %}
-      <p>Sem projetos disponíveis no momento.</p>
-      {% endfor %}
     </div>
-  </div>
 
-  <button class="btn btn-light carousel-control carousel-prev" id="prevBtn" style="color: blue;"
-    aria-label="Anterior">‹</button>
-  <button class="btn btn-light carousel-control carousel-next" id="nextBtn" style="color: blue;"
-    aria-label="Próximo">›</button>
-</div>
+    <button class="btn btn-light carousel-control carousel-prev" id="prevBtn" style="color: blue;"
+      aria-label="Anterior">‹</button>
+    <button class="btn btn-light carousel-control carousel-next" id="nextBtn" style="color: blue;"
+      aria-label="Próximo">›</button>
+  </div>
+{% endif %}
 
 {% endblock %}
