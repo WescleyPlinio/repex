@@ -73,7 +73,6 @@ def auth_callback(request):
 
     first_superuser(request)
     django_login(request, user)
-
     return redirect("dashboard")
 
 
@@ -81,6 +80,8 @@ def first_superuser(request):
     user = User.objects.get(pk=1)
     user.is_superuser = True
     user.is_staff = True 
+    grupo, _ = Group.objects.get_or_create(name="Professor")
+    user.groups.add(grupo)
     user.save()
 
 
