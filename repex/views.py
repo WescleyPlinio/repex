@@ -205,7 +205,7 @@ class InstituicaoCreateView(LoginRequiredMixin, UserPassesTestMixin ,SuccessMess
     success_url = reverse_lazy('painel')
 
     def test_func(self):
-        is_superuser(self.request.user)
+        return is_superuser(self.request.user)
 
 
 class IdentidadeVisualCreateView(LoginRequiredMixin, UserPassesTestMixin ,SuccessMessageMixin, CreateView):
@@ -216,7 +216,7 @@ class IdentidadeVisualCreateView(LoginRequiredMixin, UserPassesTestMixin ,Succes
     success_url = reverse_lazy('painel')
 
     def test_func(self):
-        is_superuser(self.request.user)
+        return is_superuser(self.request.user)
 
 
 class RedeSocialCreateView(LoginRequiredMixin, UserPassesTestMixin ,SuccessMessageMixin, CreateView):
@@ -227,7 +227,7 @@ class RedeSocialCreateView(LoginRequiredMixin, UserPassesTestMixin ,SuccessMessa
     success_url = reverse_lazy('painel')
 
     def test_func(self):
-        is_superuser(self.request.user)
+        return is_superuser(self.request.user)
 
 
 class UserSocialLinkCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
@@ -278,7 +278,7 @@ class AreaConhecimentoUpdateView(LoginRequiredMixin, UserPassesTestMixin ,Succes
     success_url = reverse_lazy('painel')
 
     def test_func(self):
-        is_superuser(self.request.user)
+        return is_superuser(self.request.user)
 
 
 class InstituicaoUpdateView(LoginRequiredMixin, UserPassesTestMixin ,SuccessMessageMixin, UpdateView):
@@ -289,7 +289,7 @@ class InstituicaoUpdateView(LoginRequiredMixin, UserPassesTestMixin ,SuccessMess
     success_url = reverse_lazy('painel')
 
     def test_func(self):
-        is_superuser(self.request.user)
+        return is_superuser(self.request.user)
 
     
 class IdentidadeVisualUpdateView(LoginRequiredMixin, UserPassesTestMixin ,SuccessMessageMixin, UpdateView):
@@ -300,7 +300,7 @@ class IdentidadeVisualUpdateView(LoginRequiredMixin, UserPassesTestMixin ,Succes
     success_url = reverse_lazy('painel')
 
     def test_func(self):
-        is_superuser(self.request.user)
+        return is_superuser(self.request.user)
 
 
 class RedeSocialUpdateView(LoginRequiredMixin, UserPassesTestMixin ,SuccessMessageMixin, UpdateView):
@@ -311,7 +311,7 @@ class RedeSocialUpdateView(LoginRequiredMixin, UserPassesTestMixin ,SuccessMessa
     success_url = reverse_lazy('painel')
 
     def test_func(self):
-        is_superuser(self.request.user)
+        return is_superuser(self.request.user)
 
 
 class UserSocialLinkUpdateView(LoginRequiredMixin, UserPassesTestMixin ,SuccessMessageMixin, UpdateView):
