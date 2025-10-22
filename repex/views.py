@@ -151,7 +151,7 @@ class ProfileDetailView(DetailView):
 
 # ----------------- Creates -----------------
 
-class ProjetoCreateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class ProjetoCreateView(LoginRequiredMixin, UserPassesTestMixin ,SuccessMessageMixin, CreateView):
     model = Projeto
     form_class = ProjetoForm
     template_name = 'projeto_form.html'
@@ -171,7 +171,7 @@ class ProjetoCreateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageM
         return HttpResponseRedirect(self.get_success_url())
 
 
-class NoticiaCreateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class NoticiaCreateView(LoginRequiredMixin, UserPassesTestMixin ,SuccessMessageMixin, CreateView):
     model = Noticia
     fields = ['titulo', 'descricao', 'conteudo', 'imagem', 'area_conhecimento']
     template_name = 'noticia_form.html'
@@ -186,7 +186,7 @@ class NoticiaCreateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageM
         return super().form_valid(form)
     
 
-class AreaConhecimentoCreateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class AreaConhecimentoCreateView(LoginRequiredMixin, UserPassesTestMixin ,SuccessMessageMixin, CreateView):
     model = AreaConhecimento
     fields = ['area']
     template_name = 'area_conhecimento_form.html'
@@ -197,7 +197,7 @@ class AreaConhecimentoCreateView(UserPassesTestMixin ,LoginRequiredMixin, Succes
         return is_superuser(self.request.user)
 
 
-class InstituicaoCreateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class InstituicaoCreateView(LoginRequiredMixin, UserPassesTestMixin ,SuccessMessageMixin, CreateView):
     model = Instituicao
     fields = ['logo', 'nome', 'cep', 'endereco', 'site']
     template_name = 'instituicao_form.html'
@@ -208,7 +208,7 @@ class InstituicaoCreateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMess
         is_superuser(self.request.user)
 
 
-class IdentidadeVisualCreateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class IdentidadeVisualCreateView(LoginRequiredMixin, UserPassesTestMixin ,SuccessMessageMixin, CreateView):
     model = IdentidadeVisual
     template_name = 'identidade_visual_form.html'
     success_message = 'Identidade visual criada com sucesso!'
@@ -219,7 +219,7 @@ class IdentidadeVisualCreateView(UserPassesTestMixin ,LoginRequiredMixin, Succes
         is_superuser(self.request.user)
 
 
-class RedeSocialCreateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class RedeSocialCreateView(LoginRequiredMixin, UserPassesTestMixin ,SuccessMessageMixin, CreateView):
     model = RedeSocial
     fields = ['nome', 'url_base']
     template_name = 'rede_social_form.html'
@@ -244,7 +244,7 @@ class UserSocialLinkCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateVi
 
 # ----------------- Updates -----------------
 
-class ProjetoUpdateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class ProjetoUpdateView(LoginRequiredMixin, UserPassesTestMixin ,SuccessMessageMixin, UpdateView):
     model = Projeto
     form_class = ProjetoForm
     template_name = 'projeto_form.html'
@@ -257,7 +257,7 @@ class ProjetoUpdateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageM
         return ta_no_grupo(user) and projeto.componentes.filter(id=user.id).exists()
 
 
-class NoticiaUpdateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class NoticiaUpdateView(LoginRequiredMixin, UserPassesTestMixin ,SuccessMessageMixin, UpdateView):
     model = Noticia
     fields = ['titulo', 'descricao', 'conteudo', 'imagem', 'area_conhecimento']
     template_name = 'noticia_form.html'
@@ -270,7 +270,7 @@ class NoticiaUpdateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageM
         return ta_no_grupo(user) and noticia.autor.id == user.id
 
 
-class AreaConhecimentoUpdateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class AreaConhecimentoUpdateView(LoginRequiredMixin, UserPassesTestMixin ,SuccessMessageMixin, UpdateView):
     model = AreaConhecimento
     fields = ['area']
     template_name = 'area_conhecimento_form.html'
@@ -281,7 +281,7 @@ class AreaConhecimentoUpdateView(UserPassesTestMixin ,LoginRequiredMixin, Succes
         is_superuser(self.request.user)
 
 
-class InstituicaoUpdateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class InstituicaoUpdateView(LoginRequiredMixin, UserPassesTestMixin ,SuccessMessageMixin, UpdateView):
     model = Instituicao
     fields = ['logo', 'nome', 'cep', 'endereco', 'site']
     template_name = 'instituicao_form.html'
@@ -292,7 +292,7 @@ class InstituicaoUpdateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMess
         is_superuser(self.request.user)
 
     
-class IdentidadeVisualUpdateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class IdentidadeVisualUpdateView(LoginRequiredMixin, UserPassesTestMixin ,SuccessMessageMixin, UpdateView):
     model = IdentidadeVisual
     template_name = 'identidade_visual_form.html'
     success_message = 'Identidade visual atualizada com sucesso!'
@@ -303,7 +303,7 @@ class IdentidadeVisualUpdateView(UserPassesTestMixin ,LoginRequiredMixin, Succes
         is_superuser(self.request.user)
 
 
-class RedeSocialUpdateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class RedeSocialUpdateView(LoginRequiredMixin, UserPassesTestMixin ,SuccessMessageMixin, UpdateView):
     model = RedeSocial
     fields = ['nome', 'url_base']
     template_name = 'rede_social_form.html'
@@ -314,7 +314,7 @@ class RedeSocialUpdateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessa
         is_superuser(self.request.user)
 
 
-class UserSocialLinkUpdateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class UserSocialLinkUpdateView(LoginRequiredMixin, UserPassesTestMixin ,SuccessMessageMixin, UpdateView):
     model = UserSocialLink
     fields = ["rede", "url"]
     template_name = "profile_rede_social_form.html"
@@ -329,7 +329,7 @@ class UserSocialLinkUpdateView(UserPassesTestMixin ,LoginRequiredMixin, SuccessM
 
 # ----------------- Deletes -----------------
 
-class ProjetoDeleteView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+class ProjetoDeleteView(LoginRequiredMixin, UserPassesTestMixin ,SuccessMessageMixin, DeleteView):
     model = Projeto
     success_message = 'Projeto deletado com sucesso!'
     success_url = reverse_lazy('dashboard')
@@ -340,7 +340,7 @@ class ProjetoDeleteView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageM
         return ta_no_grupo(self.request.user) and projeto.componentes.filter(id=user.id).exists()
 
 
-class NoticiaDeleteView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+class NoticiaDeleteView(LoginRequiredMixin, UserPassesTestMixin ,SuccessMessageMixin, DeleteView):
     model = Noticia
     success_message = 'Notícia deletada com sucesso!'
     success_url = reverse_lazy('dashboard')
@@ -351,7 +351,7 @@ class NoticiaDeleteView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageM
         return ta_no_grupo(user) and noticia.autor.id == user.id
 
 
-class AreaConhecimentoDeleteView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+class AreaConhecimentoDeleteView(LoginRequiredMixin, UserPassesTestMixin ,SuccessMessageMixin, DeleteView):
     model = AreaConhecimento
     template_name = 'area_conhecimento_confirm_delete.html'
     success_message = 'Área de conhecimento deletada com sucesso!'
@@ -361,7 +361,7 @@ class AreaConhecimentoDeleteView(UserPassesTestMixin ,LoginRequiredMixin, Succes
         return is_superuser(self.request.user)
 
 
-class InstituicaoDeleteView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+class InstituicaoDeleteView(LoginRequiredMixin, UserPassesTestMixin ,SuccessMessageMixin, DeleteView):
     model = Instituicao
     template_name = 'instituicao_confirm_delete.html'
     success_message = 'Instituição deletada com sucesso!'
@@ -371,7 +371,7 @@ class InstituicaoDeleteView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMess
         return is_superuser(self.request.user)
 
 
-class RedeSocialDeleteView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+class RedeSocialDeleteView(LoginRequiredMixin, UserPassesTestMixin ,SuccessMessageMixin, DeleteView):
     model = RedeSocial
     template_name = 'rede_social_confirm_delete.html'
     success_message = 'Rede social deletada com sucesso!'
@@ -381,7 +381,7 @@ class RedeSocialDeleteView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessa
         return is_superuser(self.request.user)
 
 
-class UserSocialLinkDeleteView(UserPassesTestMixin ,LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+class UserSocialLinkDeleteView(LoginRequiredMixin, UserPassesTestMixin ,SuccessMessageMixin, DeleteView):
     model = UserSocialLink
     success_message = 'Rede social deletada com sucesso!'
     success_url = reverse_lazy('dashboard')
