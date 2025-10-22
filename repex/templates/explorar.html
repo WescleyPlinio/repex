@@ -9,10 +9,10 @@
     
     <form method="get" id="filtros-form" name="q" value="{{ query }}" class="mb-4 d-flex gap-2 flex-wrap bg-body-secondary py-3 px-5 rounded">
       <h5 class="me-2 my-auto fw-bold" {% if identidade_visual.cor_sistema %}style="color: {{ identidade_visual.cor_sistema }};"{% endif %}><i class="fa-solid fa-filter fa-sm"></i> Filtros:</h5>
-      <select name="status" class="form-select form-select-sm border border-0 w-auto bg-body-secondary">
-        <option value="">Status</option>
-        {% for valor, label in status_choices %}
-          <option class="border border-0" value="{{ valor }}" {% if status_selected == valor %}selected{% endif %}>{{ label }}</option>
+     <select name="area_conhecimento" class="form-select form-select-sm border border-0 w-auto bg-body-secondary">
+        <option value="">Áreas de conhecimento</option>
+        {% for area in areas %}
+          <option class="border border-0" value="{{ area.id }}" {% if request.GET.area_conhecimento == area.id %}selected{% endif %}>{{ area.area }}</option>
         {% endfor %}
       </select>
 
@@ -23,10 +23,10 @@
         {% endfor %}
       </select>
 
-     <select name="area_conhecimento" class="form-select form-select-sm border border-0 w-auto bg-body-secondary">
-        <option value="">Áreas de conhecimento</option>
-        {% for area in areas %}
-          <option class="border border-0" value="{{ area.id }}" {% if request.GET.area_conhecimento == area.id %}selected{% endif %}>{{ area.area }}</option>
+      <select name="status" class="form-select form-select-sm border border-0 w-auto bg-body-secondary">
+        <option value="">Status</option>
+        {% for valor, label in status_choices %}
+          <option class="border border-0" value="{{ valor }}" {% if status_selected == valor %}selected{% endif %}>{{ label }}</option>
         {% endfor %}
       </select>
     </form>
