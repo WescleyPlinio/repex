@@ -6,6 +6,8 @@ from django.dispatch import receiver
 from PIL import Image, ImageOps
 from django.conf import settings
 from django.apps import apps
+from cloudinary.models import CloudinaryField
+
 
 class User(AbstractUser):
     USERNAME_FIELD = "email"
@@ -54,21 +56,11 @@ User.add_to_class("is_professor", is_professor)
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(null=True, blank=True)
-    avatar = models.ImageField(upload_to='media', blank=True, null=True)
+    avatar = CloudinaryField('image', folder='repex/avatars/', blank=True, null=True)
 
 
     def __str__(self):
         return f'{self.user.username} Profile'
-
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        if self.avatar:
-            img = Image.open(self.avatar.path)
-
-            output_size = (300, 300)
-            img = ImageOps.fit(img, output_size, Image.LANCZOS)
-
-            img.save(self.avatar.path)
 
 
 @receiver(post_save, sender=User)
