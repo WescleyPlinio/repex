@@ -25,6 +25,7 @@ class Projeto(models.Model):
         ("Ensino", "Ensino"),
         ("Pesquisa", "Pesquisa"),
         ("Extensão", "Extensão"),
+        ("Interdisciplinar", "Interdisciplinar"),
     ]
 
     titulo = models.CharField(max_length=100)
@@ -35,8 +36,8 @@ class Projeto(models.Model):
     objetivo = HTMLField(_("Objetivo"), blank=True)
     criado_em = models.DateTimeField(auto_now_add=True)
     resultados = HTMLField(_("Resultados"), blank=True)
-    capa = models.ImageField(upload_to='media/', null=True, blank=True)
-    doc = models.FileField(upload_to='media/', blank=True, null=True)
+    capa = models.ImageField(upload_to='projetos/', null=True, blank=True)
+    doc = models.FileField(upload_to='docs/', blank=True, null=True)
     palavras_chave = models.CharField(max_length=200)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
     modalidade = models.CharField(max_length=20, choices=MODALIDADE_CHOICES)
@@ -69,7 +70,7 @@ class Noticia(models.Model):
     descricao = HTMLField(_("Descricao"), blank=True)
     conteudo = HTMLField(_("Conteudo"), blank=True)
     data_publicacao = models.DateTimeField(auto_now_add=True, null=True)
-    imagem = models.ImageField(upload_to='media/', null=True, blank=True)
+    imagem = models.ImageField(upload_to='noticias/', null=True, blank=True)
     area_conhecimento = models.ForeignKey(AreaConhecimento, on_delete=models.CASCADE, related_name='area_conhecimento_noticia', null=True, blank=True)
     autor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='noticias', null=True, blank=True)
     criado_em = models.DateTimeField(auto_now_add=True, null=True)
