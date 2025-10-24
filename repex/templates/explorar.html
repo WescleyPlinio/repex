@@ -6,31 +6,29 @@
 
 {% block content %}
   <nav class="d-flex justify-content-center flex-wrap gap-2">
-    
-    <form method="get" id="filtros-form" name="q" value="{{ query }}" class="mb-4 d-flex gap-2 flex-wrap bg-body-secondary py-3 px-5 rounded">
-      <h5 class="me-2 my-auto fw-bold" {% if identidade_visual.cor_sistema %}style="color: {{ identidade_visual.cor_sistema }};"{% endif %}><i class="fa-solid fa-filter fa-sm"></i> Filtros:</h5>
+    <form method="get" id="filtros-form" name="q" value="{{ query }}" class="mb-4 d-flex justify-content-between gap-2 flex-wrap bg-body-secondary py-3 px-5 rounded">
+      <h5 class="my-auto fw-bold" {% if identidade_visual.cor_sistema %}style="color: {{ identidade_visual.cor_sistema }};"{% endif %}><i class="fa-solid fa-filter fa-sm"></i> FILTROS:</h5>
      <select name="area_conhecimento" class="form-select form-select-sm border border-0 w-auto bg-body-secondary">
-        <option value="">Áreas de conhecimento</option>
+        <option value="">ÁREAS DE CONHECIMENTO</option>
         {% for area in areas %}
           <option class="border border-0" value="{{ area.id }}" {% if request.GET.area_conhecimento == area.id %}selected{% endif %}>{{ area.area }}</option>
         {% endfor %}
       </select>
 
       <select name="modalidade" class="form-select form-select-sm border border-0 w-auto bg-body-secondary">
-        <option value="">Modalidades</option>
+        <option value="">MODALIDADE</option>
         {% for valor, label in modalidade_choices %}
           <option class="border border-0" value="{{ valor }}" {% if modalidade_selected == valor %}selected{% endif %}>{{ label }}</option>
         {% endfor %}
       </select>
 
       <select name="status" class="form-select form-select-sm border border-0 w-auto bg-body-secondary">
-        <option value="">Status</option>
+        <option value="">STATUS</option>
         {% for valor, label in status_choices %}
           <option class="border border-0" value="{{ valor }}" {% if status_selected == valor %}selected{% endif %}>{{ label }}</option>
         {% endfor %}
       </select>
     </form>
-
   </nav>
 
   <div class="carousel-shell mb-5">
