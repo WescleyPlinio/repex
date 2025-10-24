@@ -104,9 +104,9 @@ class UserSocialLink(models.Model):
         return f"{self.user.nome_usual} - {self.rede.nome}"
 
 class IdentidadeVisual(models.Model):
-    logo = models.ImageField(upload_to='media/', null=True, blank=True)
+    logo = CloudinaryField('image', folder='repex/sistema/', null=True, blank=True)
     pagina_inicial_frase = models.CharField(max_length=300, default="Repositório IFSPP, aqui é o lar de todos os nossos projetos!")
-    imagem = models.ImageField(upload_to='media/', null=True, blank=True)
+    imagem = CloudinaryField('image', folder='repex/sistema/', null=True, blank=True)
     cor_sistema = models.CharField(max_length=7, default="#005EFF")
     cor_suplente = models.CharField(max_length=7, blank=True, null=True)
     cor_titulo = models.CharField(max_length=7, default="#FF9823")
@@ -116,7 +116,7 @@ class IdentidadeVisual(models.Model):
  
 
 class Instituicao(models.Model):
-    logo = models.ImageField(upload_to='media/', null=True, blank=True)
+    logo = CloudinaryField('image', folder='repex/instituicao/', null=True, blank=True)
     nome = models.CharField(max_length=150)
     cep = models.CharField(max_length=20, blank=True, null=True)
     endereco = models.CharField(max_length=250, blank=True, null=True)
