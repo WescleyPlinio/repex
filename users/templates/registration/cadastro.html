@@ -2,23 +2,92 @@
 {% load static crispy_forms_tags %}
 
 {% block content %}
-  <div class="container-fluid min-vh-100">
-    <div class="row min-vh-100 d-flex">
-      <div class="col-lg-6 col-md-8 col-sm-12 m-auto d-flex align-items-center justify-content-center">
-        <div class="card border-0 shadow-lg w-100">
-          <div class="card-body p-4">
-            {% if messages %}
-              <div class="container mt-3">
-                {% for message in messages %}
-                  <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                    {{ message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                  </div>
-                {% endfor %}
-              </div>
-            {% endif %}
-            {% crispy form %}
+  <div class="login-container">
+    <div class="login-card">
+      <div class="card-header {% if not identidade_visual.cor_sistema %}bg-dark{% endif %}"
+        style="{% if identidade_visual.cor_suplente %}
+          
+                 background: linear-gradient(to right, {{ identidade_visual.cor_sistema }}, {{ identidade_visual.cor_suplente }});
+
+        {% else %}
+          
+                 background-color: {{ identidade_visual.cor_sistema }};
+
+        {% endif %}">
+        {% if identidade_visual.logo %}
+          <div class="logo-container">
+            <a href="{% url 'index' %}"><img src="{{ identidade_visual.logo.url }}" alt="Logo" /></a>
           </div>
+        {% endif %}
+        <h1 class="card-title">Criar Conta</h1>
+        <p class="card-subtitle">Junte-se ao Repex em poucos passos</p>
+      </div>
+
+      <div class="card-body">
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endfor %}
+        {% endif %}
+
+        <form method="post" id="cadastroForm">
+          {% csrf_token %}
+
+          <div class="form-group">
+            <label class="form-label" for="id_nome">Nome Completo</label>
+            <input type="text" name="nome" class="form-control" id="id_nome" placeholder="Seu nome completo" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="id_email">E-mail</label>
+            <input type="email" name="email" class="form-control" id="id_email" placeholder="seu@email.com" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="id_password1">Senha</label>
+            <input type="password" name="password1" class="form-control" id="id_password1" placeholder="Crie uma senha forte" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="id_password2">Confirmar Senha</label>
+            <input type="password" name="password2" class="form-control" id="id_password2" placeholder="Repita sua senha" required />
+          </div>
+
+          <div class="form-group">
+            <button type="submit"
+              class="btn btn-primary {% if not identidade_visual.cor_sistema %}bg-dark{% endif %}"
+              style="{% if identidade_visual.cor_suplente %}
+                
+                 background: linear-gradient(to right, {{ identidade_visual.cor_sistema }}, {{ identidade_visual.cor_suplente }});
+
+              {% else %}
+                
+                 background-color: {{ identidade_visual.cor_sistema }};
+
+              {% endif %}">
+              <i class="fas fa-user-plus"></i> Criar Conta
+            </button>
+          </div>
+        </form>
+
+        <div class="divider">
+          <span>Ou cadastre-se com</span>
+        </div>
+
+        <div>
+          <a href="{% url 'login_suap' %}" class="social-btn social-btn-suap">
+            <img src="https://suap.ifrn.edu.br/static/comum/img/favicon.png" alt="SUAP" width="20" height="20" />
+            <span>SUAP</span>
+          </a>
+        </div>
+
+        <div class="footer-links">
+          <p>
+            Já tem uma conta? <a href="{% url 'login' %}">Fazer Login</a>
+          </p>
         </div>
       </div>
     </div>
