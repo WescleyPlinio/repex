@@ -64,7 +64,7 @@
     <form method="GET" action="{% url 'explorar' %}" class="w-100 mb-1">
       <div class="position-relative">
         <input type="text" name="q" class="form-control" placeholder="Busque projetos:" value="{{ query }}" />
-        <button type="submit" class="p-0 position-absolute top-50 end-0 translate-middle-y me-3"><i class="fas fa-search"></i></button>
+        <button type="submit" class="p-0 position-absolute top-50 end-0 translate-middle-y me-3 border border-0 bg-white"><i class="fas fa-search"></i></button>
       </div>
     </form>
 
@@ -78,6 +78,9 @@
       {% if user.is_authenticated %}
         <li class="nav-item mb-1">
           <a class="nav-link active" href="{% url 'profile_detail' request.user.id %}" style="color: {{ identidade_visual.cor_sistema }};">Ver perfil</a>
+        </li>
+        <li class="nav-item mb-1">
+          <a class="nav-link active" href="{% url 'dashboard' %}" style="color: {{ identidade_visual.cor_sistema }};">Dashboard</a>
         </li>
         <li class="nav-item mb-1">
           <form method="post" action="{% url "logout" %}">
