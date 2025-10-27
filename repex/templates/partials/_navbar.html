@@ -5,6 +5,9 @@
      background: linear-gradient(to right, {{ identidade_visual.cor_sistema }}, {{ identidade_visual.cor_suplente }}) !important;
   {% else %}
     background-color: {{ identidade_visual.cor_sistema }} !important;
+     background: linear-gradient(to right, {{ identidade_visual.cor_sistema }}, {{ identidade_visual.cor_suplente }});
+  {% else %}
+    background-color: {{ identidade_visual.cor_sistema }};
   {% endif %}">
   <div class="container">
     <a class="navbar-brand" href="{% url 'index' %}">
@@ -68,6 +71,8 @@
             <a href="/login" class="btn-minimal btn-sm flex-fill">
               <i class="fas fa-sign-in-alt me-2"></i> Entrar
             </a>
+            <a href="/cadastro" class="btn-minimal btn-sm filled flex-fill"><i class="fas fa-user-plus me-2"></i> Cadastrar</a>
+            <a href="/login" class="btn-minimal btn-sm flex-fill"><i class="fas fa-sign-in-alt me-2"></i> Entrar</a>
           </div>
         {% endif %}
       </ul>
@@ -78,4 +83,44 @@
 <!-- Offcanvas permanece igual ao seu código original -->
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar">
   <!-- Seu código offcanvas atual aqui -->
+</div>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" style="color: {{ identidade_visual.cor_sistema }};">Menu</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body">
+    <form method="GET" action="{% url 'explorar' %}" class="w-100 mb-1">
+      <div class="position-relative">
+        <input type="text" name="q" class="form-control" placeholder="Busque projetos:" value="{{ query }}" />
+        <button type="submit" class="p-0 position-absolute top-50 end-0 translate-middle-y me-3 border border-0 bg-white"><i class="fas fa-search"></i></button>
+      </div>
+    </form>
+
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item mb-1">
+        <a class="nav-link active" href="{% url 'index' %}" style="color: {{ identidade_visual.cor_sistema }};">Início</a>
+      </li>
+      <li class="nav-item mb-1">
+        <a class="nav-link active" href="{% url 'explorar' %}" style="color: {{ identidade_visual.cor_sistema }};">Explorar</a>
+      </li>
+      {% if user.is_authenticated %}
+        <li class="nav-item mb-1">
+          <a class="nav-link active" href="{% url 'profile_detail' request.user.id %}" style="color: {{ identidade_visual.cor_sistema }};">Ver perfil</a>
+        </li>
+        <li class="nav-item mb-1">
+          <a class="nav-link active" href="{% url 'dashboard' %}" style="color: {{ identidade_visual.cor_sistema }};">Dashboard</a>
+        </li>
+        <li class="nav-item mb-1">
+          <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="nav-link active" href="{% url 'logout' %}" style="color: {{ identidade_visual.cor_sistema }};">Logout</button>
+          </form>
+        </li>
+      {% else %}
+        <li class="nav-item mb-1">
+          <a class="nav-link active" href="{% url 'login' %}" style="color: {{ identidade_visual.cor_sistema }};">Login</a>
+        </li>
+      {% endif %}
+    </ul>
+  </div>
 </div>
