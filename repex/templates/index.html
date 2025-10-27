@@ -17,7 +17,7 @@
             <i class="fas fa-rocket me-2"></i>Explorar Projetos
           </a>
           {% if not user.is_authenticated %}
-          <a href="/cadastro" class="btn btn-outline-light btn-lg px-4 py-2 rounded-pill">
+          <a href="{% url 'cadastro' %}" class="btn btn-outline-light btn-lg px-4 py-2 rounded-pill">
             <i class="fas fa-user-plus me-2"></i>Criar Conta
           </a>
           {% endif %}
@@ -71,29 +71,6 @@
                 {{ group.0.titulo }}
                 {% else %}
                 Últimas notícias:
-  {% if noticias.exists %}
-    <div id="newsCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        {% for group in noticias|chunks:3 %}
-          <div class="carousel-item {% if forloop.first %}active{% endif %}">
-            <div class="notice-shell row g-1 d-flex">
-              <div class="{% if group.1 %}col-md-6 col-lg-6 col-sm-12{% else %}w-100 h-100{% endif %}">
-                {% if group.0.id %}
-                  <a href="{% url 'noticia_detail' group.0.id %}" class="text-decoration-none">
-                    <div class="notice-card h-100 d-flex"
-                      style="background-image: url('{% if group.0.imagem %}{{ group.0.imagem.url }}{% else %}{% static 'imgs/placeholder.webp' %}{% endif %}');">
-                      <span class="notice-label">
-                        {% if group.0.area_conhecimento %}
-                          {{ group.0.area_conhecimento }}
-                        {% endif %}
-                      </span>
-                      <h4 class="m-auto p-5 text-white">
-                        {% if group.0 %}
-                          {{ group.0.titulo }}
-                        {% endif %}
-                      </h4>
-                    </div>
-                  </a>
                 {% endif %}
               </h4>
             </div>
