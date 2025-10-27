@@ -1,159 +1,199 @@
 {% extends 'base.html' %}
 {% load static news_extras %}
+
 {% block nav_bottom %}
-  <div class="row d-flex">
+<section class="hero-section" style="{% if identidade_visual.cor_suplente %}
+           background: linear-gradient(135deg, {{ identidade_visual.cor_sistema }}, {{ identidade_visual.cor_suplente }});
+        {% else %}
+          background-color: {{ identidade_visual.cor_sistema }};
+        {% endif %}">
+  <div class="container">
     {% if identidade_visual.imagem %}
-      <div class="col-md-9 d-flex py-5">
-        <h2 class="text-white my-auto fw-bold">{{ identidade_visual.pagina_inicial_frase }}</h2>
+    <div class="row align-items-center">
+      <div class="col-lg-7 hero-content">
+        <h1 class="hero-title">{{ identidade_visual.pagina_inicial_frase }}</h1>
+        <div class="hero-buttons">
+          <a href="{% url 'explorar' %}" class="btn btn-light btn-lg me-3 px-4 py-2 rounded-pill fw-bold">
+            <i class="fas fa-rocket me-2"></i>Explorar Projetos
+          </a>
+          {% if not user.is_authenticated %}
+          <a href="/cadastro" class="btn btn-outline-light btn-lg px-4 py-2 rounded-pill">
+            <i class="fas fa-user-plus me-2"></i>Criar Conta
+          </a>
+          {% endif %}
+        </div>
       </div>
-      <div class="col-md-3 py-5">
-        <img class="img-fluid mw-100" src="{{ identidade_visual.imagem.url }}" />
+      <div class="col-lg-5 hero-image">
+        <img src="{{ identidade_visual.imagem.url }}" class="img-fluid"
+          alt="{{ identidade_visual.pagina_inicial_frase }}" />
       </div>
-    {% else %}
-      <div class="col-12 d-flex justify-content-center my-5">
-        <h2 class="text-white my-auto fw-bold text-center">{{ identidade_visual.pagina_inicial_frase }}</h2>
+      {% else %}
+      <div class="hero-buttons text-center">
+        <a href="{% url 'explorar' %}" class="btn btn-light btn-lg me-3 px-4 py-2 rounded-pill fw-bold">
+          <i class="fas fa-rocket me-2"></i>Explorar Projetos
+        </a>
+        {% if not user.is_authenticated %}
+        <a href="/cadastro" class="btn btn-outline-light btn-lg px-4 py-2 rounded-pill">
+          <i class="fas fa-user-plus me-2"></i>Criar Conta
+        </a>
+        {% endif %}
       </div>
+    </div>
+    <div class="col-12 d-flex justify-content-center my-5">
+      <h2 class="hero-title text-center">{{ identidade_visual.pagina_inicial_frase }}</h2>
+    </div>
     {% endif %}
   </div>
+  </div>
+</section>
 {% endblock %}
+
 {% block content %}
-  {% if noticias.exists %}
-    <div id="newsCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
-      <h4 class="fw-bold" style="color: {{ identidade_visual.cor_sistema }};">Últimas notícias:</h4>
-      <div class="carousel-inner">
-        {% for group in noticias|chunks:3 %}
-          <div class="carousel-item {% if forloop.first %}active{% endif %}">
-            <div class="notice-shell row g-1 d-flex">
-              <div class="{% if group.1 %}col-md-6 col-lg-6 col-sm-12{% else %}w-100 h-100{% endif %}">
-                {% if group.0.id %}
-                  <a href="{% url 'noticia_detail' group.0.id %}" class="text-decoration-none">
-                    <div class="notice-card h-100 d-flex"
-                      style="background-image: url('{% if group.0.imagem %}{{ group.0.imagem.url }}{% else %}{% static 'imgs/placeholder.webp' %}{% endif %}');">
-                      <span class="notice-label">
-                        {% if group.0.area_conhecimento %}
-                          {{ group.0.area_conhecimento }}
-                        {% endif %}
-                      </span>
-                      <h4 class="m-auto p-5 text-white">
-                        {% if group.0 %}
-                          {{ group.0.titulo }}
-                        {% else %}
-                          Últimas notícias:
-                        {% endif %}
-                      </h4>
-                    </div>
-                  </a>
+{% if noticias.exists %}
+<div id="newsCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+  <h4 class="fw-bold" style="color: {{ identidade_visual.cor_sistema }};">Últimas notícias:</h4>
+  <div class="carousel-inner">
+    {% for group in noticias|chunks:3 %}
+    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+      <div class="notice-shell row g-1 d-flex">
+        <div class="{% if group.1 %}col-md-6 col-lg-6 col-sm-12{% else %}w-100 h-100{% endif %}">
+          {% if group.0.id %}
+          <a href="{% url 'noticia_detail' group.0.id %}" class="text-decoration-none">
+            <div class="notice-card h-100 d-flex"
+              style="background-image: url('{% if group.0.imagem %}{{ group.0.imagem.url }}{% else %}{% static 'imgs/placeholder.webp' %}{% endif %}');">
+              <span class="notice-label">
+                {% if group.0.area_conhecimento %}
+                {{ group.0.area_conhecimento }}
                 {% endif %}
-              </div>
+              </span>
+              <h4 class="m-auto p-5 text-white">
+                {% if group.0 %}
+                {{ group.0.titulo }}
+                {% else %}
+                Últimas notícias:
+                {% endif %}
+              </h4>
+            </div>
+          </a>
+          {% endif %}
+        </div>
 
-              <div class="col-md-6 col-lg-6 col-sm-12">
-                <div class="row d-flex flex-column" style="height: 100%;">
-                  {% if group.1.id %}
-                    <div class="col-lg-12 col-md-12 col-sm-12 flex-grow-1 mb-1">
-                      <a href="{% url 'noticia_detail' group.1.id %}" class="text-decoration-none">
-                        <div class="notice-card h-100 d-flex"
-                          style="background-image: url('{% if group.1.imagem %}{{ group.1.imagem.url }}{% else %}{% static 'imgs/placeholder.webp' %}{% endif %}');">
-                          <span class="notice-label">
-                            {% if group.1.area_conhecimento %}
-                              {{ group.1.area_conhecimento }}
-                            {% endif %}
-                          </span>
-                          <h4 class="m-auto p-5 text-white">
-                            {% if group.1 %}
-                              {{ group.1.titulo }}
-                            {% else %}
-                              Últimas notícias:
-                            {% endif %}
-                          </h4>
-                        </div>
-                      </a>
-                    </div>
-                  {% endif %}
-
-                  {% if group.2.id %}
-                    <div class="col-lg-12 col-md-12 col-sm-12 flex-grow-1">
-                      <a href="{% url 'noticia_detail' group.2.id %}" class="text-decoration-none">
-                        <div class="notice-card h-100 d-flex"
-                          style="background-image: url('{% if group.2.imagem %}{{ group.2.imagem.url }}{% else %}{% static 'imgs/placeholder.webp' %}{% endif %}');">
-                          <span class="notice-label">
-                            {% if group.2.area_conhecimento %}
-                              {{ group.2.area_conhecimento }}
-                            {% endif %}
-                          </span>
-                          <h4 class="m-auto p-5 text-white">
-                            {% if group.2 %}
-                              {{ group.2.titulo }}
-                            {% else %}
-                              Últimas notícias:
-                            {% endif %}
-                          </h4>
-                        </div>
-                      </a>
-                    </div>
-                  {% endif %}
+        <div class="col-md-6 col-lg-6 col-sm-12">
+          <div class="row d-flex flex-column" style="height: 100%;">
+            {% if group.1.id %}
+            <div class="col-lg-12 col-md-12 col-sm-12 flex-grow-1 mb-1">
+              <a href="{% url 'noticia_detail' group.1.id %}" class="text-decoration-none">
+                <div class="notice-card h-100 d-flex"
+                  style="background-image: url('{% if group.1.imagem %}{{ group.1.imagem.url }}{% else %}{% static 'imgs/placeholder.webp' %}{% endif %}');">
+                  <span class="notice-label">
+                    {% if group.1.area_conhecimento %}
+                    {{ group.1.area_conhecimento }}
+                    {% endif %}
+                  </span>
+                  <h4 class="m-auto p-5 text-white">
+                    {% if group.1 %}
+                    {{ group.1.titulo }}
+                    {% else %}
+                    Últimas notícias:
+                    {% endif %}
+                  </h4>
                 </div>
-              </div>
+              </a>
             </div>
+            {% endif %}
+
+            {% if group.2.id %}
+            <div class="col-lg-12 col-md-12 col-sm-12 flex-grow-1">
+              <a href="{% url 'noticia_detail' group.2.id %}" class="text-decoration-none">
+                <div class="notice-card h-100 d-flex"
+                  style="background-image: url('{% if group.2.imagem %}{{ group.2.imagem.url }}{% else %}{% static 'imgs/placeholder.webp' %}{% endif %}');">
+                  <span class="notice-label">
+                    {% if group.2.area_conhecimento %}
+                    {{ group.2.area_conhecimento }}
+                    {% endif %}
+                  </span>
+                  <h4 class="m-auto p-5 text-white">
+                    {% if group.2 %}
+                    {{ group.2.titulo }}
+                    {% else %}
+                    Últimas notícias:
+                    {% endif %}
+                  </h4>
+                </div>
+              </a>
+            </div>
+            {% endif %}
           </div>
-        {% endfor %}
+        </div>
       </div>
-      {% if noticias|length > 3 %}
-        <button class="btn btn-light carousel-control carousel-prev{% if not noticias %} d-none{% endif %}" data-bs-target="#newsCarousel" data-bs-slide="prev" style="color: blue;" aria-label="Anterior">‹</button>
-        <button class="btn btn-light carousel-control carousel-next{% if not noticias %} d-none{% endif %}" data-bs-target="#newsCarousel" data-bs-slide="next" style="color: blue;" aria-label="Próximo">›</button>
-      {% endif %}
     </div>
+    {% endfor %}
+  </div>
+  {% if noticias|length > 3 %}
+  <button class="btn btn-light carousel-control carousel-prev{% if not noticias %} d-none{% endif %}"
+    data-bs-target="#newsCarousel" data-bs-slide="prev" style="color: blue;" aria-label="Anterior">‹</button>
+  <button class="btn btn-light carousel-control carousel-next{% if not noticias %} d-none{% endif %}"
+    data-bs-target="#newsCarousel" data-bs-slide="next" style="color: blue;" aria-label="Próximo">›</button>
   {% endif %}
-  {% if projetos.exists %}
-    <div class="carousel-shell mb-5">
-      <h4 class="fw-bold" style="color: {{ identidade_visual.cor_sistema }};">Últimos projetos adicionados:</h4>
-      <div class="carousel-viewport">
-        <div class="carousel-track w-100" id="cardTrack">
-          {% for projeto in projetos %}
-            <div class="card-item">
-              {% include 'partials/_card.html' %}
-            </div>
-          {% endfor %}
-        </div>
+</div>
+{% endif %}
+{% if projetos.exists %}
+<div class="carousel-shell mb-5">
+  <h4 class="fw-bold" style="color: {{ identidade_visual.cor_sistema }};">Últimos projetos adicionados:</h4>
+  <div class="carousel-viewport">
+    <div class="carousel-track w-100" id="cardTrack">
+      {% for projeto in projetos %}
+      <div class="card-item">
+        {% include 'partials/_card.html' %}
       </div>
-
-      <button class="btn btn-light carousel-control carousel-prev" id="prevBtn" style="color: blue;" aria-label="Anterior">‹</button>
-      <button class="btn btn-light carousel-control carousel-next" id="nextBtn" style="color: blue;" aria-label="Próximo">›</button>
+      {% endfor %}
     </div>
+  </div>
 
-    <div class="carousel-shell mb-5">
-      <h4 class="fw-bold" style="color: {{ identidade_visual.cor_sistema }};">Conheça projetos:</h4>
-      <div class="carousel-viewport">
-        <div class="carousel-track w-100" id="cardTrack">
-          {% for projeto in projetos_random %}
-            <div class="card-item">
-              {% include 'partials/_card.html' %}
-            </div>
-          {% endfor %}
-        </div>
+  <button class="btn btn-light carousel-control carousel-prev" id="prevBtn" style="color: blue;"
+    aria-label="Anterior">‹</button>
+  <button class="btn btn-light carousel-control carousel-next" id="nextBtn" style="color: blue;"
+    aria-label="Próximo">›</button>
+</div>
+
+<div class="carousel-shell mb-5">
+  <h4 class="fw-bold" style="color: {{ identidade_visual.cor_sistema }};">Conheça projetos:</h4>
+  <div class="carousel-viewport">
+    <div class="carousel-track w-100" id="cardTrack">
+      {% for projeto in projetos_random %}
+      <div class="card-item">
+        {% include 'partials/_card.html' %}
       </div>
-      {% if projetos_random.exists %}
-        <button class="btn btn-light carousel-control carousel-prev" id="prevBtn" style="color: blue;" aria-label="Anterior">‹</button>
-        <button class="btn btn-light carousel-control carousel-next" id="nextBtn" style="color: blue;" aria-label="Próximo">›</button>
-      {% endif %}
+      {% endfor %}
     </div>
-
-    <div class="carousel-shell mb-5">
-      <h4 class="fw-bold" style="color: {{ identidade_visual.cor_sistema }};">Projetos mais vistos:</h4>
-      <div class="carousel-viewport">
-        <div class="carousel-track w-100" id="cardTrack">
-          {% for projeto in projetos_mais_vistos %}
-            <div class="card-item">
-              {% include 'partials/_card.html' %}
-            </div>
-          {% endfor %}
-        </div>
-      </div>
-      {% if projetos_mais_vistos.exists %}
-        <button class="btn btn-light carousel-control carousel-prev" id="prevBtn" style="color: blue;" aria-label="Anterior">‹</button>
-        <button class="btn btn-light carousel-control carousel-next" id="nextBtn" style="color: blue;" aria-label="Próximo">›</button>
-      {% endif %}
-    </div>
-    {% else %}
-    <p>Sem projetos cadastrados</p>
+  </div>
+  {% if projetos_random.exists %}
+  <button class="btn btn-light carousel-control carousel-prev" id="prevBtn" style="color: blue;"
+    aria-label="Anterior">‹</button>
+  <button class="btn btn-light carousel-control carousel-next" id="nextBtn" style="color: blue;"
+    aria-label="Próximo">›</button>
   {% endif %}
+</div>
+
+<div class="carousel-shell mb-5">
+  <h4 class="fw-bold" style="color: {{ identidade_visual.cor_sistema }};">Projetos mais vistos:</h4>
+  <div class="carousel-viewport">
+    <div class="carousel-track w-100" id="cardTrack">
+      {% for projeto in projetos_mais_vistos %}
+      <div class="card-item">
+        {% include 'partials/_card.html' %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% if projetos_mais_vistos.exists %}
+  <button class="btn btn-light carousel-control carousel-prev" id="prevBtn" style="color: blue;"
+    aria-label="Anterior">‹</button>
+  <button class="btn btn-light carousel-control carousel-next" id="nextBtn" style="color: blue;"
+    aria-label="Próximo">›</button>
+  {% endif %}
+</div>
+{% else %}
+<p>Sem projetos cadastrados</p>
+{% endif %}
 {% endblock %}
