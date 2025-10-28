@@ -35,27 +35,8 @@
 
         <form method="post" id="cadastroForm">
           {% csrf_token %}
-
-          <div class="form-group">
-            <label class="form-label" for="id_nome">Nome Completo</label>
-            <input type="text" name="nome" class="form-control" id="id_nome" placeholder="Seu nome completo" required />
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="id_email">E-mail</label>
-            <input type="email" name="email" class="form-control" id="id_email" placeholder="seu@email.com" required />
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="id_password1">Senha</label>
-            <input type="password" name="password1" class="form-control" id="id_password1" placeholder="Crie uma senha forte" required />
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="id_password2">Confirmar Senha</label>
-            <input type="password" name="password2" class="form-control" id="id_password2" placeholder="Repita sua senha" required />
-          </div>
-
+          {{ form|crispy }}
+          
           <div class="form-group">
             <button type="submit"
               class="login-btn text-white {% if not identidade_visual.cor_sistema %}bg-dark{% endif %}"

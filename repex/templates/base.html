@@ -15,6 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="{% static 'main.css' %}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    {% block extra_styles %}{% endblock extra_styles %}
   </head>
   <body class="d-flex flex-column min-vh-100">
     {% include 'partials/_navbar.html' %}
