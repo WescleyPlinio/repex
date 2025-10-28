@@ -80,7 +80,6 @@
     height: 100%;
     background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" opacity="0.05"><polygon fill="white" points="0,1000 1000,0 1000,1000"/></svg>');
     background-size: cover;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .hero-content {

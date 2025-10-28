@@ -3,11 +3,11 @@
 
 {% block nav_bottom %}
 <section class="hero-section" style="{% if identidade_visual.cor_suplente %}
-           background: linear-gradient(135deg, {{ identidade_visual.cor_sistema }}, {{ identidade_visual.cor_suplente }});
+           background: linear-gradient(to right, {{ identidade_visual.cor_sistema }}, {{ identidade_visual.cor_suplente }});
         {% else %}
           background-color: {{ identidade_visual.cor_sistema }};
         {% endif %}">
-  <div class="container">
+  <div>
     {% if identidade_visual.imagem %}
     <div class="row align-items-center">
       <div class="col-lg-7 hero-content">
@@ -39,7 +39,7 @@
         {% endif %}
       </div>
     </div>
-    <div class="col-12 d-flex justify-content-center my-5">
+    <div class="col-md-8 mx-auto d-flex justify-content-center my-5">
       <h2 class="hero-title text-center">{{ identidade_visual.pagina_inicial_frase }}</h2>
     </div>
     {% endif %}
@@ -51,7 +51,6 @@
 {% block content %}
 {% if noticias.exists %}
 <div id="newsCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
-  <h4 class="fw-bold" style="color: {{ identidade_visual.cor_sistema }};">Últimas notícias:</h4>
   <div class="carousel-inner">
     {% for group in noticias|chunks:3 %}
     <div class="carousel-item {% if forloop.first %}active{% endif %}">
@@ -93,8 +92,6 @@
                   <h4 class="m-auto p-5 text-white">
                     {% if group.1 %}
                     {{ group.1.titulo }}
-                    {% else %}
-                    Últimas notícias:
                     {% endif %}
                   </h4>
                 </div>

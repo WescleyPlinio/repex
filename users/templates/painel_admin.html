@@ -6,7 +6,7 @@ Configurações do sistema
 {% block content %}
 <div class="card mb-3">
   <div class="card-header d-flex">
-    <h3 class="card-title fw-bold my-auto {% if not identidade_visual.cor_sistema %}bg-dark{% endif %}" style="{% if identidade_visual.cor_suplente %}
+    <h3 class="card-title fw-bold my-auto {% if not identidade_visual.cor_sistema %}text-dark{% endif %}" style="{% if identidade_visual.cor_suplente %}
                    color: {{ identidade_visual.cor_sistema }};
                 {% endif %}">Redes sociais</h3>
     <a class="btn btn-success ms-auto" href="{% url 'rede_social_create' %}">Cadastrar</a>
@@ -38,7 +38,7 @@ Configurações do sistema
 
 <div class="card mb-3">
   <div class="card-header d-flex">
-    <h3 class="card-title fw-bold my-auto {% if not identidade_visual.cor_sistema %}bg-dark{% endif %}" style="{% if identidade_visual.cor_suplente %}
+    <h3 class="card-title fw-bold my-auto {% if not identidade_visual.cor_sistema %}text-dark{% endif %}" style="{% if identidade_visual.cor_suplente %}
                    color: {{ identidade_visual.cor_sistema }};
                 {% endif %}">Áreas de conhecimento</h3>
     <a class="btn btn-success ms-auto" href="{% url 'area_conhecimento_create' %}">Cadastrar</a>
@@ -72,7 +72,7 @@ Configurações do sistema
 
 <div class="card mb-3">
   <div class="card-header d-flex">
-    <h3 class="card-title fw-bold my-auto {% if not identidade_visual.cor_sistema %}bg-dark{% endif %}" style="{% if identidade_visual.cor_suplente %}
+    <h3 class="card-title fw-bold my-auto {% if not identidade_visual.cor_sistema %}text-dark{% endif %}" style="{% if identidade_visual.cor_suplente %}
                   color: {{ identidade_visual.cor_sistema }};
                 {% endif %}">Identidade visual</h3>
     {% if not identidade_visual %}
@@ -121,7 +121,7 @@ Configurações do sistema
 
 <div class="card mb-3">
   <div class="card-header d-flex">
-    <h3 class="card-title fw-bold my-auto {% if not identidade_visual.cor_sistema %}bg-dark{% endif %}" style="{% if identidade_visual.cor_suplente %}
+    <h3 class="card-title fw-bold my-auto {% if not identidade_visual.cor_sistema %}text-dark{% endif %}" style="{% if identidade_visual.cor_suplente %}
                   color: {{ identidade_visual.cor_sistema }};
                 {% endif %}">Instituição</h3>
     {% if not instituicao %}
