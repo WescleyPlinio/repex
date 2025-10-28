@@ -1,9 +1,19 @@
 {% load static %}
-<aside class="main-sidebar sidebar-dark-primary elevation-1 fundo-bd">
+<aside
+  class="main-sidebar sidebar-dark-primary elevation-1 {% if not identidade_visual.cor_sistema %}bg-dark{% endif %}"
+  style="{% if identidade_visual.cor_suplente %}
+                   background: linear-gradient(135deg, {{ identidade_visual.cor_sistema }}, {{ identidade_visual.cor_suplente }});
+                {% else %}
+                  background: {{ identidade_visual.cor_sistema }};
+                {% endif %}">
   {% if identidade_visual.logo %}
-  <a href="{% url 'index' %}" class="brand-link"><img src="{{ identidade_visual.logo.url }}" class="w-100" alt="" /></a>
+  <a href="{% url 'index' %}" class="brand-link">
+    <img src="{{ identidade_visual.logo.url }}" class="w-100" alt="Logo" style="filter: brightness(0) invert(1);" />
+  </a>
   {% else %}
-  <a href="{% url 'index' %}" class="brand-link text-center text-decoration-none"><h2>Repex</h2></a>
+  <a href="{% url 'index' %}" class="brand-link text-center text-decoration-none">
+    <h2 style="color: white; margin: 0;">Repex</h2>
+  </a>
   {% endif %}
   <div class="sidebar">
     <nav class="mt-2">

@@ -68,7 +68,6 @@
 .hero-section {
     color: white;
     padding: 80px 0;
-    position: relative;
     overflow: hidden;
 }
 
@@ -134,7 +133,6 @@
     }
 }
 
-/* Responsividade */
 @media (max-width: 992px) {
     .hero-title {
         font-size: 2.8rem;
@@ -194,7 +192,7 @@ body::-webkit-scrollbar {
     max-width: 40%;
     box-sizing: border-box;
     padding: .3rem;
-    /* espaço interno entre cards */
+
 }
 
 .card-item .card {
@@ -269,12 +267,17 @@ body::-webkit-scrollbar {
     text-align: center;
 }
 
+:root {
+    --primary: #ffffff;
+    --secondary: #000000;
+}
+
 .btn-minimal {
     border: 2px solid var(--primary);
     background: transparent;
     color: var(--primary);
     border-radius: 8px;
-    padding: 10px 24px;
+    padding: 6px 20px;
     font-weight: 600;
     transition: all 0.3s ease;
     display: inline-flex;
@@ -286,12 +289,12 @@ body::-webkit-scrollbar {
 
 .btn-minimal.filled {
     background: var(--primary);
-    color: white;
+    color: var(--secondary);
 }
 
 .btn-minimal:hover {
-    background: var(--primary);
-    color: white;
+    background: var(--secondary);
+    color: rgb(255, 255, 255);
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
     text-decoration: none;
@@ -305,10 +308,4 @@ body::-webkit-scrollbar {
 .btn-group-minimal {
     display: flex;
     gap: 12px;
-}
-
-@media (max-width: 768px) {
-    .btn-group-minimal {
-        flex-direction: column;
-    }
 }
