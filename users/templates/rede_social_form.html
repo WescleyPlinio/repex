@@ -2,7 +2,7 @@
 {% load static crispy_forms_tags %}
 {% block title %}{% if form.instance.pk %}Editar Rede social{% else %}Nova Rede social{% endif %}{% endblock %}
 {% block content %}
-  <h3 class="mb-3 text-primary">{% if form.instance.pk %}Editar{% else %}Nova{% endif %} Rede social</h3>
+  <h3 style="color: {{ identidade_visual.cor_sistema }};" class="mb-3">{% if form.instance.pk %}Editar{% else %}Nova{% endif %} Rede social</h3>
   <form method="post" enctype="multipart/form-data" class="card card-body">
     {% csrf_token %}
     {{ form| crispy}}
