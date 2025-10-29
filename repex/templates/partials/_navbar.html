@@ -1,23 +1,45 @@
 {% load static %}
-
+{% block extra_styles %}
+<style>
+  .btn-outline-light:hover {
+    color: {{ identidade_visual.cor_sistema }};
+  }
+</style>
+{% endblock extra_styles %}
 <!-- Navbar -->
-<nav id="mainNavbar" class="navbar navbar-expand-lg fixed-top navbar-dark {% if not identidade_visual.cor_sistema %}bg-dark{% endif %}" style="{% if identidade_visual.cor_suplente %} background: linear-gradient(to right, {{ identidade_visual.cor_sistema }}, {{ identidade_visual.cor_suplente }}); {% else %}background-color: {{ identidade_visual.cor_sistema }};{% endif %}">
+<nav id="mainNavbar"
+  class="navbar navbar-expand-lg fixed-top navbar-dark {% if not identidade_visual.cor_sistema %}bg-dark{% endif %}"
+  style="{% if identidade_visual.cor_suplente %}
+     background: linear-gradient(to right, {{ identidade_visual.cor_sistema }}, {{ identidade_visual.cor_suplente }}) !important;
+  {% else %}
+    background-color: {{ identidade_visual.cor_sistema }} !important;
+  {% endif %}">
   <div class="container">
     <a class="navbar-brand" href="{% url 'index' %}">
       {% if identidade_visual.logo %}
         <img style="max-height: 50px;" src="{{ identidade_visual.logo.url }}" />
       {% else %}
-        Repex
+      <img style="max-height: 25px;" src="{% static 'imgs/logo.png' %}" />
       {% endif %}
     </a>
 
-    <form method="get" action="{% url 'explorar' %}" class="flex-grow-1 mw-100 mx-3 d-none d-md-block">
+    <form method="get" action="{% url 'explorar' %}" class="search-container flex-grow-1 mx-3 d-none d-lg-block">
       <div class="position-relative">
         <input type="text" id="search-projetos" name="q" class="form-control" placeholder="Busque projetos:" value="{{ query }}" />
-        <button type="submit" class="btn btn-link p-0 position-absolute top-50 end-0 translate-middle-y me-3"><i class="fas fa-search text-dark"></i></button>
+        <button type="submit"
+          class="btn"
+          style="{% if identidade_visual.cor_suplente %}
+                   background: linear-gradient(to right, {{ identidade_visual.cor_sistema }}, {{ identidade_visual.cor_suplente }});
+          {% else %}
+                  background-color: {{ identidade_visual.cor_sistema }};
+          {% endif %}">
+          <i class="fas fa-search text-white"></i>
+        </button>
       </div>
     </form>
+
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"><span class="navbar-toggler-icon"></span></button>
+
     <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
@@ -37,7 +59,7 @@
                 <a class="dropdown-item" href="{% url 'dashboard' %}">Dashboard</a>
               </li>
               <li>
-                <form action="{% url "logout" %}" method="post">
+                <form action="{% url 'logout' %}" method="post">
                   {% csrf_token %}
                   <button type="submit" class="dropdown-item">Logout</button>
                 </form>
@@ -45,9 +67,12 @@
             </ul>
           </div>
         {% else %}
-          <li class="nav-item">
-            <a class="nav-link text-white" href="{% url 'login' %}">Login</a>
-          </li>
+          <div class="btn-group-minimal">
+            <li class="nav-item">
+              <a class="nav-link text-white" href="{% url 'login' %}">Entrar</a>
+            </li>
+            <a href="{% url 'cadastro' %}" class="btn btn btn-outline-light rounded-pill flex-fill"><i class="fas fa-user-plus me-2"></i>Cadastre-se</a>
+          </div>
         {% endif %}
       </ul>
     </div>
@@ -83,7 +108,7 @@
           <a class="nav-link active" href="{% url 'dashboard' %}" style="color: {{ identidade_visual.cor_sistema }};">Dashboard</a>
         </li>
         <li class="nav-item mb-1">
-          <form method="post" action="{% url "logout" %}">
+          <form method="post" action="{% url 'logout' %}">
             {% csrf_token %}
             <button type="submit" class="nav-link active" href="{% url 'logout' %}" style="color: {{ identidade_visual.cor_sistema }};">Logout</button>
           </form>

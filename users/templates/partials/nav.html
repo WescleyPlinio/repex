@@ -1,13 +1,20 @@
 {% load static %}
-<nav class="navbar navbar-dark main-header navbar-expand-lg border border-0">
+<nav
+  class="navbar main-header navbar-expand-lg border border-0 {% if not identidade_visual.cor_sistema %}bg-dark{% endif %}"
+  style="{% if identidade_visual.cor_suplente %}
+     background: linear-gradient(to right, {{ identidade_visual.cor_sistema }}, {{ identidade_visual.cor_suplente }}) !important;
+  {% else %}
+    background-color: {{ identidade_visual.cor_sistema }} !important;
+  {% endif %}">
   <div class="container custom-container">
-    <a class="nav-link h-auto ms-1" data-widget="pushmenu" role="button"><i class="fas fa-bars fa-xl text-white"></i></a>
+    <a class="nav-link h-auto ms-1" data-widget="pushmenu" role="button"><i
+        class="fas fa-bars fa-xl text-white"></i></a>
     <div class="collapse navbar-collapse d-none d-lg-flex justify-content-between">
       <ul class="navbar-nav ms-auto d-flex align-items-center">
         <li class="nav-item ms-2">
-          <form action="{% url "logout" %}" method="post">
+          <form action="{% url 'logout' %}" method="post">
             {% csrf_token %}
-            <button type="submit" class="nav-link"><i class="fa-solid fa-arrow-right-from-bracket fa-xl"></i></button>
+            <button type="submit" class="nav-link"><i class="fa-solid fa-arrow-right-from-bracket fa-xl text-white"></i></button>
           </form>
         </li>
       </ul>

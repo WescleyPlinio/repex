@@ -7,7 +7,9 @@
 {% block content %}
   <div class="card mb-3">
     <div class="card-header d-flex">
-      <h3 class="card-title fw-bold my-auto">Usuários</h3>
+      <h3 class="card-title fw-bold my-auto {% if not identidade_visual.cor_sistema %}text-dark{% endif %}" style="{% if identidade_visual.cor_suplente %}
+                  color: {{ identidade_visual.cor_sistema }};
+                {% endif %}">Usuários</h3>
     </div>
     <div class="card-body table-responsive p-0">
       <table class="table table-hover text-nowrap">
