@@ -1,3 +1,4 @@
+{% load static %}
 {% block extra_styles %}
 <style>
   .btn-outline-light:hover {
@@ -18,7 +19,7 @@
       {% if identidade_visual.logo %}
         <img style="max-height: 50px;" src="{{ identidade_visual.logo.url }}" />
       {% else %}
-        Repex
+      <img style="max-height: 25px;" src="{% static 'imgs/logo.png' %}" />
       {% endif %}
     </a>
 
@@ -70,7 +71,7 @@
             <li class="nav-item">
               <a class="nav-link text-white" href="{% url 'login' %}">Entrar</a>
             </li>
-            <a href="{% url 'cadastro' %}" class="btn btn btn-outline-light rounded-pill flex-fill"><i class="fas fa-user-plus me-2"></i> Cadastrar</a>
+            <a href="{% url 'cadastro' %}" class="btn btn btn-outline-light rounded-pill flex-fill"><i class="fas fa-user-plus me-2"></i>Cadastre-se</a>
           </div>
         {% endif %}
       </ul>

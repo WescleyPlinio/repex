@@ -160,8 +160,9 @@ class PerfilUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         return self.request.user.profile
     
 
-class UserCreateView(CreateView):
+class UserCreateView(SuccessMessageMixin, CreateView):
     model = User
     template_name = 'registration/cadastro.html'
     form_class = CustomUserCreationForm
-    success_url = reverse_lazy('index')
+    success_message = 'Usuário criado com sucesso! Agora faça login com suas credenciais.'
+    success_url = reverse_lazy('login')

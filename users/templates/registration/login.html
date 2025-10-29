@@ -15,9 +15,12 @@
         {% endif %}">
         {% if identidade_visual.logo %}
           <a href="{% url 'index' %}" class="d-block mb-3"><img src="{{ identidade_visual.logo.url }}" alt="Logo" style="max-height: 60px;" /></a>
+        {% else %}
+          <a href="{% url "index" %}">
+            <img style="max-height: 25px;" src="{% static 'imgs/logo.png' %}" />
+          </a>
         {% endif %}
-        <h1 class="card-title">Bem-vindo ao Repex</h1>
-        <p class="card-subtitle">Faça login para acessar sua conta</p>
+        <p class="card-subtitle mt-2">Faça login para acessar sua conta</p>
       </div>
 
       <div class="card-body">

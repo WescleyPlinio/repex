@@ -11,9 +11,7 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);">
     <h1 class="h3 mb-1 {% if not identidade_visual.cor_sistema %}text-dark{% endif %}"
       style="{% if identidade_visual.cor_suplente %}
-        
                    color: {{ identidade_visual.cor_sistema }};
-
       {% endif %}">
       Olá, {{ user.get_primeiro_nome }}!
     </h1>
@@ -21,11 +19,9 @@
   </div>
   <div class="card mb-3">
     <div class="card-header d-flex">
-      <h3 class="fw-bold my-auto {% if not identidade_visual.cor_sistema %}text-dark{% endif %}"
+      <h3 class="card-title fw-bold my-auto {% if not identidade_visual.cor_sistema %}text-dark{% endif %}"
         style="{% if identidade_visual.cor_suplente %}
-          
-                  color: {{ identidade_visual.cor_sistema }};
-
+                color: {{ identidade_visual.cor_sistema }};
         {% endif %}">
         Suas redes sociais
       </h3>
@@ -126,9 +122,7 @@
       <div class="card-header d-flex">
         <h3 class="card-title fw-bold my-auto {% if not identidade_visual.cor_sistema %}text-dark{% endif %}"
           style="{% if identidade_visual.cor_suplente %}
-            
                   color: {{ identidade_visual.cor_sistema }};
-
           {% endif %}">
           Suas notícias
         </h3>
