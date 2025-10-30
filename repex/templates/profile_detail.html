@@ -9,7 +9,7 @@
       {% if profile.avatar %}
         <img src="{{ profile.avatar.url }}" alt="avatar" style="aspect-ratio: 1 / 1;" class="w-100 rounded-circle shadow mb-2 d-flex object-fit-cover" />
       {% elif profile.id == request.user.id %}
-        <div style="width: 100%; aspect-ratio: 1 / 1;" class="bg-body-tertiary rounded-circle">
+        <div style="width: 100%; aspect-ratio: 1 / 1;" class="bg-body-tertiary rounded-circle d-flex">
           <a href="{% url 'perfil_update' request.user.id %}" class="text-decoration-none m-auto p-5">
             <i class="fa-solid fa-image"></i>
             Adicione sua foto de perfil
