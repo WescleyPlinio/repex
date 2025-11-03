@@ -1,4 +1,5 @@
-# Repositório de Propostas e projetos de Ensino, Pesquisa e Extensão - REPEX
+# Engenharia de software - REPEX
+Documentação de engenharia de software. [Clique aqui para ver a documentação técnica do Repex](code.md)
 
 ## Sumário
 - [Resumo](#resumo)
@@ -136,6 +137,8 @@ A tela de ver notícia aparece quando o usuário clica em uma das notícias. Nes
 A tela descubra exibe de forma aleatória diversas notícias e projetos, com o intuito de fazer com que o usuário descubra novidades fora de seus principais interesses.
 
 ![Pagina descubra](imgs/6.png)
+
+[Clique aqui para ver a documentação técnica do Repex](code.md)
 
 ## Referências bibliográficas:
 SANTOS, Erika Moreira; NASCIMENTO, Francinaide de Lima Silva. A prática pedagógica e o Projeto Integrador: uma análise de documentos oficiais do Instituto Federal do Rio Grande do Norte. 1-6. Natal: IFRN, 2020.

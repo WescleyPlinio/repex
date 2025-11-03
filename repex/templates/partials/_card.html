@@ -1,7 +1,7 @@
 {% load static %}
 <a href="{% url "projeto_detail" projeto.id %}" class="text-decoration-none h-100">
   <div class="card border border-0 shadow shadow-sm h-100">
-      <img width="520" height="320" src="{% if projeto.capa %}{{ projeto.capa.url }}{% else %}{% static 'imgs/placeholder.webp' %}{% endif %}" alt="{{ projeto.titulo }}" class="img-fluid w-100 mb-3 object-fit-cover"/>
+      <img src="{% if projeto.capa %}{{ projeto.capa.url }}{% else %}{% static 'imgs/placeholder.webp' %}{% endif %}" alt="{{ projeto.titulo }}" height="320px" class="card-img-top object-fit-cover" />
     <div class="card-body">
       <h5 class="card-title fw-bold" style="color: {{ identidade_visual.cor_titulo }};">{{ projeto.titulo }}</h5>
       <p class="card-text">{{ projeto.descricao }}</p>
