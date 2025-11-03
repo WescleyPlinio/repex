@@ -43,14 +43,14 @@
     <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link text-white" href="{% url 'index' %}">Início</a>
+          <a class="nav-link text-white fw-bold" href="{% url 'index' %}">Início</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="{% url 'explorar' %}">Explorar</a>
+          <a class="nav-link text-white fw-bold" href="{% url 'explorar' %}">Explorar</a>
         </li>
         {% if user.is_authenticated %}
           <div class="dropdown">
-            <button class="btn btn-transparent text-white dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Perfil</button>
+            <button class="btn btn-transparent text-white dropdown-toggle fw-bold" type="button" data-bs-toggle="dropdown" aria-expanded="false">Perfil</button>
             <ul class="dropdown-menu">
               <li>
                 <a class="dropdown-item" href="{% url 'profile_detail' request.user.id %}">Ver perfil</a>
@@ -69,7 +69,7 @@
         {% else %}
           <div class="btn-group-minimal">
             <li class="nav-item">
-              <a class="nav-link text-white" href="{% url 'login' %}">Entrar</a>
+              <a class="nav-link text-white fw-bold" href="{% url 'login' %}">Entrar</a>
             </li>
             <a href="{% url 'cadastro' %}" class="btn btn btn-outline-light rounded-pill flex-fill"><i class="fas fa-user-plus me-2"></i>Cadastre-se</a>
           </div>
